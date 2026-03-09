@@ -1,0 +1,4 @@
+# Cloudflare Pages redirect rules
+# Preserve all existing Webflow blog URLs exactly — no SEO impact
+
+/blog  /blog/  301

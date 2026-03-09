@@ -1,0 +1,8 @@
+name = "reportinghub-blog-router"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# Routes: only intercept blog paths on your live domain
+[[routes]]
+pattern = "thereportinghub.com/blog*"
+zone_name = "thereportinghub.com"
