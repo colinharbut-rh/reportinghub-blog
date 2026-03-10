@@ -9,7 +9,7 @@
  */
 
 const WEBFLOW_ORIGIN = "https://thereportinghub.webflow.io";
-const PAGES_URL      = "https://reportinghub-blog.pages.dev"; // update after first Pages deploy
+const PAGES_URL      = "https://reportinghub-blog.colin-harbut.workers.dev";
 
 export default {
   async fetch(request) {
