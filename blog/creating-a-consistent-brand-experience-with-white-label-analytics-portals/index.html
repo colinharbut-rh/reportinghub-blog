@@ -81,6 +81,14 @@
   .post-content blockquote p { font-size:18px; font-style:italic; color:var(--navy); font-weight:500; margin:0; }
   .post-content a { color:var(--blue); text-decoration:none; }
   .post-content a:hover { text-decoration:underline; }
+  /* Grid overflow fix: prevent content from exceeding its column */
+  .post-content { min-width:0; }
+  /* Cap all media and wide elements inside post body */
+  .post-content img, .post-content figure, .post-content video,
+  .post-content iframe, .post-content table { max-width:100%; height:auto; }
+  /* Prevent Webflow-embedded flex sections from overflowing */
+  .post-content [class*="section"], .post-content [class*="grid"],
+  .post-content [class*="container"] { max-width:100%; overflow:hidden; }
   .callout { background:linear-gradient(135deg,rgba(34,164,247,.08),rgba(108,110,243,.08));
     border:1px solid rgba(34,164,247,.2); border-radius:var(--radius);
     padding:24px 28px; margin:32px 0; }
