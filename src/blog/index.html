@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Blog — The Reporting Hub</title>
+<meta name="description" content="Strategy, product, and real-world stories from the team building the future of white-label BI.">
+<link rel="canonical" href="https://thereportinghub.com/blog/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--blue:#22A4F7;--indigo:#6C6EF3;--purple:#5E2C8F;--magenta:#C729ED;--navy:#0D0F1A;
+    --grad:linear-gradient(135deg,#22A4F7 0%,#6C6EF3 50%,#C729ED 100%);
+    --text:#0D0F1A;--muted:#6B7280;--border:#E5E7EB;--bg:#F8F9FB;--card-bg:#FFFFFF;--radius:14px;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  .nav-inner{max-width:1200px;margin:0 auto;padding:0 32px;height:68px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-logo img{height:34px;display:block;}
+  .nav-links{display:flex;gap:32px;list-style:none;}
+  .nav-links a{font-size:15px;font-weight:500;color:var(--text);text-decoration:none;opacity:.75;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-links a.active{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;opacity:1;}
+  .nav-cta{background:var(--grad);color:#fff;font-size:14px;font-weight:600;padding:10px 22px;border-radius:100px;text-decoration:none;transition:opacity .2s;}
+  .nav-cta:hover{opacity:.88;}
+  .hero{max-width:1200px;margin:0 auto;padding:72px 32px 48px;}
+  .hero-eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+  .hero h1{font-family:'Sora',sans-serif;font-size:clamp(36px,5vw,56px);font-weight:800;line-height:1.1;color:var(--navy);margin-bottom:20px;}
+  .hero p{font-size:18px;line-height:1.65;color:var(--muted);max-width:540px;}
+  .hero-accent{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .filter-bar{max-width:1200px;margin:0 auto;padding:0 32px 40px;display:flex;gap:10px;flex-wrap:wrap;}
+  .filter-pill{font-size:13px;font-weight:500;padding:8px 18px;border-radius:100px;border:1px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;transition:all .2s;text-decoration:none;}
+  .filter-pill:hover{border-color:var(--blue);color:var(--blue);}
+  .filter-pill.active{background:var(--grad);border-color:transparent;color:#fff;font-weight:600;}
+  .featured-wrap{max-width:1200px;margin:0 auto;padding:0 32px 48px;}
+  .featured-card{display:grid;grid-template-columns:1fr 1fr;border-radius:var(--radius);overflow:hidden;background:var(--card-bg);box-shadow:0 2px 20px rgba(13,15,26,.07);border:1px solid var(--border);text-decoration:none;color:inherit;transition:transform .25s,box-shadow .25s;}
+  .featured-card:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(13,15,26,.12);}
+  .featured-img{min-height:320px;position:relative;}
+  .featured-badge{position:absolute;top:20px;left:20px;background:rgba(255,255,255,.2);backdrop-filter:blur(8px);color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:100px;letter-spacing:.04em;text-transform:uppercase;}
+  .featured-body{padding:48px;display:flex;flex-direction:column;justify-content:center;}
+  .featured-cat{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;}
+  .featured-body h2{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;line-height:1.25;color:var(--navy);margin-bottom:16px;}
+  .featured-body p{font-size:16px;line-height:1.7;color:var(--muted);margin-bottom:28px;}
+  .featured-meta{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);}
+  .avatar{width:32px;height:32px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0;}
+  .grid-section{max-width:1200px;margin:0 auto;padding:0 32px 80px;}
+  .grid-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
+  .grid-header h3{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--navy);}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(13,15,26,.1);}
+  .card-img-link{display:block;}
+  .card-img{height:180px;transition:opacity .3s;}
+  .card:hover .card-img{opacity:.9;}
+  .card-body{padding:24px;flex:1;display:flex;flex-direction:column;}
+  .card-cat{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;display:block;}
+  .card-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;line-height:1.3;margin-bottom:12px;flex:1;}
+  .card-title a{color:var(--navy);text-decoration:none;transition:color .2s;}
+  .card-title a:hover{color:var(--blue);}
+  .card-excerpt{font-size:14px;line-height:1.65;color:var(--muted);margin-bottom:20px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .card-meta{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:16px;margin-top:auto;}
+  .card-author{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--text);}
+  .card-author .avatar{width:26px;height:26px;font-size:11px;}
+  .card-date{font-size:12px;color:var(--muted);}
+  .newsletter{background:var(--navy);padding:80px 32px;text-align:center;}
+  .newsletter-inner{max-width:540px;margin:0 auto;}
+  .newsletter h2{font-family:'Sora',sans-serif;font-size:32px;font-weight:800;color:#fff;margin-bottom:14px;line-height:1.2;}
+  .newsletter p{font-size:16px;line-height:1.6;color:rgba(255,255,255,.6);margin-bottom:32px;}
+  .newsletter-form{display:flex;gap:10px;max-width:420px;margin:0 auto;}
+  .newsletter-form input{flex:1;padding:13px 18px;border-radius:100px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;}
+  .newsletter-form input::placeholder{color:rgba(255,255,255,.4);}
+  .newsletter-form button{background:var(--grad);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;padding:13px 24px;border-radius:100px;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
+  .newsletter-form button:hover{opacity:.88;}
+  footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.08);padding:32px;}
+  .footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+  .footer-inner img{height:24px;opacity:.7;}
+  .footer-inner p{font-size:13px;color:rgba(255,255,255,.4);}
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);} .featured-card{grid-template-columns:1fr;} .featured-img{min-height:220px;} .featured-body{padding:32px;}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr;} .nav-links{display:none;} .hero{padding:48px 20px 32px;} .featured-wrap,.filter-bar,.grid-section{padding-left:20px;padding-right:20px;} .newsletter-form{flex-direction:column;}}
+</style>
+</head>
+<body>
+<!-- INCLUDE header -->
+<section class="hero">
+  <p class="hero-eyebrow">Insights &amp; Ideas</p>
+  <h1>The <span class="hero-accent">analytics</span> playbook<br>for modern businesses</h1>
+  <p>Strategy, product, and real-world stories from the team building the future of white-label BI.</p>
+</section>
+<div class="filter-bar"><a href="/blog/" class="filter-pill active">All Posts</a><a href="/blog/?cat=ai-data-analysis" class="filter-pill">AI Data Analysis</a><a href="/blog/?cat=analytics-as-a-service" class="filter-pill">Analytics as a Service</a><a href="/blog/?cat=business-intelligence" class="filter-pill">Business Intelligence</a><a href="/blog/?cat=data-analysis" class="filter-pill">Data Analysis</a><a href="/blog/?cat=data-security---governance" class="filter-pill">Data Security & Governance</a><a href="/blog/?cat=data-visualization" class="filter-pill">Data Visualization</a><a href="/blog/?cat=microsoft-azure" class="filter-pill">Microsoft Azure</a><a href="/blog/?cat=microsoft-fabric" class="filter-pill">Microsoft Fabric</a><a href="/blog/?cat=microsoft-fabric---power-bi" class="filter-pill">Microsoft Fabric & Power BI</a><a href="/blog/?cat=power-bi" class="filter-pill">Power BI</a><a href="/blog/?cat=power-bi-embedded-analytics" class="filter-pill">Power BI Embedded Analytics</a><a href="/blog/?cat=power-bi-licensing" class="filter-pill">Power BI Licensing</a><a href="/blog/?cat=reporting-dashboards" class="filter-pill">Reporting Dashboards</a><a href="/blog/?cat=white-label-analytics" class="filter-pill">White Label Analytics</a></div>
+<div class="featured-wrap">
+  <a href="/blog/why-external-reporting-is-a-different-discipline-than-internal-bi/" class="featured-card">
+    <div class="featured-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69a99971d5b491c557c63ccb_External-reporting-vs-internal-BI.jpg');background-size:cover;background-position:center;">
+      <span class="featured-badge">✦ Latest</span>
+    </div>
+    <div class="featured-body">
+      <span class="featured-cat">Power BI Embedded Analytics</span>
+      <h2>Why External Reporting Is a Different Discipline Than Internal BI</h2>
+      <p>/* ── BRAND TOKENS — Light background CMS compatible ───── */ :root { --rh-bg: #ffffff; --rh-surface: #eaf6fd; --rh-surface-2: #d4eef9; --rh-border: #dde3e7; --rh-teal: #5BC6F7; --…</p>
+      <div class="featured-meta">
+        <div class="avatar">B</div>
+        <span>Brian DeLuca</span>
+        <span style="opacity:.4">·</span>
+        <span>Mar 05, 2026</span>
+        <span style="opacity:.4">·</span><span>4 minutes</span>
+      </div>
+    </div>
+  </a>
+</div>
+<section class="grid-section">
+  <div class="grid-header"><h3>All Posts</h3></div>
+  <div class="grid">
+      <article class="card">
+        <a href="/blog/10-analytics-ai-trends-redefining-business-intelligence-in-2025/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/697f810e1c715ae572089907_10-Analytics-AI-Trends-Redefining-Business-Intelligence-in-2025.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Security & Governance</span>
+          <h2 class="card-title"><a href="/blog/10-analytics-ai-trends-redefining-business-intelligence-in-2025/">10 Analytics & AI Trends Redefining Business Intelligence in 2026</a></h2>
+          <p class="card-excerpt">Business intelligence has always moved in waves.First came dashboards. Then cloud data platforms. Then self-service. But 2026 marks a very different kind of shift – one where analy…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Feb 17, 2026 · 7 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/the-state-of-analytics-2025-whats-actually-driving-business-decisions/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/697e18ff908591cf3f71ada9_The-State-of-Analytics-2025-What-s-Actually-Driving-Business-Decisions.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Analytics as a Service</span>
+          <h2 class="card-title"><a href="/blog/the-state-of-analytics-2025-whats-actually-driving-business-decisions/">The State of Analytics 2026: What’s Actually Driving Business Decisions</a></h2>
+          <p class="card-excerpt">As we progress through 2026, analytics is no longer purely about accumulating more data – the critical shift has become about using it faster, smarter, and more responsibly. As ind…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Feb 17, 2026 · 6 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/times-reddit-saved-businesses-from-power-bi-licensing-mistakes/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/690b9403bd073c57f74eef42_Times-Reddit-Saved-Businesses-from-Power-BI-Licensing-Mistakes.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/times-reddit-saved-businesses-from-power-bi-licensing-mistakes/">Times Reddit Saved Businesses from Power BI Licensing Mistakes</a></h2>
+          <p class="card-excerpt">‍Power BI is an indispensable asset for a great number of organizations, but sometimes it’s easy to trip yourself up with the technical side of things – such as licenses. Thankfull…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Feb 03, 2026 · 7 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/its-all-a-big-mess-why-power-bi-feels-overwhelming-to-new-users/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69402fcb56e88f797fbb85b2_blogimg3.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/its-all-a-big-mess-why-power-bi-feels-overwhelming-to-new-users/">“It’s All a Big Mess”: Why Power BI Feels Overwhelming to New Users</a></h2>
+          <p class="card-excerpt">You’ve recently embarked on your Power BI journey and may have been feeling a little confusion initially. Why does it have this disorganized, difficult feel? Don’t be alarmed – you…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Feb 03, 2026 · 9 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/the-hidden-costs-of-power-bi-embedded-licensing-scaling-and-optimization/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69471b03fc110f7465e0f17a_The-Hidden-Costs-of-Power-BI-Embedded-Licensing-Scaling-and-Optimization-p-1080.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Analytics as a Service</span>
+          <h2 class="card-title"><a href="/blog/the-hidden-costs-of-power-bi-embedded-licensing-scaling-and-optimization/">The Hidden Costs of Power BI Embedded: Licensing, Scaling, and Optimization</a></h2>
+          <p class="card-excerpt">Power BI Embedded is a Microsoft Azure service that offers comprehensive business intelligence capabilities directly within an organization’s applications. But, like any investment…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 8 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/designing-for-engagement-keeping-users-in-your-reports/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941b6da846c6e56b71f43f1_Designing-for-Engagement-Keeping-Users-in-Your-Reports.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Analysis</span>
+          <h2 class="card-title"><a href="/blog/designing-for-engagement-keeping-users-in-your-reports/">Designing for Engagement: Keeping Users in Your Reports</a></h2>
+          <p class="card-excerpt">Most analytics reports fail to hold user attention. They’re accessed briefly, scanned for surface-level information, and quickly abandoned, leaving insights untapped and effort und…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 6 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/a-guide-to-power-bi-premium-per-user-vs-embedded-capacity-for-saas/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/694199a382a698c6f46caacf_blogimg5.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/a-guide-to-power-bi-premium-per-user-vs-embedded-capacity-for-saas/">A Guide to Power BI Premium Per User vs. Embedded Capacity for SaaS</a></h2>
+          <p class="card-excerpt">Welcome to the deep dive into the world of Power BISimply put, Power BI is a suite of software services, apps, and connectors that unify disparate data sources into comprehensive, …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 12 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/advanced-visualizations-utilizing-custom-visuals-in-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6967fdce00c99ef235de6cca_Advanced-Visualizations-Utilizing-Custom-Visuals-in-Power-BI-Embedded.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Visualization</span>
+          <h2 class="card-title"><a href="/blog/advanced-visualizations-utilizing-custom-visuals-in-power-bi-embedded/">Advanced Visualizations: Utilizing Custom Visuals in Power BI Embedded</a></h2>
+          <p class="card-excerpt">Power BI Embedded offers an unparalleled platform for integrating interactive reports into applications. While its default visualization library is powerful, many organizations fin…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/automating-alerting-and-escalation-from-kpis-inside-power-bi-reports/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6962955bb7b6bb94e9eb51fb_Automating-Alerting-and-Escalation-from-KPIs-Inside-Power-BI-Reports.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI</span>
+          <h2 class="card-title"><a href="/blog/automating-alerting-and-escalation-from-kpis-inside-power-bi-reports/">Automating Alerting and Escalation from KPIs Inside Power BI Reports</a></h2>
+          <p class="card-excerpt">When key metrics start shifting, decisions need to be made quickly. But manually tracking KPIs in Power BI and reacting to every change? It can become overwhelming. By automating a…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/best-practices-for-deploying-analytics-to-external-users/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941a1eba3d2abc286043291_blogimg8.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/best-practices-for-deploying-analytics-to-external-users/">Best Practices for Deploying Analytics to External Users</a></h2>
+          <p class="card-excerpt">With the rise of data-driven decision-making, deploying analytics to external users has become more critical than ever. This guide will enumerate best practices to ensure an effect…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 7 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/building-scalable-multi-tenant-analytics-with-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941a04437aef8da66bebf9b_blogimg7.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Security & Governance</span>
+          <h2 class="card-title"><a href="/blog/building-scalable-multi-tenant-analytics-with-power-bi-embedded/">Building Scalable Multi-Tenant Analytics with Power BI Embedded</a></h2>
+          <p class="card-excerpt">Modern businesses rely on data analytics as the foundation for better decision-making, and many are turning to multi-tenant solutions for enhanced security, scalability, and cost e…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 8 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/common-data-governance-mistakes-and-how-to-avoid-them/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941a52d0644ce45d810ac9f_Common-data-governance.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Security & Governance</span>
+          <h2 class="card-title"><a href="/blog/common-data-governance-mistakes-and-how-to-avoid-them/">Common Data Governance Mistakes and How to Avoid Them</a></h2>
+          <p class="card-excerpt">Data is a critical asset, but its value depends on trust.For larger teams, missing guardrails can lead to duplicated reports, access chaos, and wasted time verifying numbers. Small…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 5 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/creating-a-consistent-brand-experience-with-white-label-analytics-portals/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6962b5eb809a3e529ccb41cf_Creating-a-Consistent-Brand-Experience-with-White-Label-Analytics-Portals.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/creating-a-consistent-brand-experience-with-white-label-analytics-portals/">Creating a Consistent Brand Experience with White-Label Analytics Portals</a></h2>
+          <p class="card-excerpt">The way you deliver data insights can be just as important as the insights themselves. A branded analytics experience builds trust, enhances professionalism, and strengthens custom…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">R</div>
+              <span>Renata Lamb</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 3 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/data-is-the-product-why-analytics-needs-better-packaging/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941ae8bf02c4a23e62be05d_Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/data-is-the-product-why-analytics-needs-better-packaging/">Data Is the Product: Why Analytics Needs Better Packaging</a></h2>
+          <p class="card-excerpt">Analytics doesn’t live in the background anymore. It’s front and center, and in many cases, the data itself is the product. But here’s the problem: too many analytics teams are sti…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/embedded-analytics-meets-generative-ai-how-saas-teams-monetize-bi-in-2025/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69600be56fa30d9d91a5f337_Embedded-Analytics-Meets-Generative-AI-How-SaaS-Teams-Monetize-BI-in-2025.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">AI Data Analysis</span>
+          <h2 class="card-title"><a href="/blog/embedded-analytics-meets-generative-ai-how-saas-teams-monetize-bi-in-2025/">Embedded Analytics Meets Generative AI: How SaaS Teams Monetize BI in 2025</a></h2>
+          <p class="card-excerpt">In 2025, the analytics landscape is undergoing a shift as significant as the rise of cloud computing a decade ago. For SaaS companies, enterprises, and analytics service providers,…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 7 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/exploring-cross-platform-integrations-with-power-bi-for-seamless-workflows/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/696ddeb757520e124d3e1b23_Exploring-Cross-Platform-Integrations-With-Power-BI-For-Seamless-Workflows-1.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Analysis</span>
+          <h2 class="card-title"><a href="/blog/exploring-cross-platform-integrations-with-power-bi-for-seamless-workflows/">Exploring Cross-Platform Integrations with Power BI for Seamless Workflows</a></h2>
+          <p class="card-excerpt">Why Cross-Platform Integration MattersIn today’s diverse tech environment, organizations rarely rely on a single tool for all their operations. Most businesses use a mix of CRMs li…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/fabric-vs-power-bi-premium/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6961652bcf02c04b7b0edbe3_Fabric-vs.-Power-BI-Premium-Reddit.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Microsoft Fabric & Power BI</span>
+          <h2 class="card-title"><a href="/blog/fabric-vs-power-bi-premium/">Fabric vs. Power BI Premium</a></h2>
+          <p class="card-excerpt">Across Reddit’s Power BI and Microsoft Fabric communities, one debate keeps resurfacing:“Do I really need Fabric if I already have Power BI Premium?”It’s a fair question. Both are …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 8 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/from-excel-to-power-bi-a-beginners-transition-guide/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941a73d3023424bae3e2a5c_From-Excel-to-Power-BI-A-Beginner-s-Transition-Guide.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Analytics as a Service</span>
+          <h2 class="card-title"><a href="/blog/from-excel-to-power-bi-a-beginners-transition-guide/">From Excel to Power BI: A Beginner’s Transition Guide</a></h2>
+          <p class="card-excerpt">Excel is powerful for ad-hoc analysis, but manual refreshes and multi-sheet workflows become unsustainable at scale. Power BI automates these tasks while preserving Excel’s flexibi…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 3 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/from-hype-to-impact-how-ai-is-changing-business-intelligence/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941a3d90d74d01fe227465c_From-hype-to-impact.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">AI Data Analysis</span>
+          <h2 class="card-title"><a href="/blog/from-hype-to-impact-how-ai-is-changing-business-intelligence/">From Hype to Impact: How AI Is Changing Business Intelligence</a></h2>
+          <p class="card-excerpt">We’ll kick things off with Microsoft highlighting the latest in AI-powered analytics From Copilot for Power BI to Fabric Data Agents—and how these innovations are making it easier …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 2 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/harnessing-power-bi-for-employee-performance-and-hr-analytics/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69637651de18b03c4177cf87_Harnessing-Power-BI-for-Employee-Performance-and-HR-Analytics.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI</span>
+          <h2 class="card-title"><a href="/blog/harnessing-power-bi-for-employee-performance-and-hr-analytics/">Harnessing Power BI for Employee Performance and HR Analytics</a></h2>
+          <p class="card-excerpt">IntroductionOrganizations are increasingly leveraging analytics to optimize operations and make informed business decisions. Human Resources (HR) is no exception—employee performan…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 3 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-agencies-can-resell-data-portals-using-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941b017c31f8cd2cc3067dd_How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Analytics as a Service</span>
+          <h2 class="card-title"><a href="/blog/how-agencies-can-resell-data-portals-using-power-bi-embedded/">How Agencies Can Resell Data Portals Using Power BI Embedded</a></h2>
+          <p class="card-excerpt">Modern agencies face rising expectations for transparency and data access. Clients no longer accept static updates; they want interactive, on-demand insights.Power BI Embedded allo…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 7 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-design-first-analytics-win-more-clients/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941b312b07bfd4fba821192_How-Design-First-Analytics-Win-More-Clients-.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Analytics as a Service</span>
+          <h2 class="card-title"><a href="/blog/how-design-first-analytics-win-more-clients/">How Design-First Analytics Win More Clients</a></h2>
+          <p class="card-excerpt">Design-first analytics puts users at the center of the reporting experience. It flips the script on traditional dashboards. Instead of designing after the data is built, it priorit…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 7 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-to-customize-power-bi-embedded-reports-without-code-for-your-brand-or-clients/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/696a5fd770162200def0abe8_How-to-Customize-Power-BI-Embedded-Reports-without-Code-for-Your-Brand-or-Clients.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/how-to-customize-power-bi-embedded-reports-without-code-for-your-brand-or-clients/">How To Customize Power BI Embedded Reports Without Code For Your Brand Or Clients</a></h2>
+          <p class="card-excerpt">Power BI is a powerhouse for data visualization, but transforming raw data into compelling, branded insights can be challenging. Organizations often find themselves tangled in a we…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 2 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-to-leverage-power-bi-for-effective-customer-segmentation-and-personalization/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6963c762182cbccedfce87c9_How-to-Leverage-Power-BI-for-Effective-Customer-Segmentation-and-Personalization.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/how-to-leverage-power-bi-for-effective-customer-segmentation-and-personalization/">How To Leverage Power BI For Effective Customer Segmentation and Personalization</a></h2>
+          <p class="card-excerpt">Customers expect brands to understand their needs, but static reports can’t keep up with ever-changing behaviors. To truly connect and drive loyalty, businesses need real-time, dat…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 3 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-to-leverage-streaming-data-in-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69666142ecc1853b4ece6973_How-to-Leverage-Streaming-Data-in-Power-BI-Embedded.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/how-to-leverage-streaming-data-in-power-bi-embedded/">How to Leverage Streaming Data in Power BI Embedded</a></h2>
+          <p class="card-excerpt">Power BI Embedded offers organizations a powerful way to integrate analytics seamlessly into their applications, and when paired with streaming data capabilities, the possibilities…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 3 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-to-optimize-dax-formulas-for-better-performance/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69419f36dd23453d354123e5_690cebd9743d0861962972c0_How-to-Optimize-DAX-Formulas-for-Better-Performance-1.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Analysis</span>
+          <h2 class="card-title"><a href="/blog/how-to-optimize-dax-formulas-for-better-performance/">How to Optimize DAX Formulas for Better Performance</a></h2>
+          <p class="card-excerpt">In the world of Power BI and data analytics, performance is everything. Slow-loading reports frustrate users and diminish the value of your data insights. At Reporting Hub, we’ve f…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">J</div>
+              <span>Jessie G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 3 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-to-set-up-scheduled-refreshes-in-power-bi-a-step-by-step-guide/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/696905b9e45943ae8394ffa6_How-to-Set-Up-Scheduled-Refreshes-in-Power-BI-A-Step-by-Step-Guide.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI</span>
+          <h2 class="card-title"><a href="/blog/how-to-set-up-scheduled-refreshes-in-power-bi-a-step-by-step-guide/">How to Set Up Scheduled Refreshes in Power BI: A Step-by-Step Guide</a></h2>
+          <p class="card-excerpt">Do you want to keep your data fresh with little complications? Then, you need to set up scheduled refreshes in Power BI. These innovative scheduled refreshes will ensure that your …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-to-turn-raw-data-into-business-insights-using-power-bi/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941b58098da6ac60471f85f_How-to-Turn-Raw-Data-into-Business-Insights-Using-Power-BI.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/how-to-turn-raw-data-into-business-insights-using-power-bi/">How to Turn Raw Data into Business Insights Using Power BI</a></h2>
+          <p class="card-excerpt">You’ve got data. Lots of it. Sales numbers, customer feedback, website clicks, inventory logs, the list goes on. But here’s the thing: most of it just sits there. Disconnected. Mes…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/human-centered-design-for-embedded-bi-portals/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941aa518440792d28191b61_Human-Centered-Design-for-Embedded-BI-Portals.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Visualization</span>
+          <h2 class="card-title"><a href="/blog/human-centered-design-for-embedded-bi-portals/">Human-Centered Design for Embedded BI Portals</a></h2>
+          <p class="card-excerpt">When done right, an embedded BI portal should feel like a natural extension of your product, though this depends on your tech stack and user needs. For example, real-time data work…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 5 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/microsoft-fabric-powering-the-future-of-business-intelligence/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/696d2de8228d9d9e778ba76d_Microsoft-Fabric-Powering-the-Future-of-Business-Intelligence.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Microsoft Fabric</span>
+          <h2 class="card-title"><a href="/blog/microsoft-fabric-powering-the-future-of-business-intelligence/">Microsoft Fabric: Powering the Future of Business Intelligence</a></h2>
+          <p class="card-excerpt">The need for seamless, powerful, and flexible Business Intelligence (BI) platforms has never been more crucial for organizations looking to stay ahead in today’s data-driven world.…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">R</div>
+              <span>Renata Lamb</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/microsofts-embedded-analytics-solution-accelerator-program-now-live-with-the-reporting-hub/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69732913ca3c161d1691022a_customer-communication-blog-feature-1024x768.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/microsofts-embedded-analytics-solution-accelerator-program-now-live-with-the-reporting-hub/">Microsoft’s Embedded Analytics Solution Accelerator Program now LIVE with the Reporting Hub</a></h2>
+          <p class="card-excerpt">Today is an exciting day for the Reporting Hub &amp; Microsoft!After many months of collaboration and working closely with the Microsoft Power BI Embedded team we are officially li…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/optimizing-performance-in-power-bi-embedded-reports/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6974e199695bafd7860e4e52_blog3.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/optimizing-performance-in-power-bi-embedded-reports/">Optimizing Performance in Power BI Embedded Reports</a></h2>
+          <p class="card-excerpt">When leveraging Power BI Embedded for your business intelligence needs, ensuring a swift and smooth experience for your users is paramount. Here are some expert tips for optimizing…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">J</div>
+              <span>Jessie G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 3 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/optimizing-power-bi-reports-for-mobile-best-practices-and-the-role-of-reporting-hub/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69679fa07f66658afce5c6ca_Optimizing-Power-BI-Reports-for-Mobile-Best-Practices-and-the-Role-of-Reporting-Hub.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/optimizing-power-bi-reports-for-mobile-best-practices-and-the-role-of-reporting-hub/">Optimizing Power BI Reports for Mobile: Best Practices and the Role of Reporting Hub</a></h2>
+          <p class="card-excerpt">As mobile-first strategies dominate the analytics landscape, ensuring that your Power BI reports are optimized for mobile devices has become a vital business priority. This article…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 3 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/power-bi-azure-the-ultimate-duo-for-modern-analytics/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69457ee8b31595bd27369ea8_Power-BI-Azure-The-Ultimate-Duo-for-Modern-Analytics-p-1080.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">AI Data Analysis</span>
+          <h2 class="card-title"><a href="/blog/power-bi-azure-the-ultimate-duo-for-modern-analytics/">Power BI + Azure: The Ultimate Duo for Modern Analytics</a></h2>
+          <p class="card-excerpt">Harness the intersection of data analysis and cloud computing with Power BI and Azure, which explains how Power BI and Azure integrate, the concrete benefits of combining them, and…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 9 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/power-bi-dashboard-design-best-practices-create-engaging-visuals-and-empower-your-users/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69723e145b9bb6fc90bb0280_power-bi-dashboard-design.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Visualization</span>
+          <h2 class="card-title"><a href="/blog/power-bi-dashboard-design-best-practices-create-engaging-visuals-and-empower-your-users/">Power BI Dashboard Design Best Practices: Create Engaging Visuals and Empower Your Users</a></h2>
+          <p class="card-excerpt">1. Know Your AudienceBefore you begin designing your dashboard, you need to understand who will be using it and what their needs are.Ask yourself:‍ .human-centered-image { height: …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/power-bi-and-data-governance-ensuring-compliance-with-data-privacy-laws/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/696d1f77a3e58af5a522b077_Power-BI-and-Data-Governance-Ensuring-Compliance-with-Data-Privacy-Laws.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Security & Governance</span>
+          <h2 class="card-title"><a href="/blog/power-bi-and-data-governance-ensuring-compliance-with-data-privacy-laws/">Power BI and Data Governance: Ensuring Compliance with Data Privacy Laws</a></h2>
+          <p class="card-excerpt">Today’s world is driven by data. Organizations rely increasingly on business intelligence tools like Microsoft Power BI to make informed decisions.However, the volume and sensitivi…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 2 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/reporting-hub-featured-on-the-microsoft-partner-showcase-video/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6973d73f318cfa8addbb17c3_How-to-Customize-Power-BI-Embedded-Reports-without-Code-for-Your-Brand-or-Clients.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">White Label Analytics</span>
+          <h2 class="card-title"><a href="/blog/reporting-hub-featured-on-the-microsoft-partner-showcase-video/">Reporting Hub Featured On The Microsoft Partner Showcase: VIDEO</a></h2>
+          <p class="card-excerpt">Watch the video here!‍‍The Reporting Hub is honored to be showcased on the Microsoft Partner Showcase.‍ .human-centered-image { height: auto; }</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 1 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/scaling-analytics-best-practices-for-managing-large-datasets-in-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6969131f8bded3491476b28a_Scaling-Analytics-Best-Practices-for-Managing-Large-Datasets-in-Power-BI-Embedded.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI</span>
+          <h2 class="card-title"><a href="/blog/scaling-analytics-best-practices-for-managing-large-datasets-in-power-bi-embedded/">Scaling Analytics: Best Practices for Managing Large Datasets in Power BI Embedded</a></h2>
+          <p class="card-excerpt">Companies that can analyze big data gain a real advantage over their competitors. While Power BI Embedded is a powerful tool for this job, working with large datasets is more than …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 3 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/scaling-multi-tenant-analytics-mastering-dynamic-dataset-binding-in-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6974dcbcf0fe95cfc4aeeb3b_blog4.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/scaling-multi-tenant-analytics-mastering-dynamic-dataset-binding-in-power-bi-embedded/">Scaling Multi-Tenant Analytics: Mastering Dynamic Dataset Binding in Power BI Embedded</a></h2>
+          <p class="card-excerpt">What is dynamic dataset binding?Dynamic dataset binding is a feature within Power BI that allows the data model to be switched dynamically within a report without altering the repo…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">J</div>
+              <span>Jessie G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 3 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/should-you-migrate-to-microsoft-fabric-a-non-technical-perspective-for-bi/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941a4cf7550fa5b8c561c60_blogimg13.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/should-you-migrate-to-microsoft-fabric-a-non-technical-perspective-for-bi/">Should You Migrate to Microsoft Fabric? A Non-Technical Perspective for BI</a></h2>
+          <p class="card-excerpt">Business intelligence often involves managing multiple tools, which can lead to delays, confusion, and missed opportunities. Microsoft Fabric consolidates the entire analytics life…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 8 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/solved-sharing-power-bi-with-external-users-using-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6974d90950c511159115cf8c_blog5.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Security & Governance</span>
+          <h2 class="card-title"><a href="/blog/solved-sharing-power-bi-with-external-users-using-power-bi-embedded/">Solved: Sharing Power BI with External Users using Power BI Embedded</a></h2>
+          <p class="card-excerpt">In today’s data-driven world, the ability to share insights and analytics with external stakeholders is crucial. Microsoft’s Power BI, a leading business intelligence tool, offers …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 2 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/the-benefits-of-microsoft-azures-fabric-capacity-for-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/697512a94676be92e24c7f16_blog1.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Microsoft Azure</span>
+          <h2 class="card-title"><a href="/blog/the-benefits-of-microsoft-azures-fabric-capacity-for-power-bi-embedded/">The Benefits of Microsoft Azure’s Fabric Capacity for Power BI Embedded</a></h2>
+          <p class="card-excerpt">In the world of business intelligence, the ability to embed analytics into applications is not just a convenience—it’s a game-changer. Microsoft Azure’s Power BI Embedded service o…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 2 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/the-future-of-saas-why-embedded-analytics-is-no-longer-optional/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69419f61c150801b9ecf143c_blogimg6.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/the-future-of-saas-why-embedded-analytics-is-no-longer-optional/">The Future of SaaS: Why Embedded Analytics is No Longer Optional</a></h2>
+          <p class="card-excerpt">Welcome to the dynamic world of Software as a Service (SaaS) where embedded analytics sits at the core of cutting-edge platforms. Adding palpable value to businesses worldwide, emb…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 9 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/the-real-world-cost-of-power-bi-confusion-what-happens-when-you-outgrow-pro/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/694198fa3d41481b2acd7c65_blogimg4.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Licensing</span>
+          <h2 class="card-title"><a href="/blog/the-real-world-cost-of-power-bi-confusion-what-happens-when-you-outgrow-pro/">The Real-World Cost of Power BI Confusion: What Happens When You Outgrow “Pro”</a></h2>
+          <p class="card-excerpt">‍For many organizations, Microsoft’s Power BI licensing can feel like a labyrinth. In this piece, we’ll demystify the confusion and present clear, concise solutions. So adjust your…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 10 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/tips-for-creating-dynamic-power-bi-dashboards-for-non-technical-audiences/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69712d481582fdadb9c43bc9_How-to-Create-Dynamic-Power-BI-Dashboards-for-Non-Technical-Users.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Visualization</span>
+          <h2 class="card-title"><a href="/blog/tips-for-creating-dynamic-power-bi-dashboards-for-non-technical-audiences/">Tips for Creating Dynamic Power BI Dashboards for Non-technical Audiences</a></h2>
+          <p class="card-excerpt">1. Understand the Audience’s Needs‍Before jumping into the dashboard creation process, it’s essential to understand your target audience. Non-technical audiences are typically more…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/unlock-revenue-potential-how-to-productize-and-monetize-your-power-bi-assets/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6969e67b916b6d03245e6be6_Unlock-Revenue-Potential-How-to-Productize-and-Monetize-Your-Power-BI-Assets.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI</span>
+          <h2 class="card-title"><a href="/blog/unlock-revenue-potential-how-to-productize-and-monetize-your-power-bi-assets/">Unlock Revenue Potential: How to Productize and Monetize Your Power BI Assets</a></h2>
+          <p class="card-excerpt">In today’s data-driven world, organizations are sitting on a wealth of analytics capabilities that hold significant untapped value. But what does it really mean to “productize” and…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/unlocking-business-insights-deliver-better-bi-with-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/693c68be6aeb6e60a02c9b75_blogimg1.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/unlocking-business-insights-deliver-better-bi-with-power-bi-embedded/">Unlocking Business Insights: Deliver Better B.I. with Power BI Embedded</a></h2>
+          <p class="card-excerpt">In today’s data-driven world, businesses are constantly seeking ways to extract meaningful insights from their data to make informed decisions. Embedded Power BI has emerged as a p…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">J</div>
+              <span>Jessie G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 2 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/unlocking-the-power-of-power-bi-embedded-with-direct-lake-mode-a-game-changer-for-isvs-and-developers/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6963f3ca6dd56111ebef9db9_Unlocking-the-Power-of-Power-BI-Embedded-with-Direct-Lake.....png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/unlocking-the-power-of-power-bi-embedded-with-direct-lake-mode-a-game-changer-for-isvs-and-developers/">Unlocking the Power of Power BI Embedded with Direct Lake Mode: A Game-Changer for ISVs and Developers</a></h2>
+          <p class="card-excerpt">Introduction: A New Era of Embedded AnalyticsAs the demand for real-time, high-performance embedded analytics grows, Microsoft has introduced Power BI Embedded with Direct Lake Mod…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 2 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/why-data-security-shouldnt-come-at-the-cost-of-speed/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6944690ddfe0bdedd5b151b3_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-1-p-1080.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Analysis</span>
+          <h2 class="card-title"><a href="/blog/why-data-security-shouldnt-come-at-the-cost-of-speed/">Why Data Security Shouldn’t Come at the Cost of Speed</a></h2>
+          <p class="card-excerpt">Data security is essential. But too often, protecting data slows everything else down. Reports take longer to load. Dashboards lag. Users wait.And in analytics, speed matters. You …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/why-role-based-access-isnt-enough-in-modern-bi-environments/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941ac4d5dfe095508747e6c_Why-Role-Based-Access-Isn-t-Enough-in-Modern-BI-Environments.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/why-role-based-access-isnt-enough-in-modern-bi-environments/">Why Role-Based Access Isn’t Enough in Modern BI Environments</a></h2>
+          <p class="card-excerpt">Role-based access control, or RBAC, is a straightforward method for managing access to resources based on an individual’s role within the organization. For example, a security anal…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/why-your-organization-should-use-a-white-label-power-bi-platform/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/697233382af73f3bc38eaafb_White-Label-Power-BI-Platform-1.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">White Label Analytics</span>
+          <h2 class="card-title"><a href="/blog/why-your-organization-should-use-a-white-label-power-bi-platform/">Why Your Organization Should Use a White-Label Power BI Platform</a></h2>
+          <p class="card-excerpt">In today’s data-driven world, businesses rely heavily on analytics and reporting tools to make informed decisions. Microsoft Power BI has emerged as a leading solution for data vis…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 30, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/power-bi-vs-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69725aa039a0e6e4cbcc06e1_power-bi-vs-power-bi-embedded-overview.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI Embedded Analytics</span>
+          <h2 class="card-title"><a href="/blog/power-bi-vs-power-bi-embedded/">Power BI vs. Power BI Embedded</a></h2>
+          <p class="card-excerpt">Today’s world is almost entirely data driven; having top-notch data reporting tools can make or break your business. The popular leading business analytics software Microsoft Power…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 29, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/what-is-a-semantic-model-in-power-bi-understanding-the-foundation-of-data-analysis/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/696d049e6dc2e7d24d0d1f42_What-is-a-Semantic-Model-in-Power-BI-Understanding-the-Foundation-of-Data-Analysis.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Analysis</span>
+          <h2 class="card-title"><a href="/blog/what-is-a-semantic-model-in-power-bi-understanding-the-foundation-of-data-analysis/">What is a Semantic Model in Power BI? Understanding the Foundation of Data Analysis</a></h2>
+          <p class="card-excerpt">Do you wish that managing and processing raw data were simplified and more organized?Then, try Power BI. The semantic models that underlie Power BI reports are exceptional for tran…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">J</div>
+              <span>Jessie G</span>
+            </div>
+            <span class="card-date">Jan 29, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-to-handle-secure-access-across-clients-in-multi-tenant-bi/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941b17c244500502cc6d97c_How-to-Handle-Secure-Access-Across-Clients-in-Multi-Tenant-BI.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Data Security & Governance</span>
+          <h2 class="card-title"><a href="/blog/how-to-handle-secure-access-across-clients-in-multi-tenant-bi/">How to Handle Secure Access Across Clients in Multi-Tenant BI</a></h2>
+          <p class="card-excerpt">When offering data insights to clients at scale, security and access management are critical. However, handling these needs in a multi-tenant environment presents challenges. Servi…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 29, 2026 · 7 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/will-bi-tools-survive-the-rise-of-generative-ai/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941a39098b36e96e7513654_blogimg11.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/will-bi-tools-survive-the-rise-of-generative-ai/">Will BI Tools Survive the Rise of Generative AI?</a></h2>
+          <p class="card-excerpt">Power BI has long been a trusted foundation for data-driven decision-making. It helps teams turn complex data into charts, dashboards, and clear business insights. From finance to …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">B</div>
+              <span>Brian DeLuca</span>
+            </div>
+            <span class="card-date">Jan 29, 2026 · 6 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-to-share-power-bi-reports-with-power-bi-embedded-a-comprehensive-guide/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69728a042ac70b80158f3883_power-bi-reporting-consultant-2.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Reporting Dashboards</span>
+          <h2 class="card-title"><a href="/blog/how-to-share-power-bi-reports-with-power-bi-embedded-a-comprehensive-guide/">How to Share Power BI Reports with Power BI Embedded: A Comprehensive Guide</a></h2>
+          <p class="card-excerpt">Power BI is business intelligence software from Microsoft that helps organizations turn their raw data into useful visualizations and reports for informed decision making. Whether …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">J</div>
+              <span>Jessie G</span>
+            </div>
+            <span class="card-date">Jan 27, 2026 · 6 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/the-evolution-of-analytics-as-a-service-transforming-business-intelligence-in-the-cloud/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/69725f4501dcb26d416e5d04_Transforming-Business-Intelligence-in-the-Cloud-1.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Analytics as a Service</span>
+          <h2 class="card-title"><a href="/blog/the-evolution-of-analytics-as-a-service-transforming-business-intelligence-in-the-cloud/">The Evolution of Analytics as a Service: Transforming Business Intelligence in the Cloud</a></h2>
+          <p class="card-excerpt">AaaS (Analytics as a Service) allows companies to outsource their data analytics and BI functions to specialized vendors who provide cloud-based tools on a subscription model. This…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">R</div>
+              <span>Renata Lamb</span>
+            </div>
+            <span class="card-date">Jan 27, 2026 · 5 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/securing-data-access-implementing-row-level-security-in-power-bi-embedded/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/696ceae9b9f35449c9c983b8_Securing-Data-Access-Implementing-Row-Level-Security-in-Power-BI-Embedded.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI</span>
+          <h2 class="card-title"><a href="/blog/securing-data-access-implementing-row-level-security-in-power-bi-embedded/">Securing Data Access: Implementing Row-Level Security in Power BI Embedded</a></h2>
+          <p class="card-excerpt">In the high-stakes business intelligence arena, data is your most valuable asset—and protecting it is non-negotiable. For organizations leveraging Power BI Embedded, the challenge …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">J</div>
+              <span>Jessie G</span>
+            </div>
+            <span class="card-date">Jan 26, 2026 · 4 minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/how-power-bi-embedded-empowers-remote-teams-with-seamless-reporting/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6963b54c9388b5e84a40ed05_How-Power-BI-Embedded-Empowers-Remote-Teams-with-Seamless-Reporting.png');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Power BI</span>
+          <h2 class="card-title"><a href="/blog/how-power-bi-embedded-empowers-remote-teams-with-seamless-reporting/">How Power BI Embedded Empowers Remote Teams with Seamless Reporting</a></h2>
+          <p class="card-excerpt">For remote teams, seamless collaboration isn’t just a convenience—it’s a necessity. Power BI Embedded provides organizations with secure, interactive, and easily accessible reports…</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 12, 2026 · 2 Minutes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a href="/blog/will-power-bi-survive-the-low-code-revolution-the-future-of-self-service-bi/" class="card-img-link">
+          <div class="card-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941a2f55215809f12e55f97_blogimg10.webp');background-size:cover;background-position:center;"></div>
+        </a>
+        <div class="card-body">
+          <span class="card-cat">Business Intelligence</span>
+          <h2 class="card-title"><a href="/blog/will-power-bi-survive-the-low-code-revolution-the-future-of-self-service-bi/">Will Power BI Survive the Low-Code Revolution? The Future of Self-Service BI</a></h2>
+          <p class="card-excerpt">Data-driven insights are more critical to business success than ever before. One tool that has established itself as a powerful ally for businesses looking to harness the power of …</p>
+          <div class="card-meta">
+            <div class="card-author">
+              <div class="avatar">M</div>
+              <span>Manvir G</span>
+            </div>
+            <span class="card-date">Jan 06, 2026 · 7 minutes</span>
+          </div>
+        </div>
+      </article></div>
+</section>
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <h2>Never miss an insight</h2>
+    <p>Join analytics leaders getting our best posts every two weeks.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="your@email.com">
+      <button>Subscribe</button>
+    </div>
+  </div>
+</section>
+<!-- INCLUDE footer -->
+</body>
+</html>

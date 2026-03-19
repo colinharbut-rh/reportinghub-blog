@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Data Is the Product: Why Analytics Needs Better Packaging — The Reporting Hub</title>
+<meta name="description" content="Analytics doesn’t live in the background anymore. It’s front and center, and in many cases, the data itself is the product. But here’s the problem: too man">
+<meta property="og:title" content="Data Is the Product: Why Analytics Needs Better Packaging">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941ae8bf02c4a23e62be05d_Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging.webp">
+<link rel="canonical" href="https://thereportinghub.com/blog/data-is-the-product-why-analytics-needs-better-packaging/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#22A4F7; --indigo:#6C6EF3; --purple:#5E2C8F; --magenta:#C729ED;
+    --navy:#0D0F1A;
+    --grad:linear-gradient(135deg,#22A4F7 0%,#6C6EF3 50%,#C729ED 100%);
+    --text:#0D0F1A; --muted:#6B7280; --border:#E5E7EB;
+    --bg:#F8F9FB; --card-bg:#FFFFFF; --radius:14px;
+  }
+  body { font-family:'DM Sans',sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 32px; height:68px;
+    display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo img { height:34px; display:block; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { font-size:15px; font-weight:500; color:var(--text); text-decoration:none; opacity:.75; transition:opacity .2s; }
+  .nav-links a:hover { opacity:1; }
+  .nav-links a.active { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:600; opacity:1; }
+  .nav-cta { background:var(--grad); color:#fff; font-size:14px; font-weight:600;
+    padding:10px 22px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.88; }
+  footer { background:var(--navy); border-top:1px solid rgba(255,255,255,.08); padding:32px; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .footer-inner img { height:24px; opacity:.7; }
+  .footer-inner p { font-size:13px; color:rgba(255,255,255,.4); }
+  @media(max-width:600px) { .nav-links { display:none; } }
+
+  .post-hero { max-width:760px; margin:0 auto; padding:64px 32px 40px; }
+  .breadcrumb { font-size:13px; margin-bottom:20px; }
+  .breadcrumb a { color:var(--muted); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .breadcrumb span { color:var(--border); margin:0 8px; }
+  .post-cat { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:16px; display:block; }
+  .post-hero h1 { font-family:'Sora',sans-serif; font-size:clamp(28px,4vw,44px);
+    font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:20px; }
+  .post-byline { display:flex; align-items:center; gap:14px; padding:20px 0;
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .avatar { width:44px; height:44px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; flex-shrink:0; }
+  .byline-name { font-size:15px; font-weight:600; color:var(--text); }
+  .byline-meta { font-size:13px; color:var(--muted); margin-top:2px; }
+  .byline-share { margin-left:auto; display:flex; gap:10px; }
+  .share-btn { width:36px; height:36px; border-radius:50%; border:1px solid var(--border);
+    background:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; transition:border-color .2s;
+    text-decoration:none; color:var(--muted); }
+  .share-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .post-img-wrap { max-width:900px; margin:0 auto 48px; padding:0 32px; }
+  .post-img { border-radius:var(--radius); height:400px; }
+  .post-layout { max-width:1100px; margin:0 auto; padding:0 32px 80px;
+    display:grid; grid-template-columns:1fr 280px; gap:60px; align-items:start; }
+  .post-content h2 { font-family:'Sora',sans-serif; font-size:26px; font-weight:700;
+    color:var(--navy); margin:44px 0 18px; line-height:1.25; }
+  .post-content h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700;
+    color:var(--navy); margin:32px 0 14px; }
+  .post-content p { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:22px; }
+  .post-content ul,.post-content ol { padding-left:24px; margin-bottom:22px; }
+  .post-content li { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:8px; }
+  .post-content blockquote { border-left:3px solid transparent;
+    border-image:var(--grad) 1; padding:16px 24px;
+    background:var(--bg); border-radius:0 var(--radius) var(--radius) 0; margin:32px 0; }
+  .post-content blockquote p { font-size:18px; font-style:italic; color:var(--navy); font-weight:500; margin:0; }
+  .post-content a { color:var(--blue); text-decoration:none; }
+  .post-content a:hover { text-decoration:underline; }
+  /* Grid + overflow fix: article column must not bleed past its track */
+  .post-content { min-width:0; overflow:hidden; }
+  /* Every element inside article is capped to column width */
+  .post-content * { max-width:100%; box-sizing:border-box; }
+  .post-content img, .post-content video,
+  .post-content iframe { height:auto; display:block; }
+  /* Neutralise Webflow-authored max-width overrides on callout/grid divs */
+  .post-content div[class^="blog_"] { max-width:100% !important; }
+  /* Collapse Webflow embedded two-column flex sections to single column */
+  .post-content section { margin:40px 0; overflow:hidden; }
+  .post-content section > div { display:block !important; }
+  .post-content section > div > div { width:100% !important; flex:none !important; }
+  /* Centre embedded section images */
+  .post-content section img {
+    max-width:520px; width:100%; display:block;
+    margin:24px auto; border-radius:8px;
+  }
+  /* Preserve icon+text list item flex layouts */
+  .post-content section li { display:flex !important; }
+  .callout { background:linear-gradient(135deg,rgba(34,164,247,.08),rgba(108,110,243,.08));
+    border:1px solid rgba(34,164,247,.2); border-radius:var(--radius);
+    padding:24px 28px; margin:32px 0; }
+  .callout p { font-size:16px; font-weight:500; margin:0 0 10px; }
+  .callout p:last-child { margin:0; }
+  .post-sidebar { position:sticky; top:88px; }
+  .sidebar-card { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+  .sidebar-card h4 { font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    color:var(--navy); margin-bottom:16px; text-transform:uppercase; letter-spacing:.05em; }
+  .toc-list { list-style:none; }
+  .toc-list li { margin-bottom:10px; }
+  .toc-list a { font-size:13px; color:var(--muted); text-decoration:none;
+    line-height:1.4; display:block; transition:color .2s; }
+  .toc-list a:hover { color:var(--blue); }
+  .sidebar-cta { background:var(--navy); border-radius:var(--radius); padding:24px; text-align:center; }
+  .sidebar-cta p { font-size:14px; line-height:1.55; color:rgba(255,255,255,.65); margin-bottom:16px; }
+  .sidebar-cta a { display:block; background:var(--grad); color:#fff; font-size:14px;
+    font-weight:600; padding:12px 20px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .sidebar-cta a:hover { opacity:.88; }
+  .author-bio-block { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; margin-top:48px;
+    display:flex; gap:20px; align-items:flex-start; }
+  .author-bio-block .bio-avatar { width:56px; height:56px; border-radius:50%;
+    object-fit:cover; flex-shrink:0; }
+  .author-bio-block .bio-avatar-placeholder { width:56px; height:56px; border-radius:50%;
+    background:var(--grad); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:20px; flex-shrink:0; }
+  .bio-name { font-family:'Sora',sans-serif; font-size:16px; font-weight:700;
+    color:var(--navy); margin-bottom:6px; }
+  .bio-text { font-size:14px; line-height:1.65; color:var(--muted); }
+  @media(max-width:900px) {
+    .post-layout { grid-template-columns:1fr; }
+    .post-sidebar { position:static; }
+  }
+  @media(max-width:600px) {
+    .post-hero { padding:40px 20px 32px; }
+    .post-img-wrap { padding:0 20px; }
+    .post-img { height:220px; }
+    .post-layout { padding:0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- INCLUDE header -->
+<header class="post-hero">
+  <div class="breadcrumb">
+    <a href="/blog/">Blog</a>
+    <span>›</span>
+    <a href="/blog/?cat=power-bi-embedded-analytics">Power BI Embedded Analytics</a>
+  </div>
+  <span class="post-cat">Power BI Embedded Analytics</span>
+  <h1>Data Is the Product: Why Analytics Needs Better Packaging</h1>
+  <div class="post-byline">
+    <img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a3f30361927cb1cee617_Brian-DL.webp" alt="Brian DeLuca" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+    <div>
+      <div class="byline-name">Brian DeLuca</div>
+      <div class="byline-meta">Jan 30, 2026 · 4 Minutes</div>
+    </div>
+    <div class="byline-share">
+      <a href="https://www.linkedin.com/shareArticle?url=https://thereportinghub.com/blog/data-is-the-product-why-analytics-needs-better-packaging/" class="share-btn" target="_blank" rel="noopener">in</a>
+      <a href="https://twitter.com/intent/tweet?url=https://thereportinghub.com/blog/data-is-the-product-why-analytics-needs-better-packaging/&text=Data Is the Product: Why Analytics Needs Better Packaging" class="share-btn" target="_blank" rel="noopener">𝕏</a>
+    </div>
+  </div>
+</header>
+<div class="post-img-wrap">
+  <div class="post-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941ae8bf02c4a23e62be05d_Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging.webp');background-size:cover;background-position:center;"></div>
+</div>
+<div class="post-layout">
+  <article class="post-content">
+    <p>Analytics doesn’t live in the background anymore. It’s front and center, and in many cases, the data itself is the product. But here’s the problem: too many analytics teams are still stuck delivering insights through patchwork processes, manual packaging, and dashboards that don’t scale. The result? Great analysis gets lost, ignored, or misunderstood.</p><p>To make data work, it needs to be delivered like any other high-value product: polished, easy to use, and built for scale. That’s where organizations are finding success by starting to <a href="https://thereportinghub.com/">productize Power BI</a>. When analytics are embedded into seamless, branded experiences, teams don’t just get reports, they get insights they can trust and act on.</p><p>‍</p><h2 id="the-problem-great-data-poor-experience">The Problem: Great Data, Poor Experience</h2><p>Data teams invest countless hours connecting data sources, building complex models, and designing insightful <a href="https://thereportinghub.com/power-bi/power-bi-dashboards">Power BI dashboards</a>. But when it comes time to share those insights? Engagement drops off fast. The issue isn’t the data, it’s the experience around it.</p><div class="blog-warning-cards-cm9814">
+
+  <div class="blog-warning-cards-cm9814__grid">
+
+    <div class="blog-warning-cards-cm9814__card">
+      <div class="blog-warning-cards-cm9814__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d4fd79ce085da7f77970c_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-19-1-.webp" alt="">
+      </div>
+      <div class="blog-warning-cards-cm9814__text">
+        Treating Power BI Like a Spreadsheet
+      </div>
+    </div>
+
+    <div class="blog-warning-cards-cm9814__card">
+      <div class="blog-warning-cards-cm9814__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d4fce2781e233fda64172_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-18-1.webp" alt="">
+      </div>
+      <div class="blog-warning-cards-cm9814__text">
+        Dashboards that don’t match the company’s branding
+      </div>
+    </div>
+
+    <div class="blog-warning-cards-cm9814__card">
+      <div class="blog-warning-cards-cm9814__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d4fc7ec15a3b12f7ca1b2_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-17.webp" alt="">
+      </div>
+      <div class="blog-warning-cards-cm9814__text">
+        No way to self-serve or switch between client views
+      </div>
+    </div>
+
+    <div class="blog-warning-cards-cm9814__card">
+      <div class="blog-warning-cards-cm9814__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d4fbd7b6ae52778030f78_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-16.webp" alt="">
+      </div>
+      <div class="blog-warning-cards-cm9814__text">
+        Manual workflows that delay updates and erode trust
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<style>
+/* ===== Section Wrapper ===== */
+.blog-warning-cards-cm9814 {
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* ===== Grid ===== */
+.blog-warning-cards-cm9814__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+/* ===== Card ===== */
+.blog-warning-cards-cm9814__card {
+  background: #fbeeee;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ===== Icon ===== */
+.blog-warning-cards-cm9814__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blog-warning-cards-cm9814__icon img {
+  width: 56px;
+  height: 56px;
+max-width: 56px;
+  object-fit: contain;
+}
+
+/* ===== Text ===== */
+.blog-warning-cards-cm9814__text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #e53935;
+  line-height: 1.4;
+}
+.human-centered-image {
+    height: auto;
+}
+
+
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .blog-warning-cards-cm9814__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-warning-cards-cm9814__text {
+    font-size: 14.5px;
+  }
+}
+</style></div><p>Inconsistent experiences make users ignore even the best visualizations and KPIs.</p><p>‍</p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-floatleft" style="max-width:50%" data-rt-type="image" data-rt-align="floatleft" data-rt-max-width="50%"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d509b86cddea3020c3cc8_The-Problem-Great-Data-Poor-Experience-783x1024.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><p>In a <a href="https://www.theydo.com/resources/2025-leadership-perspective?">2025 leadership survey</a> covering the US and Europe, executives shared their struggles with dashboard overload. They’re flooded with data and reports every day, and instead of feeling empowered, many feel overwhelmed. About half say there’s just too much data to handle, and even though 77% rely on dashboards, most only glance at them or don’t question the data. Around two-thirds worry that leaning too heavily on dashboards might cause them to miss critical opportunities or lead to decisions based on faulty information.</p><p>Users often run into outdated portals or disconnected reports that make finding the right data frustrating. Dashboards don’t always feel branded or polished, and self-service options are missing. Switching between clients or departments is a hassle, and manual update processes slow down the flow of fresh data, hurting trust.</p><p>‍</p><p>‍</p><p>‍</p><p>‍</p><p>‍</p><p>‍</p><p>Even if your dashboards have rich visuals and KPIs, inconsistent or difficult user experiences cause people to stop using them. More than half of executives admit they don’t regularly turn to their company’s dashboards, not because data isn’t important, but because the experience doesn’t meet their expectations.</p><p>‍<strong>What users want is data that speaks clearly and tells a story they can follow. They want clean visuals, easy access, and layouts that simplify complex info. Without the right platform, your dashboards won’t hold their attention, no matter how smart your analysis is.</strong></p><p>‍</p><h2 id="data-consumers-expect-product-grade-experiences">Data Consumers Expect Product-Grade Experiences</h2><div class="blog-ux-callout-cm9948">
+
+  <div class="blog-ux-callout-cm9948__box">
+    <div class="blog-ux-callout-cm9948__icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6912234fb61189b0b26cc068_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-14.webp" alt>
+    </div>
+    <div class="blog-ux-callout-cm9948__text">
+      The bar for user experience has changed. People no longer see dashboards as internal tools; they see them as products. And just like any product, analytics must be fast, secure, branded, and easy to use.
+    </div>
+  </div>
+
+</div>
+<style>
+/* ===== Section Wrapper ===== */
+.blog-ux-callout-cm9948 {
+  width: 100%;
+  padding: 16px 0;
+}
+
+/* ===== Callout Box ===== */
+.blog-ux-callout-cm9948__box {
+  background: #eaf2fa;
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Icon */
+.blog-ux-callout-cm9948__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blog-ux-callout-cm9948__icon img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+	max-width: 56px;
+}
+
+/* Text */
+.blog-ux-callout-cm9948__text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #000;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog-ux-callout-cm9948__box {
+    padding: 16px 18px;
+  }
+
+  .blog-ux-callout-cm9948__text {
+    font-size: 14.5px;
+  }
+}
+</style></div><p>Think about the apps we rely on daily: Notion, Slack, Figma. They’ve trained users to expect intuitive design, instant access, and personalized experiences. Your analytics can’t feel outdated by comparison. Users want dashboards that look polished, respond quickly, and deliver insights tailored to their role, without asking IT for help.</p><p>‍<strong>The shift is clear: successful teams are now productizing Power BI.<br></strong></p><p><strong>‍</strong>That means creating embedded, mobile-ready, client-friendly environments with row-level security and customizable views. With AI in the mix, even non-technical users expect tools to surface trends, make predictions, and offer recommendations. If the experience doesn’t deliver? Users won’t either.</p><p>‍</p><h3>What It Means to Productize Power BI</h3><p>To productize Power BI means going beyond building dashboards. It’s about delivering data as a polished, scalable product, embedded into a custom-branded experience that looks and feels like your own application.<br>Instead of sharing static reports or scattered links, teams embed Power BI directly into client portals, web apps, or internal tools. This approach gives users access to live, interactive analytics right where they already work. And with the right setup, it’s secure, multi-tenant, and built for growth. Implement multi-tenancy using Power BI Embedded + RLS + workspace management. Each client’s data is filtered using RLS policies while using the same report.<br>Productizing Power BI typically includes:</p><p>‍</p><div class="blog-product-features-cm7821">
+
+  <div class="blog-product-features-cm7821__grid">
+
+    <div class="blog-product-features-cm7821__card">
+      <div class="blog-product-features-cm7821__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d55fca8e2433b7a6fff5c_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-13.webp" alt>
+      </div>
+      <div class="blog-product-features-cm7821__text">
+        <strong>Multi-tenant user management</strong> for separating access across clients, departments, or teams
+      </div>
+    </div>
+
+    <div class="blog-product-features-cm7821__card">
+      <div class="blog-product-features-cm7821__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d560a16cf704ccb878790_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-11.webp" alt>
+      </div>
+      <div class="blog-product-features-cm7821__text">
+        <strong>Row-level security</strong> to ensure users only see the data they’re supposed to
+      </div>
+    </div>
+
+    <div class="blog-product-features-cm7821__card">
+      <div class="blog-product-features-cm7821__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d560a16cf704ccb878790_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-11.webp" alt>
+      </div>
+      <div class="blog-product-features-cm7821__text">
+        <strong>Azure-based deployment:</strong> Use Azure services (like Azure AD, Azure SQL DB, and Power BI Embedded) to manage authentication, data, and scalable embedded reporting.
+      </div>
+    </div>
+
+    <div class="blog-product-features-cm7821__card">
+      <div class="blog-product-features-cm7821__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d560a16cf704ccb878790_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-11.webp" alt>
+      </div>
+      <div class="blog-product-features-cm7821__text">
+        <strong>Custom domains, styling, and branding</strong> to match your product’s identity
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+	<style>
+/* ===== Section Wrapper ===== */
+.blog-product-features-cm7821 {
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* ===== Grid ===== */
+.blog-product-features-cm7821__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+/* ===== Card ===== */
+.blog-product-features-cm7821__card {
+  background: #eaf2fa;
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Icon */
+.blog-product-features-cm7821__icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blog-product-features-cm7821__icon img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+	max-width: 56px;
+}
+
+/* Text */
+.blog-product-features-cm7821__text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.blog-product-features-cm7821__text strong {
+  color: #000;
+  font-weight: 600;
+	font-size:18px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog-product-features-cm7821__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-product-features-cm7821__text {
+    font-size: 14.5px;
+  }
+}
+</style></div><p>It’s not just about aesthetics. These capabilities lead to real business outcomes: faster client onboarding, stronger engagement, and even new revenue streams through subscriptions or upsell models.</p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1024px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1024px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d7072f888f5fd437ec078_What-It-Means-to-Productize-Power-BI-1024x572.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><div class="blog-monetization-models-cm9147">
+
+  <div class="blog-monetization-models-cm9147__heading">
+    Monetization requires:
+  </div>
+
+  <div class="blog-monetization-models-cm9147__grid-2">
+
+    <div class="blog-monetization-models-cm9147__card">
+      <div class="blog-monetization-models-cm9147__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d56603e0941ea4973669a_Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-gruph-icon.webp" alt>
+      </div>
+      <div class="blog-monetization-models-cm9147__text">
+        Power BI Embedded or Premium license
+      </div>
+    </div>
+
+    <div class="blog-monetization-models-cm9147__card">
+      <div class="blog-monetization-models-cm9147__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d87936d20630a10b491b9_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-12.webp" alt>
+      </div>
+      <div class="blog-monetization-models-cm9147__text">
+        Usage-based pricing model
+      </div>
+    </div>
+
+    <div class="blog-monetization-models-cm9147__card">
+      <div class="blog-monetization-models-cm9147__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d879e8bc823a1f906649d_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-6.webp" alt>
+      </div>
+      <div class="blog-monetization-models-cm9147__text">
+        Azure capacity setup (A SKUs for dev/test, EM/PU SKUs for production)
+      </div>
+    </div>
+
+    <div class="blog-monetization-models-cm9147__card">
+      <div class="blog-monetization-models-cm9147__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d87ae7e7f48bc5279110e_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-5.webp" alt>
+      </div>
+      <div class="blog-monetization-models-cm9147__text">
+        User authentication flow (Azure B2B, AAD, or custom tokens)
+      </div>
+    </div>
+
+  </div>
+
+  <div class="blog-monetization-models-cm9147__note">
+    And for agencies or consultants, white-label licensing opens up an entirely new revenue stream.
+  </div>
+
+  <div class="blog-monetization-models-cm9147__heading">
+    The models are flexible:
+  </div>
+
+  <div class="blog-monetization-models-cm9147__grid-3">
+
+    <div class="blog-monetization-models-cm9147__card">
+      <div class="blog-monetization-models-cm9147__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d87c026563921e1d62ab2_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-4.webp" alt>
+      </div>
+      <div class="blog-monetization-models-cm9147__text">
+        Subscriptions for monthly access to dynamic dashboards
+      </div>
+    </div>
+
+    <div class="blog-monetization-models-cm9147__card">
+      <div class="blog-monetization-models-cm9147__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d87c782594ee0e9c77d16_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-3.webp" alt>
+      </div>
+      <div class="blog-monetization-models-cm9147__text">
+        Usage-based pricing tied to data refreshes, users, or reports viewed
+      </div>
+    </div>
+
+    <div class="blog-monetization-models-cm9147__card">
+      <div class="blog-monetization-models-cm9147__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694d87d0d35d9d22baccd5a5_Icon-for-Data-Is-the-Product-Why-Analytics-Needs-Better-Packaging-2.webp" alt>
+      </div>
+      <div class="blog-monetization-models-cm9147__text">
+        White-label resale for clients who want their own branded analytics environment
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<style>
+/* ===== Section Wrapper ===== */
+.blog-monetization-models-cm9147 {
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* Headings */
+.blog-monetization-models-cm9147__heading {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #000;
+}
+
+/* Grid layouts */
+.blog-monetization-models-cm9147__grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.blog-monetization-models-cm9147__grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* Card */
+.blog-monetization-models-cm9147__card {
+  background: #eaf2fa;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Icon */
+.blog-monetization-models-cm9147__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blog-monetization-models-cm9147__icon img {
+  width:56px;
+  height:56px;
+	max-width: 56px;
+  object-fit: contain;
+}
+
+/* Text */
+.blog-monetization-models-cm9147__text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Paragraph */
+.blog-monetization-models-cm9147__note {
+  margin: 14px 0 22px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-monetization-models-cm9147__grid-2,
+  .blog-monetization-models-cm9147__grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+</style></div><p>‍</p><h2 id="packaging-drives-adoption-adoption-drives-roi">Packaging Drives Adoption. Adoption Drives ROI.</h2><p>You can have the most accurate models, cleanest datasets, and smartest insights, but if the delivery falls short, none of it gets used. That’s the reality many analytics teams face: the work is solid, but the presentation gets overlooked. And without engagement, there’s no return.</p><p>Great data needs more than dashboards; it needs packaging. When analytics are delivered in a seamless, branded, and intuitive experience, users engage more. They explore. They trust the data. They use it to make decisions. That’s when analytics starts driving real outcomes and real ROI.</p><p><strong>If you’re already investing time, tools, and people into building insights, don’t let that investment fall flat at the finish line. How you package and present Power BI isn’t just a detail; it’s the difference between underused dashboards and a true business asset.</strong></p><div class="blog-productize-cta-cm9824">
+  <div class="blog-productize-cta-cm9824__inner">
+
+    <!-- Left Image -->
+    <div class="blog-productize-cta-cm9824__image">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6911f8f59462bf85454b9e37_Visualize-What-Matters-783x1024.webp" alt>
+    </div>
+
+    <!-- Right Content -->
+    <div class="blog-productize-cta-cm9824__content">
+
+      <div class="blog-productize-cta-cm9824__title">
+        Ready to Productize Your Power BI?
+      </div>
+
+      <div class="blog-productize-cta-cm9824__intro">
+        You’ve done the hard part: the modeling, the measures, the visualizations. Now it’s time to ship it like a product: fast, polished, secure, and scalable.
+      </div>
+
+      <div class="blog-productize-cta-cm9824__subheading">
+        Reporting Hub gives data teams everything they need to:
+      </div>
+
+      <div class="blog-productize-cta-cm9824__list">
+
+        <div class="blog-productize-cta-cm9824__item">
+          <div class="blog-productize-cta-cm9824__icon">
+            <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6912137a2ee7213f4ca5b08b_icon-Why-Role-Based-Access-Isnt-Enough-in-Modern-BI-Environments-4.webp" alt>
+          </div>
+          <div class="blog-productize-cta-cm9824__text">
+            Transform Power BI into a white-labeled, client-ready product
+          </div>
+        </div>
+
+        <div class="blog-productize-cta-cm9824__item">
+          <div class="blog-productize-cta-cm9824__icon">
+            <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6912137a2ee7213f4ca5b08b_icon-Why-Role-Based-Access-Isnt-Enough-in-Modern-BI-Environments-4.webp" alt>
+          </div>
+          <div class="blog-productize-cta-cm9824__text">
+            Unlock new revenue by monetizing dashboards with subscriptions or usage tiers
+          </div>
+        </div>
+
+        <div class="blog-productize-cta-cm9824__item">
+          <div class="blog-productize-cta-cm9824__icon">
+            <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6912137a2ee7213f4ca5b08b_icon-Why-Role-Based-Access-Isnt-Enough-in-Modern-BI-Environments-4.webp" alt>
+          </div>
+          <div class="blog-productize-cta-cm9824__text">
+            Scale reporting across teams or clients without IT bottlenecks or manual work
+          </div>
+        </div>
+
+      </div>
+
+      <div class="blog-productize-cta-cm9824__paragraph">
+        While RLS adds much-needed control, many companies find that RBAC plus RLS isn’t flexible enough for modern BI demands. To stay secure and scalable, it’s often necessary to combine these with more dynamic, tenant-aware access controls.
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<style>
+/* ===== Section Wrapper ===== */
+.blog-productize-cta-cm9824 {
+  width: 100%;
+  padding: 30px 0;
+}
+
+/* ===== Layout ===== */
+.blog-productize-cta-cm9824__inner {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* ===== Left Image ===== */
+.blog-productize-cta-cm9824__image {
+  flex: 0 0 42%;
+}
+
+.blog-productize-cta-cm9824__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  display: block;
+}
+
+/* ===== Right Content ===== */
+.blog-productize-cta-cm9824__content {
+  flex: 1;
+}
+
+/* Headings */
+.blog-productize-cta-cm9824__title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  color: #000;
+}
+
+.blog-productize-cta-cm9824__title span {
+  color: #1a73e8;
+}
+
+.blog-productize-cta-cm9824__intro {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.blog-productize-cta-cm9824__subheading {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #000;
+}
+
+/* ===== Checklist ===== */
+.blog-productize-cta-cm9824__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.blog-productize-cta-cm9824__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.blog-productize-cta-cm9824__icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.blog-productize-cta-cm9824__icon img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.blog-productize-cta-cm9824__text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Paragraphs */
+.blog-productize-cta-cm9824__paragraph {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 14px;
+}
+
+/* CTA */
+.blog-productize-cta-cm9824__cta {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.blog-productize-cta-cm9824__cta:hover {
+  text-decoration: underline;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .blog-productize-cta-cm9824__inner {
+    flex-direction: column;
+  }
+
+  .blog-productize-cta-cm9824__image {
+    flex: 100%;
+  }
+}
+</style>
+	
+	
+</div><p>From custom branding and secure access to Azure deployment and multi-tenant control, it’s all built in.</p><p><a href="https://thereportinghub.com/"><strong>See how it works</strong></a> <strong>and start turning your analytics into a true growth engine.</strong>‍</p>
+    <div class="author-bio-block">
+      <img class="bio-avatar" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a3f30361927cb1cee617_Brian-DL.webp" alt="Brian DeLuca">
+      <div>
+        <div class="bio-name">Brian DeLuca</div>
+        <p class="bio-text">Brian DeLuca is a co-founder and CEO of The Reporting Hub. As a seasoned expert in data, analytics, and business intelligence, Brian brings over 20 years of experience driving innovation and organizat...</p>
+      </div>
+    </div>
+  </article>
+  <aside class="post-sidebar">
+    <div class="sidebar-card"><h4>In this post</h4><ul class="toc-list"><li><a href="#the-problem-great-data-poor-experience">The Problem: Great Data, Poor Experience</a></li><li><a href="#data-consumers-expect-product-grade-experiences">Data Consumers Expect Product-Grade Experiences</a></li><li><a href="#how-reporting-hub-simplifies-multi-tenant-security">How Reporting Hub Simplifies Multi-Tenant Security?</a></li><li><a href="#monetize-power-bi-the-revenue-opportunity">Monetize Power BI: The Revenue Opportunity</a></li><li><a href="#packaging-drives-adoption-adoption-drives-roi">Packaging Drives Adoption. Adoption Drives ROI.</a></li></ul></div>
+    <div class="sidebar-cta">
+      <p>See how Reporting Hub handles white-label analytics end-to-end.</p>
+      <a href="/demo/">Book a Demo →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- INCLUDE footer -->
+</body>
+</html>

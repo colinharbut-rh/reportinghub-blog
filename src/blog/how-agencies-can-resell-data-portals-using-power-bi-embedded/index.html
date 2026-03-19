@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>How Agencies Can Resell Data Portals Using Power BI Embedded — The Reporting Hub</title>
+<meta name="description" content="Modern agencies face rising expectations for transparency and data access. Clients no longer accept static updates; they want interactive, on-demand insigh">
+<meta property="og:title" content="How Agencies Can Resell Data Portals Using Power BI Embedded">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941b017c31f8cd2cc3067dd_How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded.webp">
+<link rel="canonical" href="https://thereportinghub.com/blog/how-agencies-can-resell-data-portals-using-power-bi-embedded/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#22A4F7; --indigo:#6C6EF3; --purple:#5E2C8F; --magenta:#C729ED;
+    --navy:#0D0F1A;
+    --grad:linear-gradient(135deg,#22A4F7 0%,#6C6EF3 50%,#C729ED 100%);
+    --text:#0D0F1A; --muted:#6B7280; --border:#E5E7EB;
+    --bg:#F8F9FB; --card-bg:#FFFFFF; --radius:14px;
+  }
+  body { font-family:'DM Sans',sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 32px; height:68px;
+    display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo img { height:34px; display:block; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { font-size:15px; font-weight:500; color:var(--text); text-decoration:none; opacity:.75; transition:opacity .2s; }
+  .nav-links a:hover { opacity:1; }
+  .nav-links a.active { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:600; opacity:1; }
+  .nav-cta { background:var(--grad); color:#fff; font-size:14px; font-weight:600;
+    padding:10px 22px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.88; }
+  footer { background:var(--navy); border-top:1px solid rgba(255,255,255,.08); padding:32px; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .footer-inner img { height:24px; opacity:.7; }
+  .footer-inner p { font-size:13px; color:rgba(255,255,255,.4); }
+  @media(max-width:600px) { .nav-links { display:none; } }
+
+  .post-hero { max-width:760px; margin:0 auto; padding:64px 32px 40px; }
+  .breadcrumb { font-size:13px; margin-bottom:20px; }
+  .breadcrumb a { color:var(--muted); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .breadcrumb span { color:var(--border); margin:0 8px; }
+  .post-cat { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:16px; display:block; }
+  .post-hero h1 { font-family:'Sora',sans-serif; font-size:clamp(28px,4vw,44px);
+    font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:20px; }
+  .post-byline { display:flex; align-items:center; gap:14px; padding:20px 0;
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .avatar { width:44px; height:44px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; flex-shrink:0; }
+  .byline-name { font-size:15px; font-weight:600; color:var(--text); }
+  .byline-meta { font-size:13px; color:var(--muted); margin-top:2px; }
+  .byline-share { margin-left:auto; display:flex; gap:10px; }
+  .share-btn { width:36px; height:36px; border-radius:50%; border:1px solid var(--border);
+    background:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; transition:border-color .2s;
+    text-decoration:none; color:var(--muted); }
+  .share-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .post-img-wrap { max-width:900px; margin:0 auto 48px; padding:0 32px; }
+  .post-img { border-radius:var(--radius); height:400px; }
+  .post-layout { max-width:1100px; margin:0 auto; padding:0 32px 80px;
+    display:grid; grid-template-columns:1fr 280px; gap:60px; align-items:start; }
+  .post-content h2 { font-family:'Sora',sans-serif; font-size:26px; font-weight:700;
+    color:var(--navy); margin:44px 0 18px; line-height:1.25; }
+  .post-content h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700;
+    color:var(--navy); margin:32px 0 14px; }
+  .post-content p { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:22px; }
+  .post-content ul,.post-content ol { padding-left:24px; margin-bottom:22px; }
+  .post-content li { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:8px; }
+  .post-content blockquote { border-left:3px solid transparent;
+    border-image:var(--grad) 1; padding:16px 24px;
+    background:var(--bg); border-radius:0 var(--radius) var(--radius) 0; margin:32px 0; }
+  .post-content blockquote p { font-size:18px; font-style:italic; color:var(--navy); font-weight:500; margin:0; }
+  .post-content a { color:var(--blue); text-decoration:none; }
+  .post-content a:hover { text-decoration:underline; }
+  /* Grid + overflow fix: article column must not bleed past its track */
+  .post-content { min-width:0; overflow:hidden; }
+  /* Every element inside article is capped to column width */
+  .post-content * { max-width:100%; box-sizing:border-box; }
+  .post-content img, .post-content video,
+  .post-content iframe { height:auto; display:block; }
+  /* Neutralise Webflow-authored max-width overrides on callout/grid divs */
+  .post-content div[class^="blog_"] { max-width:100% !important; }
+  /* Collapse Webflow embedded two-column flex sections to single column */
+  .post-content section { margin:40px 0; overflow:hidden; }
+  .post-content section > div { display:block !important; }
+  .post-content section > div > div { width:100% !important; flex:none !important; }
+  /* Centre embedded section images */
+  .post-content section img {
+    max-width:520px; width:100%; display:block;
+    margin:24px auto; border-radius:8px;
+  }
+  /* Preserve icon+text list item flex layouts */
+  .post-content section li { display:flex !important; }
+  .callout { background:linear-gradient(135deg,rgba(34,164,247,.08),rgba(108,110,243,.08));
+    border:1px solid rgba(34,164,247,.2); border-radius:var(--radius);
+    padding:24px 28px; margin:32px 0; }
+  .callout p { font-size:16px; font-weight:500; margin:0 0 10px; }
+  .callout p:last-child { margin:0; }
+  .post-sidebar { position:sticky; top:88px; }
+  .sidebar-card { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+  .sidebar-card h4 { font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    color:var(--navy); margin-bottom:16px; text-transform:uppercase; letter-spacing:.05em; }
+  .toc-list { list-style:none; }
+  .toc-list li { margin-bottom:10px; }
+  .toc-list a { font-size:13px; color:var(--muted); text-decoration:none;
+    line-height:1.4; display:block; transition:color .2s; }
+  .toc-list a:hover { color:var(--blue); }
+  .sidebar-cta { background:var(--navy); border-radius:var(--radius); padding:24px; text-align:center; }
+  .sidebar-cta p { font-size:14px; line-height:1.55; color:rgba(255,255,255,.65); margin-bottom:16px; }
+  .sidebar-cta a { display:block; background:var(--grad); color:#fff; font-size:14px;
+    font-weight:600; padding:12px 20px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .sidebar-cta a:hover { opacity:.88; }
+  .author-bio-block { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; margin-top:48px;
+    display:flex; gap:20px; align-items:flex-start; }
+  .author-bio-block .bio-avatar { width:56px; height:56px; border-radius:50%;
+    object-fit:cover; flex-shrink:0; }
+  .author-bio-block .bio-avatar-placeholder { width:56px; height:56px; border-radius:50%;
+    background:var(--grad); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:20px; flex-shrink:0; }
+  .bio-name { font-family:'Sora',sans-serif; font-size:16px; font-weight:700;
+    color:var(--navy); margin-bottom:6px; }
+  .bio-text { font-size:14px; line-height:1.65; color:var(--muted); }
+  @media(max-width:900px) {
+    .post-layout { grid-template-columns:1fr; }
+    .post-sidebar { position:static; }
+  }
+  @media(max-width:600px) {
+    .post-hero { padding:40px 20px 32px; }
+    .post-img-wrap { padding:0 20px; }
+    .post-img { height:220px; }
+    .post-layout { padding:0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- INCLUDE header -->
+<header class="post-hero">
+  <div class="breadcrumb">
+    <a href="/blog/">Blog</a>
+    <span>›</span>
+    <a href="/blog/?cat=analytics-as-a-service">Analytics as a Service</a>
+  </div>
+  <span class="post-cat">Analytics as a Service</span>
+  <h1>How Agencies Can Resell Data Portals Using Power BI Embedded</h1>
+  <div class="post-byline">
+    <img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a2794d98474036c4f432_691d62c15c0b1cfdbdb287e4_DSC00127-768x768.webp" alt="Manvir G" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+    <div>
+      <div class="byline-name">Manvir G</div>
+      <div class="byline-meta">Jan 30, 2026 · 7 Minutes</div>
+    </div>
+    <div class="byline-share">
+      <a href="https://www.linkedin.com/shareArticle?url=https://thereportinghub.com/blog/how-agencies-can-resell-data-portals-using-power-bi-embedded/" class="share-btn" target="_blank" rel="noopener">in</a>
+      <a href="https://twitter.com/intent/tweet?url=https://thereportinghub.com/blog/how-agencies-can-resell-data-portals-using-power-bi-embedded/&text=How Agencies Can Resell Data Portals Using Power BI Embedded" class="share-btn" target="_blank" rel="noopener">𝕏</a>
+    </div>
+  </div>
+</header>
+<div class="post-img-wrap">
+  <div class="post-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941b017c31f8cd2cc3067dd_How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded.webp');background-size:cover;background-position:center;"></div>
+</div>
+<div class="post-layout">
+  <article class="post-content">
+    <p>Modern agencies face rising expectations for transparency and data access. Clients no longer accept static updates; they want interactive, on-demand insights.</p><p><a href="https://thereportinghub.webflow.io/power-bi/power-bi-embedded">Power BI Embedded</a> allows agencies to meet this demand by embedding branded dashboards into secure client portals. These solutions are fast to deploy, easy to customize, and can be tailored to match each client’s branding, security, and data needs. This post explains how agencies can resell data portals with Power BI Embedded, deliver more value to clients, and scale their reporting services more efficiently.</p><h2 id="the-rise-of-white-labeled-data-portals">The Rise of White-Labeled Data Portals</h2><p>White label analytics platforms began gaining traction in the early 2010s, as demand for scalable, client-facing reporting grew. Early solutions offered basic embedding features, but over time, they evolved into fully branded, secure portals that agencies could deliver under their name. As cloud infrastructure matured, software vendors began offering multi-tenant platforms (allowing multiple clients to be served from a single environment, each with isolated data access) with built-in access controls, strong performance, and flexible customization.</p><p><strong>Today, as clients expect real-time insights on demand, agencies are increasingly turning to white-labeled analytics portals. These tools meet modern expectations without requiring agencies to build complex platforms from scratch.</strong></p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-floatleft" style="max-width:50%" data-rt-type="image" data-rt-align="floatleft" data-rt-max-width="50%"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694e9ff4aa511c706afef35c_The-Rise-of-White-Labeled-Data-Portals-783x1024.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><p>White label analytics refers to rebranding and reselling third-party analytics software under your own identity. Instead of investing in custom development, agencies deliver insights through a ready-made platform maintained by the vendor.</p><p>The vendor handles the backend performance, updates, and security while the agency applies its branding: logo, domain, and styling. The result is a portal that feels tailor-made. Clients receive dashboards and reports in a polished, on-brand environment.</p><p>But this isn’t just about aesthetics. White label portals reduce overhead, accelerate delivery, and free up resources for insights and strategy. They also unlock new revenue streams.</p><p><strong>Agencies can monetize access, offer premium features, and generate recurring income without the burden of building or maintaining the platform themselves.</strong></p><p>‍</p><p>‍</p><p>‍</p><p>‍</p><p>‍</p><p>‍</p><h2 id="what-is-power-bi-embedded-and-why-it-matters">What is Power BI Embedded and Why It Matters</h2><p>Power BI Embedded is Microsoft’s analytics-as-a-service platform built for external delivery. It’s ideal for agencies, consultants, and SaaS vendors who want to integrate dashboards directly into their apps or client portals, without showing the Power BI interface. Everything connects through APIs, backed by secure authentication using a service principal or master user, so clients interact with real-time reports through a polished, branded experience.</p><p><strong>Instead of sending PDFs or granting access to workspaces, teams can deliver analytics as part of their product. It’s fast, scalable, and tailored to the user.</strong></p><p>‍<strong>‍</strong></p><h4><strong>Key advantages of Power BI Embedded:</strong></h4><div class="pbi-benefits-section">
+
+  <div class="pbi-benefit-card">
+    <div class="pbi-benefit-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ea196e22489674dd19ce4_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-5.webp">
+    </div>
+    <div class="pbi-benefit-content">
+      <h3>White-labeling and full brand control</h3>
+      <p>Power BI Embedded lets providers remove all Microsoft branding. The interface can be fully customized with the agency’s logo, domain, and color scheme, so clients feel like they’re using a proprietary product. It creates a seamless experience that strengthens trust and reinforces brand identity.</p>
+    </div>
+  </div>
+
+  <div class="pbi-benefit-card">
+    <div class="pbi-benefit-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ea1a0b560e283ed292484_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-6.webp">
+    </div>
+    <div class="pbi-benefit-content">
+      <h3>Secure, multi-client management</h3>
+      <p>Agencies can manage multiple client accounts from a single environment. Power BI Embedded supports row-level security, object-level, and role-based access, making it easy to isolate data between tenants and control who sees what. There’s no need to build multiple workspaces or juggle access permissions manually.</p>
+    </div>
+  </div>
+
+  <div class="pbi-benefit-card">
+    <div class="pbi-benefit-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ea1a8de1f48f2d0ef5d2b_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-7.webp">
+    </div>
+    <div class="pbi-benefit-content">
+      <h3>Real-time, personalized reporting</h3>
+      <p>Reports update automatically and can be personalized for each user. Whether a client wants to see only their specific metrics or access organization-wide data, the system adjusts accordingly. This reduces overhead for internal teams while giving clients exactly what they need, when they need it.</p>
+    </div>
+  </div>
+
+  <div class="pbi-benefit-card">
+    <div class="pbi-benefit-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ea1b20dd4c5428bf23645_icon-No-need-for-end-users-to-access-Power-BI-directly.webp">
+    </div>
+    <div class="pbi-benefit-content">
+      <h3>No need for end users to access Power BI directly</h3>
+      <p>Clients interact with embedded dashboards without needing separate Power BI accounts or accessing the Power BI service interface. This removes friction and makes data more accessible to non-technical users.</p>
+    </div>
+  </div>
+
+  <div class="pbi-benefit-card">
+    <div class="pbi-benefit-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ea1bcb65e463ad5593204_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-8.webp">
+    </div>
+    <div class="pbi-benefit-content">
+      <h3>Faster deployment without custom infrastructure</h3>
+      <p>Power BI Embedded is ready to go. Instead of building a reporting solution from scratch, teams can integrate pre-built dashboards into their stack and go live quickly. It eliminates the need for additional infrastructure or custom development, reducing both cost and time-to-market.</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+
+.pbi-benefits-section {
+  max-width: 960px;
+  margin: 50px auto;
+  padding: 0 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.pbi-benefit-card {
+  display: flex;
+  align-items: flex-start;
+  background: #edf6ff;
+  border: 2px solid #178ee8;
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 22px;
+}
+
+.pbi-benefit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18px;
+  flex-shrink: 0;
+}
+
+.pbi-benefit-icon img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+	max-width: 100px;
+}
+
+.pbi-benefit-content h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+
+.pbi-benefit-content p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #4d5b6b;
+}
+.human-centered-image {
+    height: auto;
+}
+
+
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .pbi-benefit-card {
+    flex-direction: column;
+  }
+
+  .pbi-benefit-icon {
+    margin-bottom: 14px;
+  }
+}
+
+</style></div><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1024px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1024px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694eb00208a404815adb214e_What-is-Power-BI-Embedded-and-Why-It-Matters-1024x572.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><p>‍</p><h2 id="how-agencies-can-build-and-resell-data-portals">How Agencies Can Build and Resell Data Portals</h2><p>Agencies no longer need to build analytics platforms from scratch. With Power BI Embedded, it’s easy to create scalable, branded portals that deliver real-time insights to clients.</p><div class="blogsteps-powerbiportal-cm8842">
+
+  <div class="blogsteps-powerbiportal-cm8842__item">
+    <div class="blogsteps-powerbiportal-cm8842__number">1</div>
+    <div class="blogsteps-powerbiportal-cm8842__content">
+      <h4>Build Reusable Power BI Reports</h4>
+      <p>
+        Start by designing flexible reports in Power BI Desktop. Keep them modular and focused on solving
+        common client challenges. Reusing these templates saves time and makes onboarding new clients faster.
+      </p>
+    </div>
+  </div>
+
+  <div class="blogsteps-powerbiportal-cm8842__item">
+    <div class="blogsteps-powerbiportal-cm8842__number">2</div>
+    <div class="blogsteps-powerbiportal-cm8842__content">
+      <h4>Embed in a Branded Portal</h4>
+      <p>
+        Use APIs to embed your reports in a white-labeled web app. The <a href="/power-bi">Power BI</a> service runs behind the scenes,
+        but your client sees a polished interface that reflects your brand—or theirs.
+      </p>
+    </div>
+  </div>
+
+  <div class="blogsteps-powerbiportal-cm8842__item">
+    <div class="blogsteps-powerbiportal-cm8842__number">3</div>
+    <div class="blogsteps-powerbiportal-cm8842__content">
+      <h4>Choose Your Brand or Theirs</h4>
+      <p>
+        Whether the portal shows your logo or the client’s, everything from domain to styling is fully
+        customizable. The experience feels cohesive, professional, and trustworthy.
+      </p>
+    </div>
+  </div>
+
+  <div class="blogsteps-powerbiportal-cm8842__item">
+    <div class="blogsteps-powerbiportal-cm8842__number">4</div>
+    <div class="blogsteps-powerbiportal-cm8842__content">
+      <h4>Control Access with Built-In Security</h4>
+      <p>
+        Use Power BI’s row-level and object-level security to ensure each user only sees what they’re supposed
+        to. This is essential when supporting multiple clients or user types.
+      </p>
+    </div>
+  </div>
+
+  <div class="blogsteps-powerbiportal-cm8842__item">
+    <div class="blogsteps-powerbiportal-cm8842__number">5</div>
+    <div class="blogsteps-powerbiportal-cm8842__content">
+      <h4>Monetize Your Portal</h4>
+      <p>
+        Turn your portal into a product. Sell access via subscriptions, offer tiered data packages, or bundle
+        reporting with other services you provide. (Requires a Power BI Embedded capacity license from
+        Microsoft.)
+      </p>
+    </div>
+  </div>
+
+</div>
+<style>
+/* ===============================
+   SECTION WRAPPER
+================================ */
+.blogsteps-powerbiportal-cm8842 {
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* ===============================
+   STEP ITEM
+================================ */
+.blogsteps-powerbiportal-cm8842__item {
+  position: relative;
+  display: flex;
+  gap: 18px;
+  padding-bottom: 28px;
+}
+
+/* Vertical line */
+.blogsteps-powerbiportal-cm8842__item::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 38px;
+  width: 2px;
+  height: calc(100% - 38px);
+  background: #7b61ff;
+}
+
+/* Remove line from last */
+.blogsteps-powerbiportal-cm8842__item:last-child::before {
+  display: none;
+}
+
+/* ===============================
+   NUMBER CIRCLE (SAME LOGIC)
+================================ */
+.blogsteps-powerbiportal-cm8842__number {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  border: 2px solid #7b61ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  z-index: 2;
+}
+
+/* Inner fill */
+.blogsteps-powerbiportal-cm8842__number::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #7b61ff;
+  z-index: -1;
+}
+
+/* ===============================
+   CONTENT
+================================ */
+.blogsteps-powerbiportal-cm8842__content h4 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #000;
+}
+
+.blogsteps-powerbiportal-cm8842__content p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ===============================
+   MOBILE
+================================ */
+@media (max-width: 768px) {
+  .blogsteps-powerbiportal-cm8842__item {
+    gap: 14px;
+  }
+}
+</style></div><p>‍</p><h4><strong>What Makes It Effective:</strong></h4><div class="feature-grid-wrapper">
+  <div class="feature-grid">
+
+    <div class="feature-item">
+      <div class="feature-item-icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebaa735a370875b06a541_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-14.webp">
+      </div>
+      <h3>Self-service</h3>
+      <p>Non-technical users can slice data, filter views, and generate insights without IT support.</p>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-item-icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebaaf16cf704ccba892fd_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-15.webp">
+      </div>
+      <h3>User-friendly</h3>
+      <p>Interactive dashboards are intuitive and visually rich.</p>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-item-icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebab639fa5bc83a40e6a1_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-16.webp">
+      </div>
+      <h3>Customizable</h3>
+      <p>Each client can receive a tailored experience, from report layout to data sources.</p>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-item-icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebabdaf90959fd409b906_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-17.webp">
+      </div>
+      <h3>Real-time data</h3>
+      <p>Reports stay up to date, pulling from multiple live data sources.</p>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-item-icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebac522b265da9509f8ad_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-18.webp">
+      </div>
+      <h3>Actionable insights</h3>
+      <p>Embedded analytics help users take action immediately within the app.</p>
+    </div>
+
+    <div class="feature-item">
+      <div class="feature-item-icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebad09f9b4eaf11837ce7_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-19.webp">
+      </div>
+      <h3>Advanced capabilities</h3>
+      <p>AI, predictive modeling, and natural language Q&amp;A enhance value.</p>
+    </div>
+
+  </div>
+</div>
+<style>
+
+.feature-grid-wrapper {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 40px 20px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #f2fbff 0%, #f8f3ff 100%);
+  border: 2px solid #e2e2e2;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 20px;
+  text-align: center;
+}
+
+.feature-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+
+.feature-item-icon img {
+  width: 70px;
+  height: 70px;
+	max-width: 70px;
+  object-fit: contain;
+}
+
+.feature-item h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2f32ff;
+}
+
+.feature-item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #000;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+
+</style></div><h2 id="how-to-set-up-and-deploy-a-white-labeled-analytics-experience-power-bi-embedded-tutorial">How to Set Up and Deploy a White-Labeled Analytics Experience (Power BI Embedded Tutorial)</h2><p>This hands-on tutorial provides a step-by-step guide to implementing Power BI Embedded using the “embed for your customers” model, ideal for independent software vendors (ISVs), agencies, and developers building external-facing applications.</p><p>‍<strong>Here’s a simple roadmap:</strong></p><div class="blogsteps-powerbiembed-cm8821">
+
+  <div class="blogsteps-powerbiembed-cm8821__item">
+    <div class="blogsteps-powerbiembed-cm8821__number">1</div>
+    <div class="blogsteps-powerbiembed-cm8821__content">
+      <h4>Register a Microsoft Entra (Azure AD) Application (formerly Azure Active Directory)</h4>
+      <p>
+        Begin by setting up an app registration in Microsoft Entra. This enables secure, non-interactive
+        authentication to Power BI. End users can access embedded reports without requiring individual
+        Power BI accounts or licenses. Use either a service principal (recommended for scalability and
+        security) or a master user.
+      </p>
+    </div>
+  </div>
+
+  <div class="blogsteps-powerbiembed-cm8821__item">
+    <div class="blogsteps-powerbiembed-cm8821__number">2</div>
+    <div class="blogsteps-powerbiembed-cm8821__content">
+      <h4>Create and Publish Power BI Reports</h4>
+      <p>
+        Build your reports in Power BI Desktop, focusing on modular, reusable components. Publish the final
+        reports to a workspace backed by a Power BI Embedded capacity. These reports become the core visual
+        assets embedded into your external-facing application.
+      </p>
+    </div>
+  </div>
+
+  <div class="blogsteps-powerbiembed-cm8821__item">
+    <div class="blogsteps-powerbiembed-cm8821__number">3</div>
+    <div class="blogsteps-powerbiembed-cm8821__content">
+      <h4>Configure Embedding and Access Permissions</h4>
+      <p>
+        Use Power BI REST APIs and SDKs to generate embed tokens and configure report access. This includes
+        setting up roles, applying row-level or object-level security, and defining which users can view
+        specific data. Embedding keeps the analytics experience inside your app with no visible Microsoft UI.
+      </p>
+    </div>
+  </div>
+
+  <div class="blogsteps-powerbiembed-cm8821__item">
+    <div class="blogsteps-powerbiembed-cm8821__number">4</div>
+    <div class="blogsteps-powerbiembed-cm8821__content">
+      <h4>Embed Reports into a Custom Web Application</h4>
+      <p>
+        Integrate the published Power BI reports into your own branded front end. Use JavaScript or supported
+        SDKs (.NET, Python, Java, Node.js) to embed visuals directly into your app, maintaining full control
+        over layout and design.
+      </p>
+    </div>
+  </div>
+
+  <div class="blogsteps-powerbiembed-cm8821__item">
+    <div class="blogsteps-powerbiembed-cm8821__number">5</div>
+    <div class="blogsteps-powerbiembed-cm8821__content">
+      <h4>Test, Customize, and Deploy</h4>
+      <p>
+        Ensure the embedded experience is responsive, secure, and user-friendly. Customize branding,
+        optimize performance, and run functional tests before production. End users should interact with
+        live dashboards without knowing they’re powered by Power BI.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* ===============================
+   SECTION WRAPPER (100% FLUID)
+================================ */
+.blogsteps-powerbiembed-cm8821 {
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* ===============================
+   STEP ITEM
+================================ */
+.blogsteps-powerbiembed-cm8821__item {
+  position: relative;
+  display: flex;
+  gap: 18px;
+  padding-bottom: 28px;
+}
+
+/* Vertical line */
+.blogsteps-powerbiembed-cm8821__item::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 38px;
+  width: 2px;
+  height: calc(100% - 38px);
+  background: #ff4f8b;
+}
+
+/* Remove line from last item */
+.blogsteps-powerbiembed-cm8821__item:last-child::before {
+  display: none;
+}
+
+/* ===============================
+   NUMBER CIRCLE (REUSED LOGIC)
+================================ */
+.blogsteps-powerbiembed-cm8821__number {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  border: 2px solid #ff4f8b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  z-index: 2;
+}
+
+/* Inner fill */
+.blogsteps-powerbiembed-cm8821__number::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #ff4f8b;
+  z-index: -1;
+}
+
+/* ===============================
+   CONTENT
+================================ */
+.blogsteps-powerbiembed-cm8821__content h4 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #000;
+}
+
+.blogsteps-powerbiembed-cm8821__content p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ===============================
+   MOBILE
+================================ */
+@media (max-width: 768px) {
+  .blogsteps-powerbiembed-cm8821__item {
+    gap: 14px;
+  }
+}
+</style></div><p>‍</p><h2 id="what-to-look-for-in-a-power-bi-delivery-platform">What to Look for in a Power BI Delivery Platform</h2><p>When selecting a Power BI delivery platform, agencies should prioritize flexibility, control, and ease of use.</p><h4><strong>Key features include:<br></strong></h4><div class="agency-feature-section">
+
+  <div class="agency-feature-box">
+    <div class="agency-feature-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebe41d0fa56dfc592d71c_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-25.webp">
+    </div>
+    <div class="agency-feature-content">
+      <h3>White-label readiness</h3>
+      <p>The platform should support full rebranding – logo, colors, and domain, so clients interact with the agency’s brand, not Microsoft’s.</p>
+    </div>
+  </div>
+
+  <div class="agency-feature-box">
+    <div class="agency-feature-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebe9998bd68220e520c90_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-26.webp">
+    </div>
+    <div class="agency-feature-content">
+      <h3>Azure deployment control</h3>
+      <p>Agencies should have the option to deploy in their own Azure environment for maximum compliance, data residency control, and security.</p>
+    </div>
+  </div>
+
+  <div class="agency-feature-box">
+    <div class="agency-feature-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebe9f443a7905a3777226_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-27.webp">
+    </div>
+    <div class="agency-feature-content">
+      <h3>Low-code or No-code setup</h3>
+      <p>A strong delivery platform enables report embedding, user provisioning, and access management without writing code.</p>
+    </div>
+  </div>
+
+  <div class="agency-feature-box">
+    <div class="agency-feature-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebea7355820a0881df87c_Icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-28.webp">
+    </div>
+    <div class="agency-feature-content">
+      <h3>Multi-client access management</h3>
+      <p>The platform must support segmented access per client or workspace, with user-level permissions and scalable role assignment.</p>
+    </div>
+  </div>
+
+  <div class="agency-feature-box">
+    <div class="agency-feature-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebeb0f6034523df08eb61_icon-for-How-Agencies-Can-Resell-Data-Portals-Using-Power-BI-Embedded-29.webp">
+    </div>
+    <div class="agency-feature-content">
+      <h3>Optional: plug-and-play AI assistants</h3>
+      <p>Built-in AI querying can enhance the client experience, offering fast answers and insights from semantic models without needing to explore dashboards manually.</p>
+    </div>
+  </div>
+
+</div>
+<style>
+
+.agency-feature-section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.agency-feature-box {
+  display: flex;
+  align-items: flex-start;
+  background: #edf6ff;
+  border: 2px solid #178ee8;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+
+.agency-feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.agency-feature-icon img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+	max-width: 100px;
+}
+
+.agency-feature-content h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: #000;
+}
+
+.agency-feature-content p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4d5b6b;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .agency-feature-box {
+    flex-direction: column;
+  }
+
+  .agency-feature-icon {
+    margin-bottom: 12px;
+  }
+}
+
+</style></div><figure class="w-richtext-figure-type-image w-richtext-align-floatleft" style="max-width:50%" data-rt-type="image" data-rt-align="floatleft" data-rt-max-width="50%"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694ebfda3629f1eacca8b902_How-Reporting-Hub-Simplifies-This-for-Agencies-1024x1024.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><h2 id="how-reporting-hub-simplifies-this-for-agencies">How Reporting Hub Simplifies This for Agencies</h2><p><a href="https://thereportinghub.com/" target="_blank">Reporting Hub</a> gives agencies a powerful way to resell Power BI Embedded data portals with ease. It offers simple white-labeling, fast Azure hosting, and a no-code setup, so teams can launch quickly without technical hurdles. Agencies manage multiple clients securely from one platform using role-based access controls. AI-driven querying tools make data more accessible and actionable, adding real value for clients. Reporting Hub streamlines delivery, reduces complexity, and opens new revenue streams, helping agencies scale and stand out.</p><p>‍</p><p>‍</p><p>‍</p><p>‍</p><p>This ready-to-use BI portal provides full branding and access control, helping optimize licensing usage without requiring additional developer resources. Agencies can deliver Analytics-as-a-Service to unlimited users, build secure, custom-branded portals, and own the entire user experience, without needing developers.</p><p><strong>For agencies looking to simplify Power BI delivery and grow their business, Reporting Hub offers a turnkey, scalable solution.</strong></p><h4><strong>Contact us today to see how Reporting Hub can help you resell branded data portals with confidence.</strong>‍<strong>‍</strong>‍</h4>
+    <div class="author-bio-block">
+      <img class="bio-avatar" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a2794d98474036c4f432_691d62c15c0b1cfdbdb287e4_DSC00127-768x768.webp" alt="Manvir G">
+      <div>
+        <div class="bio-name">Manvir G</div>
+        <p class="bio-text">Manvir Grewal, co-founder and architect behind The Reporting Hub, is a seasoned Agile Coach with over 16 years of experience in creating and leading cross-functional teams in complex domains. His expe...</p>
+      </div>
+    </div>
+  </article>
+  <aside class="post-sidebar">
+    <div class="sidebar-card"><h4>In this post</h4><ul class="toc-list"><li><a href="#the-rise-of-white-labeled-data-portals">The Rise of White-Labeled Data Portals</a></li><li><a href="#what-is-power-bi-embedded-and-why-it-matters">What is Power BI Embedded and Why It Matters</a></li><li><a href="#how-agencies-can-build-and-resell-data-portals">How Agencies Can Build and Resell Data Portals</a></li><li><a href="#how-to-set-up-and-deploy-a-white-labeled-analytics-experience-power-bi-embedded-tutorial">How to Set Up and Deploy a White-Labeled Analytics Experience (Power BI Embedded Tutorial)</a></li><li><a href="#what-to-look-for-in-a-power-bi-delivery-platform">What to Look for in a Power BI Delivery Platform</a></li><li><a href="#how-reporting-hub-simplifies-this-for-agencies">How Reporting Hub Simplifies This for Agencies</a></li></ul></div>
+    <div class="sidebar-cta">
+      <p>See how Reporting Hub handles white-label analytics end-to-end.</p>
+      <a href="/demo/">Book a Demo →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- INCLUDE footer -->
+</body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Scaling Analytics: Best Practices for Managing Large Datasets in Power BI Embedded — The Reporting Hub</title>
+<meta name="description" content="Companies that can analyze big data gain a real advantage over their competitors. While Power BI Embedded is a powerful tool for this job, working with lar">
+<meta property="og:title" content="Scaling Analytics: Best Practices for Managing Large Datasets in Power BI Embedded">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6969131f8bded3491476b28a_Scaling-Analytics-Best-Practices-for-Managing-Large-Datasets-in-Power-BI-Embedded.png">
+<link rel="canonical" href="https://thereportinghub.com/blog/scaling-analytics-best-practices-for-managing-large-datasets-in-power-bi-embedded/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#22A4F7; --indigo:#6C6EF3; --purple:#5E2C8F; --magenta:#C729ED;
+    --navy:#0D0F1A;
+    --grad:linear-gradient(135deg,#22A4F7 0%,#6C6EF3 50%,#C729ED 100%);
+    --text:#0D0F1A; --muted:#6B7280; --border:#E5E7EB;
+    --bg:#F8F9FB; --card-bg:#FFFFFF; --radius:14px;
+  }
+  body { font-family:'DM Sans',sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 32px; height:68px;
+    display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo img { height:34px; display:block; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { font-size:15px; font-weight:500; color:var(--text); text-decoration:none; opacity:.75; transition:opacity .2s; }
+  .nav-links a:hover { opacity:1; }
+  .nav-links a.active { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:600; opacity:1; }
+  .nav-cta { background:var(--grad); color:#fff; font-size:14px; font-weight:600;
+    padding:10px 22px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.88; }
+  footer { background:var(--navy); border-top:1px solid rgba(255,255,255,.08); padding:32px; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .footer-inner img { height:24px; opacity:.7; }
+  .footer-inner p { font-size:13px; color:rgba(255,255,255,.4); }
+  @media(max-width:600px) { .nav-links { display:none; } }
+
+  .post-hero { max-width:760px; margin:0 auto; padding:64px 32px 40px; }
+  .breadcrumb { font-size:13px; margin-bottom:20px; }
+  .breadcrumb a { color:var(--muted); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .breadcrumb span { color:var(--border); margin:0 8px; }
+  .post-cat { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:16px; display:block; }
+  .post-hero h1 { font-family:'Sora',sans-serif; font-size:clamp(28px,4vw,44px);
+    font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:20px; }
+  .post-byline { display:flex; align-items:center; gap:14px; padding:20px 0;
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .avatar { width:44px; height:44px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; flex-shrink:0; }
+  .byline-name { font-size:15px; font-weight:600; color:var(--text); }
+  .byline-meta { font-size:13px; color:var(--muted); margin-top:2px; }
+  .byline-share { margin-left:auto; display:flex; gap:10px; }
+  .share-btn { width:36px; height:36px; border-radius:50%; border:1px solid var(--border);
+    background:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; transition:border-color .2s;
+    text-decoration:none; color:var(--muted); }
+  .share-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .post-img-wrap { max-width:900px; margin:0 auto 48px; padding:0 32px; }
+  .post-img { border-radius:var(--radius); height:400px; }
+  .post-layout { max-width:1100px; margin:0 auto; padding:0 32px 80px;
+    display:grid; grid-template-columns:1fr 280px; gap:60px; align-items:start; }
+  .post-content h2 { font-family:'Sora',sans-serif; font-size:26px; font-weight:700;
+    color:var(--navy); margin:44px 0 18px; line-height:1.25; }
+  .post-content h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700;
+    color:var(--navy); margin:32px 0 14px; }
+  .post-content p { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:22px; }
+  .post-content ul,.post-content ol { padding-left:24px; margin-bottom:22px; }
+  .post-content li { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:8px; }
+  .post-content blockquote { border-left:3px solid transparent;
+    border-image:var(--grad) 1; padding:16px 24px;
+    background:var(--bg); border-radius:0 var(--radius) var(--radius) 0; margin:32px 0; }
+  .post-content blockquote p { font-size:18px; font-style:italic; color:var(--navy); font-weight:500; margin:0; }
+  .post-content a { color:var(--blue); text-decoration:none; }
+  .post-content a:hover { text-decoration:underline; }
+  /* Grid + overflow fix: article column must not bleed past its track */
+  .post-content { min-width:0; overflow:hidden; }
+  /* Every element inside article is capped to column width */
+  .post-content * { max-width:100%; box-sizing:border-box; }
+  .post-content img, .post-content video,
+  .post-content iframe { height:auto; display:block; }
+  /* Neutralise Webflow-authored max-width overrides on callout/grid divs */
+  .post-content div[class^="blog_"] { max-width:100% !important; }
+  /* Collapse Webflow embedded two-column flex sections to single column */
+  .post-content section { margin:40px 0; overflow:hidden; }
+  .post-content section > div { display:block !important; }
+  .post-content section > div > div { width:100% !important; flex:none !important; }
+  /* Centre embedded section images */
+  .post-content section img {
+    max-width:520px; width:100%; display:block;
+    margin:24px auto; border-radius:8px;
+  }
+  /* Preserve icon+text list item flex layouts */
+  .post-content section li { display:flex !important; }
+  .callout { background:linear-gradient(135deg,rgba(34,164,247,.08),rgba(108,110,243,.08));
+    border:1px solid rgba(34,164,247,.2); border-radius:var(--radius);
+    padding:24px 28px; margin:32px 0; }
+  .callout p { font-size:16px; font-weight:500; margin:0 0 10px; }
+  .callout p:last-child { margin:0; }
+  .post-sidebar { position:sticky; top:88px; }
+  .sidebar-card { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+  .sidebar-card h4 { font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    color:var(--navy); margin-bottom:16px; text-transform:uppercase; letter-spacing:.05em; }
+  .toc-list { list-style:none; }
+  .toc-list li { margin-bottom:10px; }
+  .toc-list a { font-size:13px; color:var(--muted); text-decoration:none;
+    line-height:1.4; display:block; transition:color .2s; }
+  .toc-list a:hover { color:var(--blue); }
+  .sidebar-cta { background:var(--navy); border-radius:var(--radius); padding:24px; text-align:center; }
+  .sidebar-cta p { font-size:14px; line-height:1.55; color:rgba(255,255,255,.65); margin-bottom:16px; }
+  .sidebar-cta a { display:block; background:var(--grad); color:#fff; font-size:14px;
+    font-weight:600; padding:12px 20px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .sidebar-cta a:hover { opacity:.88; }
+  .author-bio-block { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; margin-top:48px;
+    display:flex; gap:20px; align-items:flex-start; }
+  .author-bio-block .bio-avatar { width:56px; height:56px; border-radius:50%;
+    object-fit:cover; flex-shrink:0; }
+  .author-bio-block .bio-avatar-placeholder { width:56px; height:56px; border-radius:50%;
+    background:var(--grad); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:20px; flex-shrink:0; }
+  .bio-name { font-family:'Sora',sans-serif; font-size:16px; font-weight:700;
+    color:var(--navy); margin-bottom:6px; }
+  .bio-text { font-size:14px; line-height:1.65; color:var(--muted); }
+  @media(max-width:900px) {
+    .post-layout { grid-template-columns:1fr; }
+    .post-sidebar { position:static; }
+  }
+  @media(max-width:600px) {
+    .post-hero { padding:40px 20px 32px; }
+    .post-img-wrap { padding:0 20px; }
+    .post-img { height:220px; }
+    .post-layout { padding:0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- INCLUDE header -->
+<header class="post-hero">
+  <div class="breadcrumb">
+    <a href="/blog/">Blog</a>
+    <span>›</span>
+    <a href="/blog/?cat=power-bi">Power BI</a>
+  </div>
+  <span class="post-cat">Power BI</span>
+  <h1>Scaling Analytics: Best Practices for Managing Large Datasets in Power BI Embedded</h1>
+  <div class="post-byline">
+    <img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a3f30361927cb1cee617_Brian-DL.webp" alt="Brian DeLuca" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+    <div>
+      <div class="byline-name">Brian DeLuca</div>
+      <div class="byline-meta">Jan 30, 2026 · 3 minutes</div>
+    </div>
+    <div class="byline-share">
+      <a href="https://www.linkedin.com/shareArticle?url=https://thereportinghub.com/blog/scaling-analytics-best-practices-for-managing-large-datasets-in-power-bi-embedded/" class="share-btn" target="_blank" rel="noopener">in</a>
+      <a href="https://twitter.com/intent/tweet?url=https://thereportinghub.com/blog/scaling-analytics-best-practices-for-managing-large-datasets-in-power-bi-embedded/&text=Scaling Analytics: Best Practices for Managing Large Datasets in Power BI Embedded" class="share-btn" target="_blank" rel="noopener">𝕏</a>
+    </div>
+  </div>
+</header>
+<div class="post-img-wrap">
+  <div class="post-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6969131f8bded3491476b28a_Scaling-Analytics-Best-Practices-for-Managing-Large-Datasets-in-Power-BI-Embedded.png');background-size:cover;background-position:center;"></div>
+</div>
+<div class="post-layout">
+  <article class="post-content">
+    <p>Companies that can analyze big data gain a real advantage over their competitors. While Power BI Embedded is a powerful tool for this job, working with large datasets is more than just having the right software. You need innovative strategies for managing your data to get meaningful insights – from running your system smoothly to controlling who sees what.</p><p><strong>Suppose you want to optimize how your team handles big data in Power BI Embedded. In that case, this guide offers actionable best practices to help you scale that process while maintaining control over data visibility.</strong></p><p>‍</p><h3><strong>Big Data Hurdles in Power BI Embedded</strong></h3><p>Power BI Embedded lets you add custom dashboards and reports to your apps.</p><p><strong>But when your data grows too big, you might run into some problems that can slow you down:</strong></p><p>‍</p><style>
+
+.human-centered-image {
+    height: auto;
+}
+
+
+
+/* Section (NO outer padding) */
+.blog_pbi_challenges {
+}
+
+/* Grid */
+.blog_pbi_challenges_wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px 60px;
+}
+
+/* Item */
+.blog_pbi_challenge {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+/* Icon */
+.blog_pbi_challenge_icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blog_pbi_challenge_icon img {
+  width: 56px;
+  height: 56px;
+}
+
+/* Content */
+.blog_pbi_challenge h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e88ff;
+  margin-bottom: 6px;
+	margin-top: 10px;
+}
+
+.blog_pbi_challenge p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #222222;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog_pbi_challenges_wrap {
+    grid-template-columns: 1fr;
+  }
+}
+</style>	
+	
+<section class="blog_pbi_challenges">
+  <div class="blog_pbi_challenges_wrap">
+
+    <!-- Item 1 -->
+    <div class="blog_pbi_challenge">
+      <div class="blog_pbi_challenge_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69692d501d94ef8ebaea9a64_Scaling-Analytics-6-1.webp" alt="">
+      </div>
+      <div>
+        <h4>Performance Bottlenecks:</h4>
+        <p>
+          As datasets grow, report load times and responsiveness may degrade,
+          frustrating end users and slowing decision-making.
+        </p>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="blog_pbi_challenge">
+      <div class="blog_pbi_challenge_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69692d5b589b49264b0fa212_Scaling-Analytics-7.webp" alt="">
+      </div>
+      <div>
+        <h4>Data Model Complexity:</h4>
+        <p>
+          Large datasets often involve intricate relationships, making data
+          models challenging to manage.
+        </p>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="blog_pbi_challenge">
+      <div class="blog_pbi_challenge_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69692d63df33207146941e3c_Scaling-Analytics-8.webp" alt="">
+      </div>
+      <div>
+        <h4>Access Control and Security:</h4>
+        <p>
+          Ensuring the right users see the correct data is non-negotiable, but
+          applying security measures like Row-Level Security (RLS) can become
+          increasingly complex at scale.
+        </p>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="blog_pbi_challenge">
+      <div class="blog_pbi_challenge_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69692d752c335d7ae0921767_Scaling-Analytics-9.webp" alt="">
+      </div>
+      <div>
+        <h4>Cost Management:</h4>
+        <p>
+          With growing data volumes, the cost of managing and processing data
+          in Power BI can escalate quickly if not optimized.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:892px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="892px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69692e1e32fe585fe46fc481_Scaling-Analytics-20-1.webp" loading="lazy" alt="Scaling-Analytics" width="auto" height="auto"></div></figure><p>‍</p><h3>Best Practices for Managing Large Datasets in Power BI Embedded</h3><p>Here's how to tackle these problems and get better results from Power BI Embedded:</p><style>
+
+/* Section heading */
+.blog_perf_title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+/* Group spacing */
+.blog_perf_group {
+  margin-bottom: 44px;
+}
+
+/* Item */
+.blog_perf_item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+
+/* Icon */
+.blog_perf_icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blog_perf_icon img {
+  width:120px;
+  height: 120px;
+
+}
+
+/* Content */
+.blog_perf_item h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;    margin-top: 35px;
+}
+
+.blog_perf_item p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #222;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog_perf_title {
+    font-size: 20px;
+  }
+}
+</style>	
+	
+<section class="blog_perf_section">
+
+  <!-- Group 1 -->
+  <div class="blog_perf_group">
+    <h2 class="blog_perf_title">Optimize Your Data Model</h2>
+
+    <div class="blog_perf_item">
+      <div class="blog_perf_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696933c3b7d37d0e1638171e_icon-6.png" alt="">
+      </div>
+      <div>
+        <h4>Simplify Relationships:</h4>
+        <p>
+          Avoid unnecessary relationships and use star schemas to simplify
+          the structure of your data model.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_perf_item">
+      <div class="blog_perf_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696933cb76bc9417fbaace81_icon-1-3.png" alt="">
+      </div>
+      <div>
+        <h4>Aggregate Data:</h4>
+        <p>
+          Pre-aggregate data at the source to minimize processing within Power BI
+          and reduce the strain on both Power BI Embedded and your end users’ devices.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_perf_item">
+      <div class="blog_perf_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696933d42e1a64004913d7b6_icon-2-1.png" alt="">
+      </div>
+      <div>
+        <h4>Partition Large Tables:</h4>
+        <p>
+          Break up massive datasets into smaller, manageable chunks using
+          partitioning, improving query performance.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group 2 -->
+  <div class="blog_perf_group">
+    <h2 class="blog_perf_title">Improve Query Performance</h2>
+
+    <div class="blog_perf_item">
+      <div class="blog_perf_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696933dda372e3820f774e4f_icon-3-2.png" alt="">
+      </div>
+      <div>
+        <h4>Use Query Folding:</h4>
+        <p>
+          Leverage Power Query’s ability to push transformations to the source
+          system, reducing the amount of data processed within Power BI.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_perf_item">
+      <div class="blog_perf_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696933e843f78779a50a8360_icon-4-3.png" alt="">
+      </div>
+      <div>
+        <h4>Avoid Complex Calculations in DAX:</h4>
+        <p>
+          Perform as many calculations as possible in the data source before
+          importing the data into Power BI.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group 3 -->
+  <div class="blog_perf_group">
+	  <h2 class="blog_perf_title" style="margin-bottom: 5px;">Implement Row-Level Security (RLS)</h2>
+<p>Row-level security lets you control exactly what data each user can see. This matters even more with big datasets since it helps your reports run faster and keeps sensitive information safe. By setting up the right RLS filters and roles, you can show users just the data they need for their work – nothing more, nothing less.
+
+</p>
+	  <br>
+<br>
+
+    <h2 class="blog_perf_title">Monitor and Optimize Performance</h2>
+
+    <div class="blog_perf_item">
+      <div class="blog_perf_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696933f0bf18d51be1db00ce_6icon.png" alt="">
+      </div>
+      <div>
+        <h4>Utilize Power BI Performance Analyzer:</h4>
+        <p>
+          This tool identifies and fixes performance bottlenecks in your reports.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_perf_item">
+      <div class="blog_perf_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696933f928c912593ceb8ef6_7icon-1.png" alt="">
+      </div>
+      <div>
+        <h4>Monitor Usage Metrics:</h4>
+        <p>
+          Analyze report usage patterns to identify underutilized datasets
+          and optimize resources accordingly.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</section><p>‍</p><h4><strong>Leverage Dataflows for ETL</strong></h4><p>Dataflows allow you to centralize and reuse data preparation tasks across multiple reports, reducing redundancy and improving scalability.</p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:892px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="892px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69694946d119081198f0dae0_Scaling-Analytics-21-1.webp" loading="lazy" alt="Leverage Dataflows for ETL" width="auto" height="auto"></div></figure><p>‍</p><h3><strong>Simplifying Scaled Analytics With The Reporting Hub</strong></h3><p>Scaling analytics with Power BI Embedded can feel like solving a puzzle with too many pieces. The Reporting Hub is a no-code platform designed to take the complexity out of managing large datasets and sharing reports.</p><p>‍</p><h4><strong>How The Reporting Hub Can Help:</strong>‍</h4><style>
+
+.blog_secure_card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 22px 24px;
+  margin-bottom: 20px;
+
+  background: #f7f1ff;
+  border: 3px solid #a200ff;
+  border-radius: 16px;
+}
+
+/* Icon */
+.blog_secure_icon {
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blog_secure_icon img {
+  width: 36px;
+  height: 36px;
+	    margin-top: 18px;
+}
+
+/* Content */
+.blog_secure_content h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 0px;
+}
+
+.blog_secure_content p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #222;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog_secure_card {
+    padding: 18px;
+  }
+
+  .blog_secure_content h3 {
+    font-size: 16px;
+  }
+}
+</style>	
+	
+<section class="blog_secure_section">
+
+  <div class="blog_secure_card">
+    <div class="blog_secure_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69694b67f245e933c838c2eb_Scaling-Analytics-2.webp" alt="">
+    </div>
+    <div class="blog_secure_content">
+      <h3>Streamlined Row-Level Security</h3>
+      <p>
+        Our platform integrates seamlessly with Power BI’s RLS framework,
+        enabling you to define and manage user roles effortlessly. Whether
+        you’re working with Microsoft or non-Microsoft authentication providers
+        like Auth0, we ensure granular control over data visibility.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_secure_card">
+    <div class="blog_secure_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69694b70dda60e32058297f9_Scaling-Analytics-3.webp" alt="">
+    </div>
+    <div class="blog_secure_content">
+      <h3>Effortless Report Sharing</h3>
+      <p>
+        Create branded portals where users access personalized reports securely,
+        with no coding expertise required. You can scale without worrying about
+        performance or security.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_secure_card">
+    <div class="blog_secure_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69694b7702d51ba65c62bfe7_Scaling-Analytics-4.webp" alt="">
+    </div>
+    <div class="blog_secure_content">
+      <h3>Custom Branding</h3>
+      <p>
+        With white-label portals, you can embed Power BI reports into customized
+        environments that align with your brand identity, delivering a polished
+        and professional user experience.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_secure_card">
+    <div class="blog_secure_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69694b7e05ed60a66d34eedf_Scaling-Analytics-5.webp" alt="">
+    </div>
+    <div class="blog_secure_content">
+      <h3>Optimized Performance</h3>
+      <p>
+        The Reporting Hub simplifies large-scale analytics by minimizing
+        technical overhead, allowing you to focus on insights rather than
+        infrastructure.
+      </p>
+    </div>
+  </div>
+
+</section><p>‍</p><h3><strong>Simplify Scaling with Confidence</strong></h3><p>Scaling analytics in Power BI Embedded doesn’t have to be daunting. By optimizing your data models, implementing Row-Level Security, and adopting best practices for query performance, you can get the full potential of your large datasets.</p><p>However, managing complex analytics environments can strain resources even with these strategies.</p><h5><strong>The Reporting Hub transforms these challenges into opportunities.</strong></h5><p>With our no-code platform, intuitive RLS management, and secure, branded portals, we empower organizations to scale analytics confidently.</p><h5><strong>Ready to simplify and scale your analytics?</strong></h5><p>Explore The Reporting Hub today and take control of your data like never before.</p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:892px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="892px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69694ec20c7a08340e390ae3_Scaling-Analytics-1-1.webp" loading="lazy" alt="Scaling-Analytics" width="auto" height="auto"></div></figure>
+    <div class="author-bio-block">
+      <img class="bio-avatar" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a3f30361927cb1cee617_Brian-DL.webp" alt="Brian DeLuca">
+      <div>
+        <div class="bio-name">Brian DeLuca</div>
+        <p class="bio-text">Brian DeLuca is a co-founder and CEO of The Reporting Hub. As a seasoned expert in data, analytics, and business intelligence, Brian brings over 20 years of experience driving innovation and organizat...</p>
+      </div>
+    </div>
+  </article>
+  <aside class="post-sidebar">
+    
+    <div class="sidebar-cta">
+      <p>See how Reporting Hub handles white-label analytics end-to-end.</p>
+      <a href="/demo/">Book a Demo →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- INCLUDE footer -->
+</body>
+</html>

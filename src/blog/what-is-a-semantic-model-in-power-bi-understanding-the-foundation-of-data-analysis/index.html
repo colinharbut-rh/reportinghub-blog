@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>What is a Semantic Model in Power BI? Understanding the Foundation of Data Analysis — The Reporting Hub</title>
+<meta name="description" content="Do you wish that managing and processing raw data were simplified and more organized?Then, try Power BI. The semantic models that underlie Power BI reports">
+<meta property="og:title" content="What is a Semantic Model in Power BI? Understanding the Foundation of Data Analysis">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/696d049e6dc2e7d24d0d1f42_What-is-a-Semantic-Model-in-Power-BI-Understanding-the-Foundation-of-Data-Analysis.png">
+<link rel="canonical" href="https://thereportinghub.com/blog/what-is-a-semantic-model-in-power-bi-understanding-the-foundation-of-data-analysis/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#22A4F7; --indigo:#6C6EF3; --purple:#5E2C8F; --magenta:#C729ED;
+    --navy:#0D0F1A;
+    --grad:linear-gradient(135deg,#22A4F7 0%,#6C6EF3 50%,#C729ED 100%);
+    --text:#0D0F1A; --muted:#6B7280; --border:#E5E7EB;
+    --bg:#F8F9FB; --card-bg:#FFFFFF; --radius:14px;
+  }
+  body { font-family:'DM Sans',sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 32px; height:68px;
+    display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo img { height:34px; display:block; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { font-size:15px; font-weight:500; color:var(--text); text-decoration:none; opacity:.75; transition:opacity .2s; }
+  .nav-links a:hover { opacity:1; }
+  .nav-links a.active { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:600; opacity:1; }
+  .nav-cta { background:var(--grad); color:#fff; font-size:14px; font-weight:600;
+    padding:10px 22px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.88; }
+  footer { background:var(--navy); border-top:1px solid rgba(255,255,255,.08); padding:32px; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .footer-inner img { height:24px; opacity:.7; }
+  .footer-inner p { font-size:13px; color:rgba(255,255,255,.4); }
+  @media(max-width:600px) { .nav-links { display:none; } }
+
+  .post-hero { max-width:760px; margin:0 auto; padding:64px 32px 40px; }
+  .breadcrumb { font-size:13px; margin-bottom:20px; }
+  .breadcrumb a { color:var(--muted); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .breadcrumb span { color:var(--border); margin:0 8px; }
+  .post-cat { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:16px; display:block; }
+  .post-hero h1 { font-family:'Sora',sans-serif; font-size:clamp(28px,4vw,44px);
+    font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:20px; }
+  .post-byline { display:flex; align-items:center; gap:14px; padding:20px 0;
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .avatar { width:44px; height:44px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; flex-shrink:0; }
+  .byline-name { font-size:15px; font-weight:600; color:var(--text); }
+  .byline-meta { font-size:13px; color:var(--muted); margin-top:2px; }
+  .byline-share { margin-left:auto; display:flex; gap:10px; }
+  .share-btn { width:36px; height:36px; border-radius:50%; border:1px solid var(--border);
+    background:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; transition:border-color .2s;
+    text-decoration:none; color:var(--muted); }
+  .share-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .post-img-wrap { max-width:900px; margin:0 auto 48px; padding:0 32px; }
+  .post-img { border-radius:var(--radius); height:400px; }
+  .post-layout { max-width:1100px; margin:0 auto; padding:0 32px 80px;
+    display:grid; grid-template-columns:1fr 280px; gap:60px; align-items:start; }
+  .post-content h2 { font-family:'Sora',sans-serif; font-size:26px; font-weight:700;
+    color:var(--navy); margin:44px 0 18px; line-height:1.25; }
+  .post-content h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700;
+    color:var(--navy); margin:32px 0 14px; }
+  .post-content p { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:22px; }
+  .post-content ul,.post-content ol { padding-left:24px; margin-bottom:22px; }
+  .post-content li { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:8px; }
+  .post-content blockquote { border-left:3px solid transparent;
+    border-image:var(--grad) 1; padding:16px 24px;
+    background:var(--bg); border-radius:0 var(--radius) var(--radius) 0; margin:32px 0; }
+  .post-content blockquote p { font-size:18px; font-style:italic; color:var(--navy); font-weight:500; margin:0; }
+  .post-content a { color:var(--blue); text-decoration:none; }
+  .post-content a:hover { text-decoration:underline; }
+  /* Grid + overflow fix: article column must not bleed past its track */
+  .post-content { min-width:0; overflow:hidden; }
+  /* Every element inside article is capped to column width */
+  .post-content * { max-width:100%; box-sizing:border-box; }
+  .post-content img, .post-content video,
+  .post-content iframe { height:auto; display:block; }
+  /* Neutralise Webflow-authored max-width overrides on callout/grid divs */
+  .post-content div[class^="blog_"] { max-width:100% !important; }
+  /* Collapse Webflow embedded two-column flex sections to single column */
+  .post-content section { margin:40px 0; overflow:hidden; }
+  .post-content section > div { display:block !important; }
+  .post-content section > div > div { width:100% !important; flex:none !important; }
+  /* Centre embedded section images */
+  .post-content section img {
+    max-width:520px; width:100%; display:block;
+    margin:24px auto; border-radius:8px;
+  }
+  /* Preserve icon+text list item flex layouts */
+  .post-content section li { display:flex !important; }
+  .callout { background:linear-gradient(135deg,rgba(34,164,247,.08),rgba(108,110,243,.08));
+    border:1px solid rgba(34,164,247,.2); border-radius:var(--radius);
+    padding:24px 28px; margin:32px 0; }
+  .callout p { font-size:16px; font-weight:500; margin:0 0 10px; }
+  .callout p:last-child { margin:0; }
+  .post-sidebar { position:sticky; top:88px; }
+  .sidebar-card { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+  .sidebar-card h4 { font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    color:var(--navy); margin-bottom:16px; text-transform:uppercase; letter-spacing:.05em; }
+  .toc-list { list-style:none; }
+  .toc-list li { margin-bottom:10px; }
+  .toc-list a { font-size:13px; color:var(--muted); text-decoration:none;
+    line-height:1.4; display:block; transition:color .2s; }
+  .toc-list a:hover { color:var(--blue); }
+  .sidebar-cta { background:var(--navy); border-radius:var(--radius); padding:24px; text-align:center; }
+  .sidebar-cta p { font-size:14px; line-height:1.55; color:rgba(255,255,255,.65); margin-bottom:16px; }
+  .sidebar-cta a { display:block; background:var(--grad); color:#fff; font-size:14px;
+    font-weight:600; padding:12px 20px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .sidebar-cta a:hover { opacity:.88; }
+  .author-bio-block { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; margin-top:48px;
+    display:flex; gap:20px; align-items:flex-start; }
+  .author-bio-block .bio-avatar { width:56px; height:56px; border-radius:50%;
+    object-fit:cover; flex-shrink:0; }
+  .author-bio-block .bio-avatar-placeholder { width:56px; height:56px; border-radius:50%;
+    background:var(--grad); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:20px; flex-shrink:0; }
+  .bio-name { font-family:'Sora',sans-serif; font-size:16px; font-weight:700;
+    color:var(--navy); margin-bottom:6px; }
+  .bio-text { font-size:14px; line-height:1.65; color:var(--muted); }
+  @media(max-width:900px) {
+    .post-layout { grid-template-columns:1fr; }
+    .post-sidebar { position:static; }
+  }
+  @media(max-width:600px) {
+    .post-hero { padding:40px 20px 32px; }
+    .post-img-wrap { padding:0 20px; }
+    .post-img { height:220px; }
+    .post-layout { padding:0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- INCLUDE header -->
+<header class="post-hero">
+  <div class="breadcrumb">
+    <a href="/blog/">Blog</a>
+    <span>›</span>
+    <a href="/blog/?cat=data-analysis">Data Analysis</a>
+  </div>
+  <span class="post-cat">Data Analysis</span>
+  <h1>What is a Semantic Model in Power BI? Understanding the Foundation of Data Analysis</h1>
+  <div class="post-byline">
+    <img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-696ceb0aed9005f8478eeaca_DSC00125-768x768.jpg" alt="Jessie G" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+    <div>
+      <div class="byline-name">Jessie G</div>
+      <div class="byline-meta">Jan 29, 2026 · 4 minutes</div>
+    </div>
+    <div class="byline-share">
+      <a href="https://www.linkedin.com/shareArticle?url=https://thereportinghub.com/blog/what-is-a-semantic-model-in-power-bi-understanding-the-foundation-of-data-analysis/" class="share-btn" target="_blank" rel="noopener">in</a>
+      <a href="https://twitter.com/intent/tweet?url=https://thereportinghub.com/blog/what-is-a-semantic-model-in-power-bi-understanding-the-foundation-of-data-analysis/&text=What is a Semantic Model in Power BI? Understanding the Foundation of Data Analysis" class="share-btn" target="_blank" rel="noopener">𝕏</a>
+    </div>
+  </div>
+</header>
+<div class="post-img-wrap">
+  <div class="post-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/696d049e6dc2e7d24d0d1f42_What-is-a-Semantic-Model-in-Power-BI-Understanding-the-Foundation-of-Data-Analysis.png');background-size:cover;background-position:center;"></div>
+</div>
+<div class="post-layout">
+  <article class="post-content">
+    <p><strong>Do you wish that managing and processing raw data were simplified and more organized?</strong></p><p>Then, try Power BI. The semantic models that underlie Power BI reports are exceptional for transforming raw data into an actionable, structured format. Whether you’re building basic reports or complex dashboards, understanding the role of semantic models in Power BI is crucial for optimizing data analysis and achieving meaningful results.</p><p><strong>So, dive into our comprehensive guide on Semantic models in Power BI and learn how to get more out of your data.</strong></p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1024px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1024px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d05a50c869ebf846daaa1_What-is-a-Semantic-Model-1024x511.webp" loading="lazy" alt="What-is-a-Semantic-Model" width="auto" height="auto"></div></figure><p>‍</p><h3><strong>What is a Semantic Model?</strong></h3><p>A semantic model in Power BI is a bridge between your visualizations and unprocessed data sources. It helps with intuitive data interaction by translating complex data structures into clear, user-friendly terms. More importantly, it defines, organizes, and exposes data in a manner consistent with business logic, which increases the relevance and impact of your data analysis.</p><p>‍</p><h3><strong>Key Components of Semantic Model in Power BI</strong></h3><p>Semantic models consist of several different elements that play crucial roles in organizing, simplifying, and securing data, such as:</p><p>‍</p><style>
+.human-centered-image {
+    height: auto;
+}
+
+
+
+.blog_semantic_list {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ITEM */
+.blog_semantic_item {
+  position: relative;
+  padding-left: 44px;
+}
+
+/* LEFT LINE */
+.blog_semantic_item::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #9b4dff;
+  border-radius: 3px;
+}
+
+/* ICON */
+.blog_semantic_icon {
+
+  margin-bottom: 12px;
+}
+
+.blog_semantic_icon img {
+  width: 30px;
+  height: 30px;
+}
+
+/* TITLE */
+.blog_semantic_title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+/* TEXT */
+.blog_semantic_text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.blog_semantic_text strong {
+  font-weight: 700;
+  color: #000;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .blog_semantic_item {
+    padding-left: 36px;
+  }
+
+  .blog_semantic_item::before {
+    left: 8px;
+  }
+
+  .blog_semantic_title {
+    font-size: 16px;
+  }
+}
+</style>
+<div class="blog_semantic_list">
+
+  <div class="blog_semantic_item">
+    <div class="blog_semantic_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d05ec05eb2b30d0a8b5c6_Vector-1.webp" alt="">
+    </div>
+    <div class="blog_semantic_title">Data Relationships</div>
+    <div class="blog_semantic_text">
+      The semantic model <strong>establishes and manages relationships</strong> between different tables within a dataset.
+      This helps connect various data points in a meaningful way, allowing users to slice and dice data effortlessly
+      across different dimensions.
+    </div>
+  </div>
+
+  <div class="blog_semantic_item">
+    <div class="blog_semantic_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d05faf971754b09529da3_Vector-2-1.webp" alt="">
+    </div>
+    <div class="blog_semantic_title">Data Hierarchies</div>
+    <div class="blog_semantic_text">
+      Hierarchies help with data organization into granular levels. A date hierarchy might look something like this:
+      <strong>Year &gt; Quarter &gt; Month &gt; Day</strong>. This makes it easier for users to navigate the data and
+      get more detailed insights.
+    </div>
+  </div>
+
+  <div class="blog_semantic_item">
+    <div class="blog_semantic_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d060359bef5f1c501eb31_fa-calculator.webp" alt="">
+    </div>
+    <div class="blog_semantic_title">Measures and Calculations</div>
+    <div class="blog_semantic_text">
+      The semantic model allows for <strong>creating calculated measures using DAX</strong> (Data Analysis Expressions).
+      These measures help derive advanced insights, such as total sales, average order value, or year-over-year growth,
+      enhancing analytical depth without altering the raw data.
+    </div>
+  </div>
+
+  <div class="blog_semantic_item">
+    <div class="blog_semantic_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d060ab5abb5383f788311_fa-tags.webp" alt="">
+    </div>
+    <div class="blog_semantic_title">Metadata and Aliases</div>
+    <div class="blog_semantic_text">
+      Data often comes in difficult forms for the average business user to understand. The semantic model allows you
+      to <strong>rename columns, tables, and fields</strong>, providing more context and creating an intuitive layer
+      over complex data structures.
+    </div>
+  </div>
+
+  <div class="blog_semantic_item">
+    <div class="blog_semantic_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d06106b6d2fe40c37e240_fa-shield-alt.webp" alt="">
+    </div>
+    <div class="blog_semantic_title">Security Roles</div>
+    <div class="blog_semantic_text">
+      Setting up <strong>Row-Level Security (RLS)</strong>, which restricts user-level data access, is part of Power BI’s
+      semantic approach. This preserves confidentiality while guaranteeing that the right people see the relevant data.
+    </div>
+  </div>
+
+</div></div><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:2048px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="2048px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d06b93472b50926ea0ceb_Why-Use-a-Semantic-Model-in-Power-BI-2048x1023.webp" loading="lazy" alt="Why-Use-a-Semantic-Model-in-Power-BI" width="auto" height="auto"></div></figure><p>‍</p><h3><strong>What Makes Semantic Models so Powerful?</strong></h3><p>A semantic model in Power BI is specifically developed to simplify complex data structures and improve the user experience. It makes data more accessible for well-informed decision-making by improving consistency and optimizing performance.</p><p>‍</p><style>
+
+.blog_semantic-skyicon_list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ITEM */
+.blog_semantic-skyicon_item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+/* ICON */
+.blog_semantic-skyicon_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog_semantic-skyicon_icon img {
+    width: 120px;
+    height: 120px;
+    max-width: 120px;
+}
+
+/* TEXT */
+.blog_semantic-skyicon_text h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 6px;
+}
+		.blog_semantic-skyicon_text{margin-top: 15px;}
+.blog_semantic-skyicon_text p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .blog_semantic-skyicon_item {
+    gap: 14px;
+  }
+}
+</style>
+<div class="blog_semantic-skyicon_list">
+
+  <div class="blog_semantic-skyicon_item">
+    <div class="blog_semantic-skyicon_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0910b0a0e8d5b0fcfe28_icon_tutorial.png" alt="">
+    </div>
+    <div class="blog_semantic-skyicon_text">
+      <h4>Simplified User Experience</h4>
+      <p>
+        The semantic model in Power BI is there to present complex raw data in a simplified form that meets business needs.
+        This method allows non-technical people to efficiently study data, make informed decisions, and create reports
+        without requiring a deep understanding of the underlying data structures.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_semantic-skyicon_item">
+    <div class="blog_semantic-skyicon_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0909ad6e8be631442cff_icon_tutorial-1-.png" alt="">
+    </div>
+    <div class="blog_semantic-skyicon_text">
+      <h4>Enhanced Data Consistency</h4>
+      <p>
+        Organizations can ensure consistency across different reports and dashboards by centralizing calculations
+        and data definitions within a semantic model. This avoids discrepancies that often arise when multiple users
+        independently create calculations or use different data sources.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_semantic-skyicon_item">
+    <div class="blog_semantic-skyicon_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0904c54949c8a3e8fa84_icon_tutorial-2-.png" alt="">
+    </div>
+    <div class="blog_semantic-skyicon_text">
+      <h4>Optimized Performance</h4>
+      <p>
+        A semantic model helps optimize the performance of queries by structuring data in a more efficient way.
+        This reduces the load on data sources and speeds up rendering visuals and data queries within reports.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_semantic-skyicon_item">
+    <div class="blog_semantic-skyicon_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0910b0a0e8d5b0fcfe28_icon_tutorial.png" alt="">
+    </div>
+    <div class="blog_semantic-skyicon_text">
+      <h4>Flexible Data Exploration</h4>
+      <p>
+        The semantic model empowers users to explore data interactively. By leveraging relationships, hierarchies,
+        and measures, users can easily perform ad-hoc analyses, gaining deeper insights and quickly identifying
+        trends or outliers.
+      </p>
+    </div>
+  </div>
+
+</div></div><p>‍</p><h3><strong>Creating a Semantic Model in Power BI</strong></h3><p>‍</p><style>
+
+.blog_step_numnkjiois_list {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+/* STEP ITEM */
+.blog_step_numnkjioi_item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* ICON WITH NUMBER */
+.blog_step_numnkjioi_icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.blog_step_numnkjioi_icon img {
+  width: 40px;
+	height:40px; 
+	max-width: 40px;
+
+}
+
+.blog_step_numnkjioi_number {
+  font-size: 14px;
+  font-weight: 700;
+  color: #b300ff;
+  position: relative;
+  z-index: 2;
+}
+
+/* CONTENT */
+.blog_step_numnkjioi_content h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 6px;
+	margin-top: 0px;
+}
+
+.blog_step_numnkjioi_content p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #444;
+  max-width: 900px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .blog_step_numnkjioi_item {
+    gap: 14px;
+  }
+}
+</style>	
+<div class="blog_step_numnkjiois_list">
+
+  <div class="blog_step_numnkjioi_item">
+    <div class="blog_step_numnkjioi_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d09f211797c36c87fa32f_icon-1.webp" alt="">
+     
+    </div>
+    <div class="blog_step_numnkjioi_content">
+      <h4>Connect to Data Sources</h4>
+      <p>
+        Start by connecting Power BI Desktop to your desired data sources. This could include databases,
+        cloud services, Excel sheets, etc.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_step_numnkjioi_item">
+    <div class="blog_step_numnkjioi_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d09fbbae329ca4aa174fd_icon-2.webp" alt="">
+     
+    </div>
+    <div class="blog_step_numnkjioi_content">
+      <h4>Transform and Clean Data</h4>
+      <p>
+        Use Power Query to organize and clean your data. This step is essential for ensuring that your data
+        is ready for modeling and analysis.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_step_numnkjioi_item">
+    <div class="blog_step_numnkjioi_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0a01f2bfd5e1e3b02bd7_icon-3.webp" alt="">
+     
+    </div>
+    <div class="blog_step_numnkjioi_content">
+      <h4>Design the Data Model</h4>
+      <p>
+        Define relationships between tables, create hierarchies, and set up the basic structure of your
+        semantic model. Establish data relationships through the Model view in Power BI Desktop.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_step_numnkjioi_item">
+    <div class="blog_step_numnkjioi_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0a071d9973b0f8871117_icon-4.webp" alt="">
+     
+    </div>
+    <div class="blog_step_numnkjioi_content">
+      <h4>Develop Measures with DAX</h4>
+      <p>
+        Write DAX formulas to create calculated measures that can be reused across your reports.
+        These measures allow for advanced analytics and enhance the depth of your insights.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_step_numnkjioi_item">
+    <div class="blog_step_numnkjioi_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0a12b42b7327eeb146ca_icon-5.webp" alt="">
+      
+    </div>
+    <div class="blog_step_numnkjioi_content">
+      <h4>Add Metadata and Labels</h4>
+      <p>
+        Rename columns and tables to create an intuitive experience for end-users. Include descriptions
+        and formatting as needed.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_step_numnkjioi_item">
+    <div class="blog_step_numnkjioi_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0a19fc38adc7e15ff21e_icon-6.webp" alt="">
+     
+    </div>
+    <div class="blog_step_numnkjioi_content">
+      <h4>Set Up Security</h4>
+      <p>
+        Use Row-Level Security (RLS) to manage user-role data access. This will keep data security and
+        privacy intact since users will only see information that is pertinent to them.
+      </p>
+    </div>
+  </div>
+
+</div></div><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:2048px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="2048px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0c09a403b6b1646f02ef_How-The-Reporting-Hub-Complements-Power-BI-sSemantic-Model-2048x1023.webp" loading="lazy" alt="How-The-Reporting-Hub-Complements-Power-BI-sSemantic-Model" width="auto" height="auto"></div></figure><p>‍</p><h3><strong>How The Reporting Hub Complements Power BI</strong></h3><p>The value of a robust semantic model is undeniable. However, managing data models, user access, and report sharing can become complex as organizations scale.</p><h4>This is where The Reporting Hub proves invaluable:</h4><p>‍</p><style>
+
+.blog_feature_pinKomo99_list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1100px;
+}
+
+/* ITEM */
+.blog_feature_pinKomo99_item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+/* ICON */
+.blog_feature_pinKomo99_icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+ 
+}
+
+.blog_feature_pinKomo99_icon img {
+  width: 120px;
+  height: 120px;
+  max-width: 120px;
+}
+
+/* CONTENT */
+.blog_feature_pinKomo99_content {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333;
+	margin-top: 30px;
+}
+
+.blog_feature_pinKomo99_content strong {
+  font-weight: 700;
+  color: #000;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .blog_feature_pinKomo99_item {
+    gap: 14px;
+  }
+
+  .blog_feature_pinKomo99_icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .blog_feature_pinKomo99_icon img {
+    width: 22px;
+  }
+}
+</style>	
+	
+<div class="blog_feature_pinKomo99_list">
+
+  <div class="blog_feature_pinKomo99_item">
+    <div class="blog_feature_pinKomo99_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0cd472ad6fdde49cae20_icon_tutorial-4-.png" alt="">
+    </div>
+    <div class="blog_feature_pinKomo99_content">
+      <strong>Custom-Branded Portals:</strong>
+      Deploy your reports within fully customizable portals that offer a seamless user experience.
+    </div>
+  </div>
+
+  <div class="blog_feature_pinKomo99_item">
+    <div class="blog_feature_pinKomo99_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0cce25bc572725d1d80d_icon_tutorial-5-.png" alt="">
+    </div>
+    <div class="blog_feature_pinKomo99_content">
+      <strong>Unlimited Sharing with Lower Costs:</strong>
+      Share your data-driven insights across departments or with external stakeholders without per-user incremental licensing costs.
+    </div>
+  </div>
+
+  <div class="blog_feature_pinKomo99_item">
+    <div class="blog_feature_pinKomo99_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0cc7d4a753ad9d65bf87_icon_tutorial-6-.png" alt="">
+    </div>
+    <div class="blog_feature_pinKomo99_content">
+      <strong>SaaSify Your Power BI:</strong>
+      Transform your semantic models into a scalable SaaS product, enabling efficient, widespread analytics delivery.
+    </div>
+  </div>
+
+  <div class="blog_feature_pinKomo99_item">
+    <div class="blog_feature_pinKomo99_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0cce25bc572725d1d80d_icon_tutorial-5-.png" alt="">
+    </div>
+    <div class="blog_feature_pinKomo99_content">
+      <strong>Granular Access Control:</strong>
+      For an added layer of data governance, utilize The Reporting Hub's enhanced user management to align with Power BI’s Row-Level Security.
+    </div>
+  </div>
+
+  <div class="blog_feature_pinKomo99_item">
+    <div class="blog_feature_pinKomo99_icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0cd472ad6fdde49cae20_icon_tutorial-4-.png" alt="">
+    </div>
+    <div class="blog_feature_pinKomo99_content">
+      <strong>Rapid Deployment and Scalability:</strong>
+      The Reporting Hub’s infrastructure ensures reports based on your semantic models can be shared quickly and scaled as your business grows, minimizing deployment time and operational costs.
+    </div>
+  </div>
+
+</div></div><p>‍</p><p>Together, Power BI and The Reporting Hub unlock new levels of efficiency, scalability, and user-centric analytics—positioning your business to deliver insightful, consistent, and easily accessible data experiences.</p><p>‍</p><style>
+
+.blog_cta_atbtm_980_box {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #d7ecf7;
+  border: 3px solid #2f6cff;
+  border-radius: 16px;
+  padding: 22px 26px;
+}
+
+/* ICON */
+.blog_cta_atbtm_980_icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog_cta_atbtm_980_icon img {
+  width: 40px;
+  height: 40px;
+	max-width: 40px;
+}
+
+/* TEXT */
+.blog_cta_atbtm_980_text {
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 700;
+  color: #111;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .blog_cta_atbtm_980_box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>	
+<div class="blog_cta_atbtm_980_box">
+  <div class="blog_cta_atbtm_980_icon">
+    <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696d0d8083898956b45b2b9a_Icon-7.webp" alt="">
+  </div>
+  <div class="blog_cta_atbtm_980_text">
+    Use Power BI and The Reporting Hub to take your data analysis to the next level — start transforming your business insights today!
+  </div>
+</div></div>
+    <div class="author-bio-block">
+      <img class="bio-avatar" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-696ceb0aed9005f8478eeaca_DSC00125-768x768.jpg" alt="Jessie G">
+      <div>
+        <div class="bio-name">Jessie G</div>
+        <p class="bio-text">Jessie is a passionate and skilled Business Intelligence Developer with a knack for transforming data into actionable insights. With a strong background in BI development, Jessie has honed her experti...</p>
+      </div>
+    </div>
+  </article>
+  <aside class="post-sidebar">
+    
+    <div class="sidebar-cta">
+      <p>See how Reporting Hub handles white-label analytics end-to-end.</p>
+      <a href="/demo/">Book a Demo →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- INCLUDE footer -->
+</body>
+</html>

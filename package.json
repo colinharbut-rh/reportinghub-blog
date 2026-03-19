@@ -1,0 +1,7 @@
+{
+  "name": "reportinghub-blog",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js"
+  }
+}

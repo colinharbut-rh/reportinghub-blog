@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Designing for Engagement: Keeping Users in Your Reports — The Reporting Hub</title>
+<meta name="description" content="Most analytics reports fail to hold user attention. They’re accessed briefly, scanned for surface-level information, and quickly abandoned, leaving insight">
+<meta property="og:title" content="Designing for Engagement: Keeping Users in Your Reports">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941b6da846c6e56b71f43f1_Designing-for-Engagement-Keeping-Users-in-Your-Reports.webp">
+<link rel="canonical" href="https://thereportinghub.com/blog/designing-for-engagement-keeping-users-in-your-reports/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#22A4F7; --indigo:#6C6EF3; --purple:#5E2C8F; --magenta:#C729ED;
+    --navy:#0D0F1A;
+    --grad:linear-gradient(135deg,#22A4F7 0%,#6C6EF3 50%,#C729ED 100%);
+    --text:#0D0F1A; --muted:#6B7280; --border:#E5E7EB;
+    --bg:#F8F9FB; --card-bg:#FFFFFF; --radius:14px;
+  }
+  body { font-family:'DM Sans',sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 32px; height:68px;
+    display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo img { height:34px; display:block; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { font-size:15px; font-weight:500; color:var(--text); text-decoration:none; opacity:.75; transition:opacity .2s; }
+  .nav-links a:hover { opacity:1; }
+  .nav-links a.active { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:600; opacity:1; }
+  .nav-cta { background:var(--grad); color:#fff; font-size:14px; font-weight:600;
+    padding:10px 22px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.88; }
+  footer { background:var(--navy); border-top:1px solid rgba(255,255,255,.08); padding:32px; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .footer-inner img { height:24px; opacity:.7; }
+  .footer-inner p { font-size:13px; color:rgba(255,255,255,.4); }
+  @media(max-width:600px) { .nav-links { display:none; } }
+
+  .post-hero { max-width:760px; margin:0 auto; padding:64px 32px 40px; }
+  .breadcrumb { font-size:13px; margin-bottom:20px; }
+  .breadcrumb a { color:var(--muted); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .breadcrumb span { color:var(--border); margin:0 8px; }
+  .post-cat { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:16px; display:block; }
+  .post-hero h1 { font-family:'Sora',sans-serif; font-size:clamp(28px,4vw,44px);
+    font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:20px; }
+  .post-byline { display:flex; align-items:center; gap:14px; padding:20px 0;
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .avatar { width:44px; height:44px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; flex-shrink:0; }
+  .byline-name { font-size:15px; font-weight:600; color:var(--text); }
+  .byline-meta { font-size:13px; color:var(--muted); margin-top:2px; }
+  .byline-share { margin-left:auto; display:flex; gap:10px; }
+  .share-btn { width:36px; height:36px; border-radius:50%; border:1px solid var(--border);
+    background:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; transition:border-color .2s;
+    text-decoration:none; color:var(--muted); }
+  .share-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .post-img-wrap { max-width:900px; margin:0 auto 48px; padding:0 32px; }
+  .post-img { border-radius:var(--radius); height:400px; }
+  .post-layout { max-width:1100px; margin:0 auto; padding:0 32px 80px;
+    display:grid; grid-template-columns:1fr 280px; gap:60px; align-items:start; }
+  .post-content h2 { font-family:'Sora',sans-serif; font-size:26px; font-weight:700;
+    color:var(--navy); margin:44px 0 18px; line-height:1.25; }
+  .post-content h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700;
+    color:var(--navy); margin:32px 0 14px; }
+  .post-content p { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:22px; }
+  .post-content ul,.post-content ol { padding-left:24px; margin-bottom:22px; }
+  .post-content li { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:8px; }
+  .post-content blockquote { border-left:3px solid transparent;
+    border-image:var(--grad) 1; padding:16px 24px;
+    background:var(--bg); border-radius:0 var(--radius) var(--radius) 0; margin:32px 0; }
+  .post-content blockquote p { font-size:18px; font-style:italic; color:var(--navy); font-weight:500; margin:0; }
+  .post-content a { color:var(--blue); text-decoration:none; }
+  .post-content a:hover { text-decoration:underline; }
+  /* Grid + overflow fix: article column must not bleed past its track */
+  .post-content { min-width:0; overflow:hidden; }
+  /* Every element inside article is capped to column width */
+  .post-content * { max-width:100%; box-sizing:border-box; }
+  .post-content img, .post-content video,
+  .post-content iframe { height:auto; display:block; }
+  /* Neutralise Webflow-authored max-width overrides on callout/grid divs */
+  .post-content div[class^="blog_"] { max-width:100% !important; }
+  /* Collapse Webflow embedded two-column flex sections to single column */
+  .post-content section { margin:40px 0; overflow:hidden; }
+  .post-content section > div { display:block !important; }
+  .post-content section > div > div { width:100% !important; flex:none !important; }
+  /* Centre embedded section images */
+  .post-content section img {
+    max-width:520px; width:100%; display:block;
+    margin:24px auto; border-radius:8px;
+  }
+  /* Preserve icon+text list item flex layouts */
+  .post-content section li { display:flex !important; }
+  .callout { background:linear-gradient(135deg,rgba(34,164,247,.08),rgba(108,110,243,.08));
+    border:1px solid rgba(34,164,247,.2); border-radius:var(--radius);
+    padding:24px 28px; margin:32px 0; }
+  .callout p { font-size:16px; font-weight:500; margin:0 0 10px; }
+  .callout p:last-child { margin:0; }
+  .post-sidebar { position:sticky; top:88px; }
+  .sidebar-card { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+  .sidebar-card h4 { font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    color:var(--navy); margin-bottom:16px; text-transform:uppercase; letter-spacing:.05em; }
+  .toc-list { list-style:none; }
+  .toc-list li { margin-bottom:10px; }
+  .toc-list a { font-size:13px; color:var(--muted); text-decoration:none;
+    line-height:1.4; display:block; transition:color .2s; }
+  .toc-list a:hover { color:var(--blue); }
+  .sidebar-cta { background:var(--navy); border-radius:var(--radius); padding:24px; text-align:center; }
+  .sidebar-cta p { font-size:14px; line-height:1.55; color:rgba(255,255,255,.65); margin-bottom:16px; }
+  .sidebar-cta a { display:block; background:var(--grad); color:#fff; font-size:14px;
+    font-weight:600; padding:12px 20px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .sidebar-cta a:hover { opacity:.88; }
+  .author-bio-block { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; margin-top:48px;
+    display:flex; gap:20px; align-items:flex-start; }
+  .author-bio-block .bio-avatar { width:56px; height:56px; border-radius:50%;
+    object-fit:cover; flex-shrink:0; }
+  .author-bio-block .bio-avatar-placeholder { width:56px; height:56px; border-radius:50%;
+    background:var(--grad); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:20px; flex-shrink:0; }
+  .bio-name { font-family:'Sora',sans-serif; font-size:16px; font-weight:700;
+    color:var(--navy); margin-bottom:6px; }
+  .bio-text { font-size:14px; line-height:1.65; color:var(--muted); }
+  @media(max-width:900px) {
+    .post-layout { grid-template-columns:1fr; }
+    .post-sidebar { position:static; }
+  }
+  @media(max-width:600px) {
+    .post-hero { padding:40px 20px 32px; }
+    .post-img-wrap { padding:0 20px; }
+    .post-img { height:220px; }
+    .post-layout { padding:0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- INCLUDE header -->
+<header class="post-hero">
+  <div class="breadcrumb">
+    <a href="/blog/">Blog</a>
+    <span>›</span>
+    <a href="/blog/?cat=data-analysis">Data Analysis</a>
+  </div>
+  <span class="post-cat">Data Analysis</span>
+  <h1>Designing for Engagement: Keeping Users in Your Reports</h1>
+  <div class="post-byline">
+    <img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a2794d98474036c4f432_691d62c15c0b1cfdbdb287e4_DSC00127-768x768.webp" alt="Manvir G" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+    <div>
+      <div class="byline-name">Manvir G</div>
+      <div class="byline-meta">Jan 30, 2026 · 6 Minutes</div>
+    </div>
+    <div class="byline-share">
+      <a href="https://www.linkedin.com/shareArticle?url=https://thereportinghub.com/blog/designing-for-engagement-keeping-users-in-your-reports/" class="share-btn" target="_blank" rel="noopener">in</a>
+      <a href="https://twitter.com/intent/tweet?url=https://thereportinghub.com/blog/designing-for-engagement-keeping-users-in-your-reports/&text=Designing for Engagement: Keeping Users in Your Reports" class="share-btn" target="_blank" rel="noopener">𝕏</a>
+    </div>
+  </div>
+</header>
+<div class="post-img-wrap">
+  <div class="post-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941b6da846c6e56b71f43f1_Designing-for-Engagement-Keeping-Users-in-Your-Reports.webp');background-size:cover;background-position:center;"></div>
+</div>
+<div class="post-layout">
+  <article class="post-content">
+    <p>Most analytics reports fail to hold user attention. They’re accessed briefly, scanned for surface-level information, and quickly abandoned, leaving insights untapped and effort underutilized.</p><p>In client-facing dashboards or internal analytics, engagement is what turns reporting into real business impact. It drives better decisions, stronger relationships, and higher adoption. But designing for engagement doesn’t happen by accident. It takes an intentional approach guided by how users think, move, and interact with your data.</p><div class="callout">
+  <p><strong>
+    In this post, we’ll cover Power BI user engagement best practices to help your reports drive real impact.
+  </strong></p>
+
+  <p>
+    You’ll learn how to design experiences that keep users exploring, clicking, and coming back.
+  </p>
+</div>
+
+<style>
+  .pbi-callout{
+    border-left: 3px solid #178ee8;
+    padding-left: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* ← OVO je razmak sa slike */
+  }
+
+  .pbi-callout p{
+    margin: 0;              /* ← KLJUČNO */
+    font-size: 16px;
+    line-height: 1.6;
+    color: inherit;
+  }
+.human-centered-image {
+    height: auto;
+}
+
+
+
+  @media (max-width: 767px){
+    .pbi-callout{
+      padding-left: 18px;
+    }
+  }
+</style></div><h3>What Is Design-First Analytics?</h3><p>Lack of user engagement in analytics affects more than just experience; it threatens the success of your entire reporting effort. When users quickly glance at a <a href="https://thereportinghub.com/power-bi/power-bi-dashboards">Power BI dashboard</a> and leave without interacting, it signals that the report isn’t connecting. Common signs include high bounce rates, abandoned dashboards, and minimal use of filters, drilldowns, or page navigation.</p><div class="insights-grid">
+  <div class="insight-card">
+    <div class="insight-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695ceda46090079692baf1c8_img1.webp" alt="Insights icon">
+    </div>
+    <h4>Insights go unused</h4>
+    <p>
+      Critical trends and exceptions are often overlooked, which limits data-driven decision-making.
+    </p>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695ceda2f91484a60f2422dc_img2.webp" alt="Decisions icon">
+    </div>
+    <h4>Decisions stall</h4>
+    <p>
+      Without clear data guidance, teams hesitate or rely on assumptions.
+    </p>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695ceda53d0ab6d81ec6867e_img.webp" alt="Client satisfaction icon">
+    </div>
+    <h4>Client satisfaction drops</h4>
+    <p>
+      Disengaged users lose trust in your reporting solutions.
+    </p>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695ceda5b502ce2bccb5c316_img4.webp" alt="ROI icon">
+    </div>
+    <h4>Platform ROI declines</h4>
+    <p>
+      Investment in data infrastructure and visualization yields little value.
+    </p>
+  </div>
+</div>
+
+<style>
+      .insights-grid{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+
+    .insight-card{
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+
+    .insight-card:nth-child(odd){
+      background: linear-gradient(90deg, #f1fbfe, #f7effc);
+    }
+
+
+    .insight-card:nth-child(even){
+      background: linear-gradient(90deg, #f1fbfe, #f7effc);
+    }
+
+
+  .insight-icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #eef1ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .insight-icon img{
+    width: 50x;
+    height: 50px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .insight-card h4{
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a33ff;
+  }
+
+  .insight-card p{
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #222;
+  }
+
+  @media (max-width: 767px){
+    .insights-grid{
+      grid-template-columns: 1fr;
+    }
+  }
+</style></div><p>‍</p><p>In embedded analytics environments, low engagement is especially costly. It reduces user retention, limits ongoing value, and increases churn risk, jeopardizing the broader client experience.</p><p><strong>Designing for engagement is essential for converting analytics into business outcomes.</strong></p><figure class="w-richtext-figure-type-image w-richtext-align-normal" style="max-width:1024px" data-rt-type="image" data-rt-align="normal" data-rt-max-width="1024px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695ceff923da21b049e2176e_bigimg.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><h2 id="what-is-power-bi-report-user-engagement">What Is Power BI Report User Engagement?</h2><p>Power BI report user engagement measures how effectively users interact with your dashboards and reports. It captures not just report access, but user actions that dive deeper down to how many times users filter, drill down, or view different data in general. It captures greater depth of engagement outside of just traditional logins or page views.</p><p>‍</p><p><strong>Key aspects of user engagement include:</strong></p><div class="metrics-list">
+
+  <div class="metric-item">
+    <div class="metric-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf138072149b5edc32edc_img1.webp" alt>
+    </div>
+    <div class="metric-content">
+      <h4>Adoption:</h4>
+      <p>How many users regularly access the reports?</p>
+    </div>
+  </div>
+
+  <div class="metric-item">
+    <div class="metric-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf133d73cbeddd77fe35c_img2.webp" alt>
+    </div>
+    <div class="metric-content">
+      <h4>Frequency:</h4>
+      <p>How often do users return – daily, weekly, or monthly?</p>
+    </div>
+  </div>
+
+  <div class="metric-item">
+    <div class="metric-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf1316ded00bb91238c17_img3.webp" alt>
+    </div>
+    <div class="metric-content">
+      <h4>Interactions:</h4>
+      <p>Are users applying filters, drilling down, or using slicers to explore data?</p>
+    </div>
+  </div>
+
+  <div class="metric-item">
+    <div class="metric-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf1340f0f5f014197cf33_img4.webp" alt>
+    </div>
+    <div class="metric-content">
+      <h4>Time Spent:</h4>
+      <p>How long do users stay engaged during each session?</p>
+    </div>
+  </div>
+
+  <div class="metric-item">
+    <div class="metric-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf131d58d3a5bc8b64d76_img5.webp" alt>
+    </div>
+    <div class="metric-content">
+      <h4>Value Delivered:</h4>
+      <p>Are users gaining actionable insights that lead to better decisions?</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .metrics-list{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .metric-item{
+    background: #f7edf5;
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .metric-icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(241,85,153,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .metric-icon img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  .metric-content h4{
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #f15599;
+    line-height: 1.3;
+  }
+
+  .metric-content p{
+    margin: 4px 0 0 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #222;
+  }
+
+  @media (max-width: 767px){
+    .metric-item{
+      padding: 16px 18px;
+    }
+  }
+</style></div><p>‍</p><p>While the default usage metrics in Power BI are read-only, you can save a copy of the report and customize it to analyze engagement. You can even create custom reports against the model of underlying usage data, so you can analyze user engagement at the workspace level. For cross-workspace analysis, use Power BI Activity Logs or Graph API.</p><p>Understanding trends in usage helps point out reports that are adding value to users, as well as reports that may deserve some additional critical attention. For analytics teams that provide embedded analytics—especially branded multi-tenant environments – understanding usage metrics is even more important to help prove ROI, understand user experience, and cultivate users toward continued engagement and increased adoption.</p><p>‍</p><h2 id="who-benefits-from-better-report-engagement">Who Benefits from Better Report Engagement</h2><p>A successful report user engagement generates benefits for multiple actors in the delivery and use of the analytics reports.</p><p>‍</p><div class="audience-grid">
+
+  <div class="audience-card">
+    <div class="audience-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf6376ca17f67e9d8da62_img1.webp" alt>
+    </div>
+    <h4>End users and decision-makers</h4>
+    <p>
+      Enjoy faster, clearer insights through intuitive dashboards that minimize the need for data team intervention. This leads to quicker decision cycles and less support overhead.
+    </p>
+  </div>
+
+  <div class="audience-card">
+    <div class="audience-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf63646f28aeee248f958_img2.webp" alt>
+    </div>
+    <h4>Analysts and BI professionals</h4>
+    <p>
+      Experience fewer disruptions from user queries, as engaged users can self-serve insights within reports. This shift improves efficiency and allows teams to focus on advanced analytics.
+    </p>
+  </div>
+
+  <div class="audience-card">
+    <div class="audience-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf636328e0e537f9cf174_img3.webp" alt>
+    </div>
+    <h4>Analytics providers and service vendors</h4>
+    <p>
+      Grow retention and revenue opportunities by delivering branded, embedded reports that users trust and value. Subscription-based reporting models increase platform stickiness and client loyalty.
+    </p>
+  </div>
+
+</div>
+
+<style>
+  .audience-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .audience-card{
+    position: relative;
+    padding-left: 32px;
+  }
+
+  /* vertical line */
+  .audience-card::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #7f56d9;
+    border-radius: 2px;
+  }
+
+  .audience-icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .audience-icon img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  .audience-card h4{
+    margin: 0 0 12px 0;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #000;
+  }
+
+  .audience-card p{
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #222;
+  }
+
+  @media (max-width: 991px){
+    .audience-grid{
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style></div><p>‍</p><p>‍</p><p>Ongoing feedback collection and usage monitoring create a foundation for continuous report optimization and business growth.</p><figure class="w-richtext-figure-type-image w-richtext-align-normal" style="max-width:895px" data-rt-type="image" data-rt-align="normal" data-rt-max-width="895px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf729584357d58ae2f7a4_bigimg.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><p>‍</p><h2 id="how-design-affects-power-bi-report-engagement">How Design Affects Power BI Report Engagement</h2><p>The structure and elements within a <a href="https://thereportinghub.com/power-bi">Power BI</a> report directly impact how users interact with it. For example, the number of visuals on a report can affect engagement levels. Reports with too few visuals may not encourage much exploration, while those overloaded with visuals risk overwhelming users and reducing interaction.</p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-floatleft" style="max-width:40%" data-rt-type="image" data-rt-align="floatleft" data-rt-max-width="40%"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf7583a61ebe5ca014089_leftimg.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><p>‍</p><p>Measuring how different design components, such as visuals, bookmarks, slicers, and buttons, correlate with user engagement across a portfolio of reports can reveal valuable insights. Understanding these relationships helps identify the balance between providing enough functionality and avoiding clutter that discourages use.</p><p>Third-party monitoring tools or custom frameworks can assess report complexity, usability, and engagement by scoring design. These scores highlight which reports engage users effectively and which may require redesign to improve adoption.</p><p>By analyzing engagement metrics against design factors, it becomes easier to pinpoint reports that are too complex or underutilized due to poor design choices.</p><p>‍<strong>This targeted insight supports ongoing improvements, ensuring that dashboards deliver both a modern experience and practical usability that keeps users engaged longer.</strong></p><p>‍</p><p>‍</p><p>‍</p><p>‍</p><h2 id="what-increases-time-spent-in-your-reports">What Increases Time Spent in Your Reports</h2><p>‍</p><div class="tips-grid">
+
+  <div class="tip-card">
+    <div class="tip-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf8f0618c9f8fd44f0c8b_img1.webp" alt>
+    </div>
+    <h4>Embed reports where users already work</h4>
+    <p>
+      Embedding dashboards directly in a branded portal or application removes friction. Users don’t need to switch tools, making it natural to engage with reports more often and for longer periods.
+    </p>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf8efd3143920b9000af3_img2.webp" alt>
+    </div>
+    <h4>Create tailored experiences by role, department, or client</h4>
+    <p>
+      Custom views reduce noise and cognitive load. When each audience sees only the metrics that matter to them, they can focus on insights instead of searching for relevant data.
+    </p>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf8f0fe6fd822b9135ae6_img3.webp" alt>
+    </div>
+    <h4>Streamline report flows</h4>
+    <p>
+      Minimizing unnecessary visuals, simplifying navigation, and using efficient slicers improve load speed. Faster, smoother reports encourage deeper exploration.
+    </p>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf8ec01c178d929b4591c_img4.webp" alt>
+    </div>
+    <h4>Use data-driven layouts</h4>
+    <p>
+      Monitor how users interact with your reports and adjust placement, visuals, and filters accordingly. Designing around real behavior leads to interfaces people want to revisit.
+    </p>
+  </div>
+
+</div>
+
+<style>
+  .tips-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .tip-card{
+    background: #e4eef7;
+    border-radius: 10px;
+    padding: 18px 18px 20px;
+  }
+
+  /* ICONS: 50x50 always */
+  .tip-icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(23,142,232,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .tip-icon img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .tip-card h4{
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #178ee8;
+  }
+
+  .tip-card p{
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #222;
+  }
+
+  @media (max-width: 767px){
+    .tips-grid{
+      grid-template-columns: 1fr;
+    }
+  }
+</style></div><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-normal" style="max-width:1024px" data-rt-type="image" data-rt-align="normal" data-rt-max-width="1024px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cf9d59eddb745624487ca_bigimg.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><p>‍</p><div class="guidelines-list">
+
+  <div class="guideline-item">
+    <div class="guideline-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695ceda5b502ce2bccb5c316_img4.webp" alt>
+    </div>
+    <div class="guideline-content">
+      <h4>Align scheduled refresh with data source updates</h4>
+      <p>
+        Set your cache update frequency to match your data source refresh schedule. This keeps reports accurate without overloading the system, ensuring users always see timely, relevant insights without unnecessary processing.
+      </p>
+    </div>
+  </div>
+
+  <div class="guideline-item">
+    <div class="guideline-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cfbdbe77a040bb7d7c25a_img2.webp" alt>
+    </div>
+    <div class="guideline-content">
+      <h4>Choose light backgrounds for versatility</h4>
+      <p>
+        Reports with white or light backgrounds are easier to print, share, and read across devices. This simple design choice improves accessibility both online and offline, making your content more versatile.
+      </p>
+    </div>
+  </div>
+
+  <div class="guideline-item">
+    <div class="guideline-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cfbd720e7d5bbc443b2d4_img3.webp" alt>
+    </div>
+    <div class="guideline-content">
+      <h4>Keep numbers short and readable</h4>
+      <p>
+        Limit numbers to four digits and two decimal places for cleaner visuals. Consistent number formatting reduces cognitive load and helps users focus on meaning instead of decoding large values.
+      </p>
+    </div>
+  </div>
+
+  <div class="guideline-item">
+    <div class="guideline-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cfbd778441d954600f3bf_img4.webp" alt>
+    </div>
+    <div class="guideline-content">
+      <h4>Leverage tooltips for context</h4>
+      <p>
+        Use tooltips to add deeper explanations or related data without crowding the main view. Well-chosen tooltip visuals give users extra context exactly when they need it, boosting comprehension.
+      </p>
+    </div>
+  </div>
+
+  <div class="guideline-item">
+    <div class="guideline-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cfbd78f3b03dfc0c2d25b_img5.webp" alt>
+    </div>
+    <div class="guideline-content">
+      <h4>Name objects clearly</h4>
+      <p>
+        Use business-friendly names for measures and columns, and hide anything unused. This makes reports easier to navigate and keeps attention on the most relevant elements.
+      </p>
+    </div>
+  </div>
+
+	<div class="guideline-item">
+    <div class="guideline-icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cfbd549c93023f4c2c075_img6.webp" alt>
+    </div>
+    <div class="guideline-content">
+      <h4>Align scheduled refresh with data source updates</h4>
+      <p>
+       Set your cache update frequency to match your data source refresh schedule. This keeps reports accurate without overloading the system, ensuring users always see timely, relevant insights without unnecessary processing.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .guidelines-list{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .guideline-item{
+    background-image: linear-gradient(90deg, #f1fbfe, #f7effc);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .guideline-icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0,0,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .guideline-icon img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .guideline-content h4{
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #00f;
+  }
+
+  .guideline-content p{
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #222;
+  }
+</style></div><p>‍</p><p>‍</p><h2 id="unlocking-the-full-value-of-power-bi-through-user-engagement">Unlocking the Full Value of Power BI Through User Engagement</h2><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-floatleft" style="max-width:40%" data-rt-type="image" data-rt-align="floatleft" data-rt-max-width="40%"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/695cfd790acbb1f8c2ee9a97_leftimg.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><p>‍</p><p>Power BI report engagement is the vital link between data and real business outcomes. Without it, dashboards risk being forgotten or underused. Thoughtful design shapes user behavior, how often they return, how they navigate, and the insights they uncover.</p><p>‍<strong>Treating design as a strategic part of your analytics program ensures your reports deliver meaningful value.</strong></p><p><strong>‍</strong>One way to achieve this is with solutions like Reporting Hub, which enables organizations to provide fully branded, embedded Power BI reports that are both intuitive and engaging. Delivered through a customizable, no-code portal hosted on your Azure environment and your own domain, this creates a seamless experience that keeps users exploring and engaged longer.</p><p>‍</p><p><strong>With the right embedding setup (e.g., workspaces, RLS, or dedicated capacities), solutions like Reporting Hub can support multi-tenant experiences tailored by role, department, or client, aligned with the tailored design principles that boost engagement.</strong></p><p><strong>‍</strong>Combined with enterprise-grade security, flexible authentication, and robust sharing features, it ensures data is accessible yet secure, empowering teams to collaborate effectively while maintaining control.</p>
+    <div class="author-bio-block">
+      <img class="bio-avatar" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a2794d98474036c4f432_691d62c15c0b1cfdbdb287e4_DSC00127-768x768.webp" alt="Manvir G">
+      <div>
+        <div class="bio-name">Manvir G</div>
+        <p class="bio-text">Manvir Grewal, co-founder and architect behind The Reporting Hub, is a seasoned Agile Coach with over 16 years of experience in creating and leading cross-functional teams in complex domains. His expe...</p>
+      </div>
+    </div>
+  </article>
+  <aside class="post-sidebar">
+    <div class="sidebar-card"><h4>In this post</h4><ul class="toc-list"><li><a href="#why-user-engagement-matters-in-power-bi-reporting">Why User Engagement Matters in Power BI Reporting</a></li><li><a href="#what-is-power-bi-report-user-engagement">What Is Power BI Report User Engagement?</a></li><li><a href="#who-benefits-from-better-report-engagement">Who Benefits from Better Report Engagement</a></li><li><a href="#how-design-affects-power-bi-report-engagement">How Design Affects Power BI Report Engagement</a></li><li><a href="#what-increases-time-spent-in-your-reports">What Increases Time Spent in Your Reports</a></li><li><a href="#how-to-track-and-improve-power-bi-report-engagement">How to Track and Improve Power BI Report Engagement</a></li><li><a href="#unlocking-the-full-value-of-power-bi-through-user-engagement">Unlocking the Full Value of Power BI Through User Engagement</a></li></ul></div>
+    <div class="sidebar-cta">
+      <p>See how Reporting Hub handles white-label analytics end-to-end.</p>
+      <a href="/demo/">Book a Demo →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- INCLUDE footer -->
+</body>
+</html>

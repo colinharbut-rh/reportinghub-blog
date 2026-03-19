@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Unlocking the Power of Power BI Embedded with Direct Lake Mode: A Game-Changer for ISVs and Developers — The Reporting Hub</title>
+<meta name="description" content="Introduction: A New Era of Embedded AnalyticsAs the demand for real-time, high-performance embedded analytics grows, Microsoft has introduced Power BI Embe">
+<meta property="og:title" content="Unlocking the Power of Power BI Embedded with Direct Lake Mode: A Game-Changer for ISVs and Developers">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6963f3ca6dd56111ebef9db9_Unlocking-the-Power-of-Power-BI-Embedded-with-Direct-Lake.....png">
+<link rel="canonical" href="https://thereportinghub.com/blog/unlocking-the-power-of-power-bi-embedded-with-direct-lake-mode-a-game-changer-for-isvs-and-developers/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#22A4F7; --indigo:#6C6EF3; --purple:#5E2C8F; --magenta:#C729ED;
+    --navy:#0D0F1A;
+    --grad:linear-gradient(135deg,#22A4F7 0%,#6C6EF3 50%,#C729ED 100%);
+    --text:#0D0F1A; --muted:#6B7280; --border:#E5E7EB;
+    --bg:#F8F9FB; --card-bg:#FFFFFF; --radius:14px;
+  }
+  body { font-family:'DM Sans',sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 32px; height:68px;
+    display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo img { height:34px; display:block; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { font-size:15px; font-weight:500; color:var(--text); text-decoration:none; opacity:.75; transition:opacity .2s; }
+  .nav-links a:hover { opacity:1; }
+  .nav-links a.active { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:600; opacity:1; }
+  .nav-cta { background:var(--grad); color:#fff; font-size:14px; font-weight:600;
+    padding:10px 22px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.88; }
+  footer { background:var(--navy); border-top:1px solid rgba(255,255,255,.08); padding:32px; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .footer-inner img { height:24px; opacity:.7; }
+  .footer-inner p { font-size:13px; color:rgba(255,255,255,.4); }
+  @media(max-width:600px) { .nav-links { display:none; } }
+
+  .post-hero { max-width:760px; margin:0 auto; padding:64px 32px 40px; }
+  .breadcrumb { font-size:13px; margin-bottom:20px; }
+  .breadcrumb a { color:var(--muted); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .breadcrumb span { color:var(--border); margin:0 8px; }
+  .post-cat { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:16px; display:block; }
+  .post-hero h1 { font-family:'Sora',sans-serif; font-size:clamp(28px,4vw,44px);
+    font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:20px; }
+  .post-byline { display:flex; align-items:center; gap:14px; padding:20px 0;
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .avatar { width:44px; height:44px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; flex-shrink:0; }
+  .byline-name { font-size:15px; font-weight:600; color:var(--text); }
+  .byline-meta { font-size:13px; color:var(--muted); margin-top:2px; }
+  .byline-share { margin-left:auto; display:flex; gap:10px; }
+  .share-btn { width:36px; height:36px; border-radius:50%; border:1px solid var(--border);
+    background:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; transition:border-color .2s;
+    text-decoration:none; color:var(--muted); }
+  .share-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .post-img-wrap { max-width:900px; margin:0 auto 48px; padding:0 32px; }
+  .post-img { border-radius:var(--radius); height:400px; }
+  .post-layout { max-width:1100px; margin:0 auto; padding:0 32px 80px;
+    display:grid; grid-template-columns:1fr 280px; gap:60px; align-items:start; }
+  .post-content h2 { font-family:'Sora',sans-serif; font-size:26px; font-weight:700;
+    color:var(--navy); margin:44px 0 18px; line-height:1.25; }
+  .post-content h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700;
+    color:var(--navy); margin:32px 0 14px; }
+  .post-content p { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:22px; }
+  .post-content ul,.post-content ol { padding-left:24px; margin-bottom:22px; }
+  .post-content li { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:8px; }
+  .post-content blockquote { border-left:3px solid transparent;
+    border-image:var(--grad) 1; padding:16px 24px;
+    background:var(--bg); border-radius:0 var(--radius) var(--radius) 0; margin:32px 0; }
+  .post-content blockquote p { font-size:18px; font-style:italic; color:var(--navy); font-weight:500; margin:0; }
+  .post-content a { color:var(--blue); text-decoration:none; }
+  .post-content a:hover { text-decoration:underline; }
+  /* Grid + overflow fix: article column must not bleed past its track */
+  .post-content { min-width:0; overflow:hidden; }
+  /* Every element inside article is capped to column width */
+  .post-content * { max-width:100%; box-sizing:border-box; }
+  .post-content img, .post-content video,
+  .post-content iframe { height:auto; display:block; }
+  /* Neutralise Webflow-authored max-width overrides on callout/grid divs */
+  .post-content div[class^="blog_"] { max-width:100% !important; }
+  /* Collapse Webflow embedded two-column flex sections to single column */
+  .post-content section { margin:40px 0; overflow:hidden; }
+  .post-content section > div { display:block !important; }
+  .post-content section > div > div { width:100% !important; flex:none !important; }
+  /* Centre embedded section images */
+  .post-content section img {
+    max-width:520px; width:100%; display:block;
+    margin:24px auto; border-radius:8px;
+  }
+  /* Preserve icon+text list item flex layouts */
+  .post-content section li { display:flex !important; }
+  .callout { background:linear-gradient(135deg,rgba(34,164,247,.08),rgba(108,110,243,.08));
+    border:1px solid rgba(34,164,247,.2); border-radius:var(--radius);
+    padding:24px 28px; margin:32px 0; }
+  .callout p { font-size:16px; font-weight:500; margin:0 0 10px; }
+  .callout p:last-child { margin:0; }
+  .post-sidebar { position:sticky; top:88px; }
+  .sidebar-card { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+  .sidebar-card h4 { font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    color:var(--navy); margin-bottom:16px; text-transform:uppercase; letter-spacing:.05em; }
+  .toc-list { list-style:none; }
+  .toc-list li { margin-bottom:10px; }
+  .toc-list a { font-size:13px; color:var(--muted); text-decoration:none;
+    line-height:1.4; display:block; transition:color .2s; }
+  .toc-list a:hover { color:var(--blue); }
+  .sidebar-cta { background:var(--navy); border-radius:var(--radius); padding:24px; text-align:center; }
+  .sidebar-cta p { font-size:14px; line-height:1.55; color:rgba(255,255,255,.65); margin-bottom:16px; }
+  .sidebar-cta a { display:block; background:var(--grad); color:#fff; font-size:14px;
+    font-weight:600; padding:12px 20px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .sidebar-cta a:hover { opacity:.88; }
+  .author-bio-block { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; margin-top:48px;
+    display:flex; gap:20px; align-items:flex-start; }
+  .author-bio-block .bio-avatar { width:56px; height:56px; border-radius:50%;
+    object-fit:cover; flex-shrink:0; }
+  .author-bio-block .bio-avatar-placeholder { width:56px; height:56px; border-radius:50%;
+    background:var(--grad); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:20px; flex-shrink:0; }
+  .bio-name { font-family:'Sora',sans-serif; font-size:16px; font-weight:700;
+    color:var(--navy); margin-bottom:6px; }
+  .bio-text { font-size:14px; line-height:1.65; color:var(--muted); }
+  @media(max-width:900px) {
+    .post-layout { grid-template-columns:1fr; }
+    .post-sidebar { position:static; }
+  }
+  @media(max-width:600px) {
+    .post-hero { padding:40px 20px 32px; }
+    .post-img-wrap { padding:0 20px; }
+    .post-img { height:220px; }
+    .post-layout { padding:0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- INCLUDE header -->
+<header class="post-hero">
+  <div class="breadcrumb">
+    <a href="/blog/">Blog</a>
+    <span>›</span>
+    <a href="/blog/?cat=power-bi-embedded-analytics">Power BI Embedded Analytics</a>
+  </div>
+  <span class="post-cat">Power BI Embedded Analytics</span>
+  <h1>Unlocking the Power of Power BI Embedded with Direct Lake Mode: A Game-Changer for ISVs and Developers</h1>
+  <div class="post-byline">
+    <img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a3f30361927cb1cee617_Brian-DL.webp" alt="Brian DeLuca" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+    <div>
+      <div class="byline-name">Brian DeLuca</div>
+      <div class="byline-meta">Jan 30, 2026 · 2 minutes</div>
+    </div>
+    <div class="byline-share">
+      <a href="https://www.linkedin.com/shareArticle?url=https://thereportinghub.com/blog/unlocking-the-power-of-power-bi-embedded-with-direct-lake-mode-a-game-changer-for-isvs-and-developers/" class="share-btn" target="_blank" rel="noopener">in</a>
+      <a href="https://twitter.com/intent/tweet?url=https://thereportinghub.com/blog/unlocking-the-power-of-power-bi-embedded-with-direct-lake-mode-a-game-changer-for-isvs-and-developers/&text=Unlocking the Power of Power BI Embedded with Direct Lake Mode: A Game-Changer for ISVs and Developers" class="share-btn" target="_blank" rel="noopener">𝕏</a>
+    </div>
+  </div>
+</header>
+<div class="post-img-wrap">
+  <div class="post-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6963f3ca6dd56111ebef9db9_Unlocking-the-Power-of-Power-BI-Embedded-with-Direct-Lake.....png');background-size:cover;background-position:center;"></div>
+</div>
+<div class="post-layout">
+  <article class="post-content">
+    <h3><strong>Introduction: A New Era of Embedded Analytics</strong></h3><p>As the demand for real-time, high-performance embedded analytics grows, Microsoft has introduced <a href="https://blog.fabric.microsoft.com/en-us/blog/introducing-power-bi-embedded-with-direct-lake-mode-preview/">Power BI Embedded with Direct Lake Mode</a>—a breakthrough feature designed to <strong>eliminate data duplication, enhance scalability, and improve query performance</strong>. This new capability, now in preview, presents <strong>game-changing opportunities</strong> for developers and Independent Software Vendors (ISVs) looking to integrate seamless analytics into their applications.</p><p>At <strong>Reporting Hub</strong>, we are at the forefront of transforming <a href="https://thereportinghub.com/power-bi/power-bi-embedded">Power BI Embedded </a>implementations. Our platform already simplifies the <strong>deployment, management, and scalability</strong> of Power BI solutions. With Direct Lake Mode now available, Reporting Hub users can unlock even greater performance and efficiency.</p><p>‍</p><h3><strong>What is Direct Lake Mode?</strong></h3><p>Direct Lake Mode is a <strong>new storage mode in Power BI</strong> that directly accesses <strong>Delta tables in OneLake</strong>, removing the need for data import or duplication.</p><h4><strong>This brings several advantages:</strong></h4><p>‍</p><style>
+.human-centered-image {
+    height: auto;
+}
+
+
+
+/* Section (NO outer padding by rule) */
+.blog_directlake_features {
+}
+
+/* Grid */
+.blog_directlake_features_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px 80px;
+}
+
+/* Item */
+.blog_directlake_feature {
+  width: calc(50% - 40px);
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+/* Icon */
+.blog_directlake_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blog_directlake_icon img {
+  width: 140px;
+  height: 140px;
+}
+
+/* Content */
+.blog_directlake_content h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.blog_directlake_content p {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog_directlake_feature {
+    width: 100%;
+  }
+}
+</style>	
+	
+<section class="blog_directlake_features">
+  <div class="blog_directlake_features_wrap">
+
+    <div class="blog_directlake_feature">
+      <div class="blog_directlake_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6963fd374e56327c44205282_Power-BI-Embedded-with-Direct-Lake-Mode-8-1-.webp" alt="">
+      </div>
+      <div class="blog_directlake_content">
+        <h4>Faster Performance</h4>
+        <p>
+          Directly loading parquet-formatted files into memory results in
+          <strong>faster queries and reporting</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_directlake_feature">
+      <div class="blog_directlake_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6963fd65bbb1e3a82822b95d_Power-BI-Embedded-with-Direct-Lake-Mode-2-1-.webp" alt="">
+      </div>
+      <div class="blog_directlake_content">
+        <h4>Real-Time Insights</h4>
+        <p>
+          Users get up-to-the-minute data without requiring
+          <strong>scheduled refreshes</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_directlake_feature">
+      <div class="blog_directlake_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6963fd4e3003e83dbcce5c82_Power-BI-Embedded-with-Direct-Lake-Mode-1.webp" alt="">
+      </div>
+      <div class="blog_directlake_content">
+        <h4>Optimized Resource Usage</h4>
+        <p>
+          Avoids redundant data storage and import overhead.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_directlake_feature">
+      <div class="blog_directlake_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6963fde20cc648d243247eea_Group.svg" alt="">
+      </div>
+      <div class="blog_directlake_content">
+        <h4>Resiliency</h4>
+        <p>
+          Automatically falls back to <strong>DirectQuery mode</strong> when needed,
+          ensuring continuity.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section><p>‍</p><p>For ISVs and developers using <strong>Reporting Hub</strong>, this means a <strong>faster, more responsive experience</strong> for their customers while reducing the burden of managing data refreshes.</p><p>‍</p><h3><strong>How Reporting Hub Enhances Power BI Embedded with Direct Lake Mode</strong></h3><p><strong>Reporting Hub</strong> was designed to <strong>simplify Power BI Embedded deployments</strong> by providing a <strong>white-label, no-code platform</strong> for businesses to deliver Power BI reports <strong>at scale</strong>.</p><p>‍</p><h4><strong>With Direct Lake Mode, our users can now enjoy:</strong></h4><p>‍</p><style>
+
+
+/* Section (NO outer padding by rule) */
+.blog_embedded_capabilities {
+}
+
+/* Grid */
+.blog_embedded_capabilities_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 60px;
+}
+
+/* Item */
+.blog_embedded_capability {
+  width: calc(50% - 30px);
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+/* Icon circle */
+.blog_embedded_capability_icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blog_embedded_capability_icon img {
+  width:60px;
+  height:60px;
+}
+
+/* Content */
+.blog_embedded_capability_content h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.blog_embedded_capability_content p {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog_embedded_capability {
+    width: 100%;
+  }
+}
+</style>
+<section class="blog_embedded_capabilities">
+  <div class="blog_embedded_capabilities_wrap">
+
+    <div class="blog_embedded_capability">
+      <div class="blog_embedded_capability_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6963ff0d3acbc928a3d13d76_Power-BI-Embedded-with-Direct-Lake-Mode-12.webp" alt>
+      </div>
+      <div class="blog_embedded_capability_content">
+        <h4>Instant, Real-Time Analytics</h4>
+        <p>
+          End-users get seamless, real-time insights without waiting for refresh cycles.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_embedded_capability">
+      <div class="blog_embedded_capability_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6963ff194b0cb26eaeca654e_Power-BI-Embedded-with-Direct-Lake-Mode-9.webp" alt>
+      </div>
+      <div class="blog_embedded_capability_content">
+        <h4>Scalable Performance</h4>
+        <p>
+          Large datasets can be accessed with minimal latency, improving the user experience.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_embedded_capability">
+      <div class="blog_embedded_capability_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6963ff22a2295c84f6cb2be4_Power-BI-Embedded-with-Direct-Lake-Mode-10.webp" alt>
+      </div>
+      <div class="blog_embedded_capability_content">
+        <h4>Enterprise-Grade Security & Access Control</h4>
+        <p>
+          Our platform ensures <strong>secure multi-tenant access</strong> to Power BI reports
+          without the need for costly user licenses.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_embedded_capability">
+      <div class="blog_embedded_capability_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6963ff2bdb8f13b5989237aa_Power-BI-Embedded-with-Direct-Lake-Mode-11.webp" alt>
+      </div>
+      <div class="blog_embedded_capability_content">
+        <h4>Cost-Effective Monetization</h4>
+        <p>
+          Reporting Hub enables businesses to <strong>“SaaSify”</strong> their analytics,
+          turning Power BI reports into <strong>profitable, subscription-based products</strong>.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section><p>‍</p><p>By integrating <strong>Direct Lake Mode</strong>, Reporting Hub further <strong>reduces costs and improves efficiency</strong> for companies delivering analytics to their customers.</p><p>‍</p><h3><strong>Why Businesses Choose Reporting Hub</strong></h3><p>Our customers have experienced <strong>faster deployment, reduced costs, and a simplified Power BI Embedded experience​.</strong></p><p>‍</p><h4><strong>Key benefits of Reporting Hub include:</strong></h4><p>‍</p><style>
+
+/* Section (NO outer padding by rule) */
+.blog_embedded_features {
+}
+
+/* Grid */
+.blog_embedded_features_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 60px;
+}
+
+/* Item */
+.blog_embedded_feature {
+  width: calc(50% - 30px);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Icon circle */
+.blog_embedded_feature_icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blog_embedded_feature_icon img {
+  width: 140px;
+  height: 140px;
+}
+
+/* Content */
+.blog_embedded_feature_content h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.blog_embedded_feature_content p {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog_embedded_feature {
+    width: 100%;
+  }
+}
+</style>
+	
+<section class="blog_embedded_features">
+  <div class="blog_embedded_features_wrap">
+
+    <div class="blog_embedded_feature">
+      <div class="blog_embedded_feature_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69640086c08dbe13e7ff407d_Power-BI-Embedded-with-Direct-Lake-Mode-4.webp" alt>
+      </div>
+      <div class="blog_embedded_feature_content">
+        <h4>No-Code Deployment:</h4>
+        <p>Deploy in <strong>minutes</strong>, not months.</p>
+      </div>
+    </div>
+
+    <div class="blog_embedded_feature">
+      <div class="blog_embedded_feature_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6964009600fdcab9624e0b80_Power-BI-Embedded-with-Direct-Lake-Mode-5.webp" alt>
+      </div>
+      <div class="blog_embedded_feature_content">
+        <h4>Unlimited Users, No Additional Power BI Licenses</h4>
+        <p>Avoid costly <strong>per-user fees</strong>.</p>
+      </div>
+    </div>
+
+    <div class="blog_embedded_feature">
+      <div class="blog_embedded_feature_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696400a6e0e1b33022ce4619_Power-BI-Embedded-with-Direct-Lake-Mode-6-1.webp" alt>
+      </div>
+      <div class="blog_embedded_feature_content">
+        <h4>Fully Branded & Customizable</h4>
+        <p>
+          Deliver Power BI reports under
+          <strong>your brand</strong> or your clients’.
+        </p>
+      </div>
+    </div>
+
+    <div class="blog_embedded_feature">
+      <div class="blog_embedded_feature_icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/696400b26a7c8b251d50c476_Power-BI-Embedded-with-Direct-Lake-Mode-7.webp" alt>
+      </div>
+      <div class="blog_embedded_feature_content">
+        <h4>Microsoft-Recommended Solution</h4>
+        <p>
+          Recognized by Microsoft as a
+          <strong>Power BI Embedded accelerator</strong>.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section><p>‍</p><p>For ISVs and developers using <strong>Reporting Hub</strong>, this means a <strong>faster, more responsive experience </strong>for their customers while reducing the burden of managing data refreshes.</p>
+    <div class="author-bio-block">
+      <img class="bio-avatar" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a3f30361927cb1cee617_Brian-DL.webp" alt="Brian DeLuca">
+      <div>
+        <div class="bio-name">Brian DeLuca</div>
+        <p class="bio-text">Brian DeLuca is a co-founder and CEO of The Reporting Hub. As a seasoned expert in data, analytics, and business intelligence, Brian brings over 20 years of experience driving innovation and organizat...</p>
+      </div>
+    </div>
+  </article>
+  <aside class="post-sidebar">
+    <div class="sidebar-card"><h4>In this post</h4><ul class="toc-list"><li><a href="#introduction-a-new-era-of-embedded-analytics">Introduction: A New Era of Embedded Analytics</a></li><li><a href="#what-is-direct-lake-mode">What is Direct Lake Mode?</a></li><li><a href="#how-reporting-hub-enhances-power-bi-embedded-with-direct-lake-mode">How Reporting Hub Enhances Power BI Embedded with Direct Lake Mode</a></li><li><a href="#why-businesses-choose-reporting-hub">Why Businesses Choose Reporting Hub</a></li></ul></div>
+    <div class="sidebar-cta">
+      <p>See how Reporting Hub handles white-label analytics end-to-end.</p>
+      <a href="/demo/">Book a Demo →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- INCLUDE footer -->
+</body>
+</html>

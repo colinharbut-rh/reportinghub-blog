@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Optimizing Performance in Power BI Embedded Reports — The Reporting Hub</title>
+<meta name="description" content="When leveraging Power BI Embedded for your business intelligence needs, ensuring a swift and smooth experience for your users is paramount. Here are some e">
+<meta property="og:title" content="Optimizing Performance in Power BI Embedded Reports">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6974e199695bafd7860e4e52_blog3.png">
+<link rel="canonical" href="https://thereportinghub.com/blog/optimizing-performance-in-power-bi-embedded-reports/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#22A4F7; --indigo:#6C6EF3; --purple:#5E2C8F; --magenta:#C729ED;
+    --navy:#0D0F1A;
+    --grad:linear-gradient(135deg,#22A4F7 0%,#6C6EF3 50%,#C729ED 100%);
+    --text:#0D0F1A; --muted:#6B7280; --border:#E5E7EB;
+    --bg:#F8F9FB; --card-bg:#FFFFFF; --radius:14px;
+  }
+  body { font-family:'DM Sans',sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 32px; height:68px;
+    display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo img { height:34px; display:block; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { font-size:15px; font-weight:500; color:var(--text); text-decoration:none; opacity:.75; transition:opacity .2s; }
+  .nav-links a:hover { opacity:1; }
+  .nav-links a.active { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:600; opacity:1; }
+  .nav-cta { background:var(--grad); color:#fff; font-size:14px; font-weight:600;
+    padding:10px 22px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.88; }
+  footer { background:var(--navy); border-top:1px solid rgba(255,255,255,.08); padding:32px; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .footer-inner img { height:24px; opacity:.7; }
+  .footer-inner p { font-size:13px; color:rgba(255,255,255,.4); }
+  @media(max-width:600px) { .nav-links { display:none; } }
+
+  .post-hero { max-width:760px; margin:0 auto; padding:64px 32px 40px; }
+  .breadcrumb { font-size:13px; margin-bottom:20px; }
+  .breadcrumb a { color:var(--muted); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .breadcrumb span { color:var(--border); margin:0 8px; }
+  .post-cat { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:16px; display:block; }
+  .post-hero h1 { font-family:'Sora',sans-serif; font-size:clamp(28px,4vw,44px);
+    font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:20px; }
+  .post-byline { display:flex; align-items:center; gap:14px; padding:20px 0;
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .avatar { width:44px; height:44px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; flex-shrink:0; }
+  .byline-name { font-size:15px; font-weight:600; color:var(--text); }
+  .byline-meta { font-size:13px; color:var(--muted); margin-top:2px; }
+  .byline-share { margin-left:auto; display:flex; gap:10px; }
+  .share-btn { width:36px; height:36px; border-radius:50%; border:1px solid var(--border);
+    background:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; transition:border-color .2s;
+    text-decoration:none; color:var(--muted); }
+  .share-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .post-img-wrap { max-width:900px; margin:0 auto 48px; padding:0 32px; }
+  .post-img { border-radius:var(--radius); height:400px; }
+  .post-layout { max-width:1100px; margin:0 auto; padding:0 32px 80px;
+    display:grid; grid-template-columns:1fr 280px; gap:60px; align-items:start; }
+  .post-content h2 { font-family:'Sora',sans-serif; font-size:26px; font-weight:700;
+    color:var(--navy); margin:44px 0 18px; line-height:1.25; }
+  .post-content h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700;
+    color:var(--navy); margin:32px 0 14px; }
+  .post-content p { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:22px; }
+  .post-content ul,.post-content ol { padding-left:24px; margin-bottom:22px; }
+  .post-content li { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:8px; }
+  .post-content blockquote { border-left:3px solid transparent;
+    border-image:var(--grad) 1; padding:16px 24px;
+    background:var(--bg); border-radius:0 var(--radius) var(--radius) 0; margin:32px 0; }
+  .post-content blockquote p { font-size:18px; font-style:italic; color:var(--navy); font-weight:500; margin:0; }
+  .post-content a { color:var(--blue); text-decoration:none; }
+  .post-content a:hover { text-decoration:underline; }
+  /* Grid + overflow fix: article column must not bleed past its track */
+  .post-content { min-width:0; overflow:hidden; }
+  /* Every element inside article is capped to column width */
+  .post-content * { max-width:100%; box-sizing:border-box; }
+  .post-content img, .post-content video,
+  .post-content iframe { height:auto; display:block; }
+  /* Neutralise Webflow-authored max-width overrides on callout/grid divs */
+  .post-content div[class^="blog_"] { max-width:100% !important; }
+  /* Collapse Webflow embedded two-column flex sections to single column */
+  .post-content section { margin:40px 0; overflow:hidden; }
+  .post-content section > div { display:block !important; }
+  .post-content section > div > div { width:100% !important; flex:none !important; }
+  /* Centre embedded section images */
+  .post-content section img {
+    max-width:520px; width:100%; display:block;
+    margin:24px auto; border-radius:8px;
+  }
+  /* Preserve icon+text list item flex layouts */
+  .post-content section li { display:flex !important; }
+  .callout { background:linear-gradient(135deg,rgba(34,164,247,.08),rgba(108,110,243,.08));
+    border:1px solid rgba(34,164,247,.2); border-radius:var(--radius);
+    padding:24px 28px; margin:32px 0; }
+  .callout p { font-size:16px; font-weight:500; margin:0 0 10px; }
+  .callout p:last-child { margin:0; }
+  .post-sidebar { position:sticky; top:88px; }
+  .sidebar-card { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+  .sidebar-card h4 { font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    color:var(--navy); margin-bottom:16px; text-transform:uppercase; letter-spacing:.05em; }
+  .toc-list { list-style:none; }
+  .toc-list li { margin-bottom:10px; }
+  .toc-list a { font-size:13px; color:var(--muted); text-decoration:none;
+    line-height:1.4; display:block; transition:color .2s; }
+  .toc-list a:hover { color:var(--blue); }
+  .sidebar-cta { background:var(--navy); border-radius:var(--radius); padding:24px; text-align:center; }
+  .sidebar-cta p { font-size:14px; line-height:1.55; color:rgba(255,255,255,.65); margin-bottom:16px; }
+  .sidebar-cta a { display:block; background:var(--grad); color:#fff; font-size:14px;
+    font-weight:600; padding:12px 20px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .sidebar-cta a:hover { opacity:.88; }
+  .author-bio-block { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; margin-top:48px;
+    display:flex; gap:20px; align-items:flex-start; }
+  .author-bio-block .bio-avatar { width:56px; height:56px; border-radius:50%;
+    object-fit:cover; flex-shrink:0; }
+  .author-bio-block .bio-avatar-placeholder { width:56px; height:56px; border-radius:50%;
+    background:var(--grad); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:20px; flex-shrink:0; }
+  .bio-name { font-family:'Sora',sans-serif; font-size:16px; font-weight:700;
+    color:var(--navy); margin-bottom:6px; }
+  .bio-text { font-size:14px; line-height:1.65; color:var(--muted); }
+  @media(max-width:900px) {
+    .post-layout { grid-template-columns:1fr; }
+    .post-sidebar { position:static; }
+  }
+  @media(max-width:600px) {
+    .post-hero { padding:40px 20px 32px; }
+    .post-img-wrap { padding:0 20px; }
+    .post-img { height:220px; }
+    .post-layout { padding:0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- INCLUDE header -->
+<header class="post-hero">
+  <div class="breadcrumb">
+    <a href="/blog/">Blog</a>
+    <span>›</span>
+    <a href="/blog/?cat=power-bi-embedded-analytics">Power BI Embedded Analytics</a>
+  </div>
+  <span class="post-cat">Power BI Embedded Analytics</span>
+  <h1>Optimizing Performance in Power BI Embedded Reports</h1>
+  <div class="post-byline">
+    <img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-696ceb0aed9005f8478eeaca_DSC00125-768x768.jpg" alt="Jessie G" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+    <div>
+      <div class="byline-name">Jessie G</div>
+      <div class="byline-meta">Jan 30, 2026 · 3 minutes</div>
+    </div>
+    <div class="byline-share">
+      <a href="https://www.linkedin.com/shareArticle?url=https://thereportinghub.com/blog/optimizing-performance-in-power-bi-embedded-reports/" class="share-btn" target="_blank" rel="noopener">in</a>
+      <a href="https://twitter.com/intent/tweet?url=https://thereportinghub.com/blog/optimizing-performance-in-power-bi-embedded-reports/&text=Optimizing Performance in Power BI Embedded Reports" class="share-btn" target="_blank" rel="noopener">𝕏</a>
+    </div>
+  </div>
+</header>
+<div class="post-img-wrap">
+  <div class="post-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6974e199695bafd7860e4e52_blog3.png');background-size:cover;background-position:center;"></div>
+</div>
+<div class="post-layout">
+  <article class="post-content">
+    <p>When leveraging Power BI Embedded for your business intelligence needs, ensuring a swift and smooth experience for your users is paramount. Here are some expert tips for optimizing the performance of your Power BI Embedded reports, keeping your users happy, and your reports snappy.</p><p>‍</p><h3>Data Model Elegance</h3><p>A streamlined data model is the bedrock of high-performance reports. Remove extraneous columns and tables, and adhere to a star schema design. Also, be prudent with your calculated columns and measures – keep them simple and essential.</p><p><strong>Data Model Optimization:</strong></p><ul><li><strong>Simplify Data Models:</strong> Use only necessary columns and tables. Remove unused columns and calculated columns if they are not needed.</li><li><strong>Use Star Schema:</strong> Design your data model using a star schema where possible, as it is optimized for report performance.</li><li><strong>Optimize Calculations:</strong> Make sure that calculated columns and measures are as simple as possible and use them judiciously.</li></ul><p>‍</p><h3>Smart Data Refresh</h3><p>Consider an incremental refresh strategy to update only the changed data, not the entire dataset. Additionally, schedule these refreshes during off-peak hours to lessen the load on your systems.</p><p><strong>Data Refresh Strategies:</strong></p><ul><li><strong>Incremental Refresh:</strong> Only refresh the portion of data that has changed, rather than the entire dataset.</li><li><strong>Scheduled Refresh:</strong> Use off-peak hours for scheduled refreshes to minimize the impact on report performance.</li></ul><p>‍</p><h3>Report Designing with Intent</h3><p>A cluttered report is a slow report. Limit the number of visuals to those that truly matter. Prioritize native visuals over custom ones for better efficiency, and be cautious with fields that have a high number of unique values, as they can decelerate the performance.</p><p><strong>Report Design Best Practices:</strong></p><ul><li><strong>Reduce Visuals:</strong> The more visuals on a report, the more queries are sent to the dataset. Use fewer, more impactful visuals.</li><li><strong>Optimize Visuals:</strong> Use high-performance visuals. Custom visuals can sometimes be less efficient than native visuals.</li><li><strong>Avoid Using High-Cardinality Fields:</strong> High-cardinality fields (fields with unique values for many records) can slow down your report performance.</li></ul><p>‍</p><h3>Query Efficiency</h3><p>Be strategic with your use of DirectQuery. It’s real-time but can be slower. Utilize the Performance Analyzer tool in Power BI Desktop to dissect and understand the load times of your visuals.</p><p><strong>Query Performance:</strong></p><ul><li><strong>Use DirectQuery Wisely:</strong> While DirectQuery ensures that you’re always using up-to-date data, it can be slower than importing data because queries are run live against the data source.</li><li><strong>Performance Analyzer:</strong> Use the Performance Analyzer in Power BI Desktop to understand the duration of each step in loading a visual.</li></ul><p>‍</p><h3>Leverage Caching</h3><p>Configure cache refresh schedules so that your reports are quick off the mark, serving pre-loaded data to your users’ queries rapidly.</p><p>‍</p><h3>DAX Expression Mastery</h3><p>DAX can be your best friend or your worst enemy. Use variables within your DAX expressions for better performance and optimize your filter expressions to avoid unnecessary computational load.</p><p><strong>Optimize DAX Expressions:</strong></p><ul><li><strong>Use Variables:</strong> Variables can be computed once and reused in your DAX expressions, which can be more efficient.</li><li><strong>Filter Optimization:</strong> Optimize filter expressions in DAX to avoid unnecessary table scans.</li></ul><p>‍</p><h3>Page Loading Tactics</h3><p>Adopt a layered approach for visual loading using bookmarks and the ‘Selection Pane’ to control what gets loaded and when. Also, go easy on large background images; they’re often the hidden culprits in slow page loads.</p><p><strong>Page Load Optimization:</strong></p><ul><li><strong>Layered Loading:</strong> Use bookmarks and the ‘Selection Pane’ to create a layered approach to displaying visuals, so not all visuals need to load at once.</li><li><strong>Use Background Images Wisely:</strong> Large background images can slow down report loading times.</li></ul><p>‍</p><h3>Optimize Code and Resources</h3><p>Minimize the use of external libraries to cut down on load times, and if possible, load Power BI resources asynchronously to keep your application responsive.</p><p><strong>Code and Resource Optimization:</strong></p><ul><li><strong>Minimize External Dependencies:</strong> Keep the use of external libraries and resources to a minimum.</li><li><strong>Asynchronous Loading:</strong> If your embedded application allows for it, load Power BI resources asynchronously.</li></ul><p>‍</p><h3>Infrastructure Insights</h3><p>Make sure your Power BI Embedded or Fabric capacity matches your needs, and keep your services in the same regional datacenter as your user base to minimize latency.</p><p><strong>Infrastructure Considerations:</strong></p><ul><li><strong>Appropriate Sizing:</strong> Ensure that your Power BI Embedded or Fabric capacity is appropriately sized for your workload.</li><li><strong>Geographical Location:</strong> Locate your Power BI Embedded or Fabric capacity in the same region as your users to reduce latency.</li></ul><p>‍</p><h3>Continuous Performance Monitoring</h3><p>Embrace tools like Azure Monitor to keep a keen eye on your service’s performance. Establish regular feedback with your users to find and fix performance issues proactively.</p><p><strong>Monitoring and Continuous Improvement:</strong></p><ul><li><strong>Azure Monitor:</strong> Use Azure Monitor to track the performance of your Power BI Embedded service.</li><li><strong>Feedback Loop:</strong> Collect and analyze user feedback to identify performance bottlenecks and areas for improvement.</li></ul><p>In conclusion, optimizing your Power BI Embedded reports is an ongoing process. It requires attention to detail, a deep understanding of the tools at your disposal, and a commitment to the user experience. Implement these tips, and you’ll be well on your way to creating reports that are not only insightful but also a joy to interact with.</p><p>‍</p><p>‍</p><style type="text/css">
+
+.human-centered-image {
+    height: auto;
+}
+</style></div>
+    <div class="author-bio-block">
+      <img class="bio-avatar" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-696ceb0aed9005f8478eeaca_DSC00125-768x768.jpg" alt="Jessie G">
+      <div>
+        <div class="bio-name">Jessie G</div>
+        <p class="bio-text">Jessie is a passionate and skilled Business Intelligence Developer with a knack for transforming data into actionable insights. With a strong background in BI development, Jessie has honed her experti...</p>
+      </div>
+    </div>
+  </article>
+  <aside class="post-sidebar">
+    
+    <div class="sidebar-cta">
+      <p>See how Reporting Hub handles white-label analytics end-to-end.</p>
+      <a href="/demo/">Book a Demo →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- INCLUDE footer -->
+</body>
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Human-Centered Design for Embedded BI Portals — The Reporting Hub</title>
+<meta name="description" content="When done right, an embedded BI portal should feel like a natural extension of your product, though this depends on your tech stack and user needs. For exa">
+<meta property="og:title" content="Human-Centered Design for Embedded BI Portals">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941aa518440792d28191b61_Human-Centered-Design-for-Embedded-BI-Portals.webp">
+<link rel="canonical" href="https://thereportinghub.com/blog/human-centered-design-for-embedded-bi-portals/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#22A4F7; --indigo:#6C6EF3; --purple:#5E2C8F; --magenta:#C729ED;
+    --navy:#0D0F1A;
+    --grad:linear-gradient(135deg,#22A4F7 0%,#6C6EF3 50%,#C729ED 100%);
+    --text:#0D0F1A; --muted:#6B7280; --border:#E5E7EB;
+    --bg:#F8F9FB; --card-bg:#FFFFFF; --radius:14px;
+  }
+  body { font-family:'DM Sans',sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 32px; height:68px;
+    display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo img { height:34px; display:block; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { font-size:15px; font-weight:500; color:var(--text); text-decoration:none; opacity:.75; transition:opacity .2s; }
+  .nav-links a:hover { opacity:1; }
+  .nav-links a.active { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:600; opacity:1; }
+  .nav-cta { background:var(--grad); color:#fff; font-size:14px; font-weight:600;
+    padding:10px 22px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.88; }
+  footer { background:var(--navy); border-top:1px solid rgba(255,255,255,.08); padding:32px; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .footer-inner img { height:24px; opacity:.7; }
+  .footer-inner p { font-size:13px; color:rgba(255,255,255,.4); }
+  @media(max-width:600px) { .nav-links { display:none; } }
+
+  .post-hero { max-width:760px; margin:0 auto; padding:64px 32px 40px; }
+  .breadcrumb { font-size:13px; margin-bottom:20px; }
+  .breadcrumb a { color:var(--muted); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .breadcrumb span { color:var(--border); margin:0 8px; }
+  .post-cat { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:16px; display:block; }
+  .post-hero h1 { font-family:'Sora',sans-serif; font-size:clamp(28px,4vw,44px);
+    font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:20px; }
+  .post-byline { display:flex; align-items:center; gap:14px; padding:20px 0;
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .avatar { width:44px; height:44px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; flex-shrink:0; }
+  .byline-name { font-size:15px; font-weight:600; color:var(--text); }
+  .byline-meta { font-size:13px; color:var(--muted); margin-top:2px; }
+  .byline-share { margin-left:auto; display:flex; gap:10px; }
+  .share-btn { width:36px; height:36px; border-radius:50%; border:1px solid var(--border);
+    background:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; transition:border-color .2s;
+    text-decoration:none; color:var(--muted); }
+  .share-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .post-img-wrap { max-width:900px; margin:0 auto 48px; padding:0 32px; }
+  .post-img { border-radius:var(--radius); height:400px; }
+  .post-layout { max-width:1100px; margin:0 auto; padding:0 32px 80px;
+    display:grid; grid-template-columns:1fr 280px; gap:60px; align-items:start; }
+  .post-content h2 { font-family:'Sora',sans-serif; font-size:26px; font-weight:700;
+    color:var(--navy); margin:44px 0 18px; line-height:1.25; }
+  .post-content h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700;
+    color:var(--navy); margin:32px 0 14px; }
+  .post-content p { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:22px; }
+  .post-content ul,.post-content ol { padding-left:24px; margin-bottom:22px; }
+  .post-content li { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:8px; }
+  .post-content blockquote { border-left:3px solid transparent;
+    border-image:var(--grad) 1; padding:16px 24px;
+    background:var(--bg); border-radius:0 var(--radius) var(--radius) 0; margin:32px 0; }
+  .post-content blockquote p { font-size:18px; font-style:italic; color:var(--navy); font-weight:500; margin:0; }
+  .post-content a { color:var(--blue); text-decoration:none; }
+  .post-content a:hover { text-decoration:underline; }
+  /* Grid + overflow fix: article column must not bleed past its track */
+  .post-content { min-width:0; overflow:hidden; }
+  /* Every element inside article is capped to column width */
+  .post-content * { max-width:100%; box-sizing:border-box; }
+  .post-content img, .post-content video,
+  .post-content iframe { height:auto; display:block; }
+  /* Neutralise Webflow-authored max-width overrides on callout/grid divs */
+  .post-content div[class^="blog_"] { max-width:100% !important; }
+  /* Collapse Webflow embedded two-column flex sections to single column */
+  .post-content section { margin:40px 0; overflow:hidden; }
+  .post-content section > div { display:block !important; }
+  .post-content section > div > div { width:100% !important; flex:none !important; }
+  /* Centre embedded section images */
+  .post-content section img {
+    max-width:520px; width:100%; display:block;
+    margin:24px auto; border-radius:8px;
+  }
+  /* Preserve icon+text list item flex layouts */
+  .post-content section li { display:flex !important; }
+  .callout { background:linear-gradient(135deg,rgba(34,164,247,.08),rgba(108,110,243,.08));
+    border:1px solid rgba(34,164,247,.2); border-radius:var(--radius);
+    padding:24px 28px; margin:32px 0; }
+  .callout p { font-size:16px; font-weight:500; margin:0 0 10px; }
+  .callout p:last-child { margin:0; }
+  .post-sidebar { position:sticky; top:88px; }
+  .sidebar-card { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+  .sidebar-card h4 { font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    color:var(--navy); margin-bottom:16px; text-transform:uppercase; letter-spacing:.05em; }
+  .toc-list { list-style:none; }
+  .toc-list li { margin-bottom:10px; }
+  .toc-list a { font-size:13px; color:var(--muted); text-decoration:none;
+    line-height:1.4; display:block; transition:color .2s; }
+  .toc-list a:hover { color:var(--blue); }
+  .sidebar-cta { background:var(--navy); border-radius:var(--radius); padding:24px; text-align:center; }
+  .sidebar-cta p { font-size:14px; line-height:1.55; color:rgba(255,255,255,.65); margin-bottom:16px; }
+  .sidebar-cta a { display:block; background:var(--grad); color:#fff; font-size:14px;
+    font-weight:600; padding:12px 20px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .sidebar-cta a:hover { opacity:.88; }
+  .author-bio-block { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; margin-top:48px;
+    display:flex; gap:20px; align-items:flex-start; }
+  .author-bio-block .bio-avatar { width:56px; height:56px; border-radius:50%;
+    object-fit:cover; flex-shrink:0; }
+  .author-bio-block .bio-avatar-placeholder { width:56px; height:56px; border-radius:50%;
+    background:var(--grad); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:20px; flex-shrink:0; }
+  .bio-name { font-family:'Sora',sans-serif; font-size:16px; font-weight:700;
+    color:var(--navy); margin-bottom:6px; }
+  .bio-text { font-size:14px; line-height:1.65; color:var(--muted); }
+  @media(max-width:900px) {
+    .post-layout { grid-template-columns:1fr; }
+    .post-sidebar { position:static; }
+  }
+  @media(max-width:600px) {
+    .post-hero { padding:40px 20px 32px; }
+    .post-img-wrap { padding:0 20px; }
+    .post-img { height:220px; }
+    .post-layout { padding:0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- INCLUDE header -->
+<header class="post-hero">
+  <div class="breadcrumb">
+    <a href="/blog/">Blog</a>
+    <span>›</span>
+    <a href="/blog/?cat=data-visualization">Data Visualization</a>
+  </div>
+  <span class="post-cat">Data Visualization</span>
+  <h1>Human-Centered Design for Embedded BI Portals</h1>
+  <div class="post-byline">
+    <img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a3f30361927cb1cee617_Brian-DL.webp" alt="Brian DeLuca" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+    <div>
+      <div class="byline-name">Brian DeLuca</div>
+      <div class="byline-meta">Jan 30, 2026 · 5 Minutes</div>
+    </div>
+    <div class="byline-share">
+      <a href="https://www.linkedin.com/shareArticle?url=https://thereportinghub.com/blog/human-centered-design-for-embedded-bi-portals/" class="share-btn" target="_blank" rel="noopener">in</a>
+      <a href="https://twitter.com/intent/tweet?url=https://thereportinghub.com/blog/human-centered-design-for-embedded-bi-portals/&text=Human-Centered Design for Embedded BI Portals" class="share-btn" target="_blank" rel="noopener">𝕏</a>
+    </div>
+  </div>
+</header>
+<div class="post-img-wrap">
+  <div class="post-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6941aa518440792d28191b61_Human-Centered-Design-for-Embedded-BI-Portals.webp');background-size:cover;background-position:center;"></div>
+</div>
+<div class="post-layout">
+  <article class="post-content">
+    <p>When done right, an <a href="https://thereportinghub.com/blog/human-centered-design-for-embedded-bi-portals" target="_blank">embedded BI portal</a> should feel like a natural extension of your product, though this depends on your tech stack and user needs. For example, real-time data workflows may require more customization than static reports. However, many dashboards still feel like they were built for analysts, rather than for real users trying to answer questions quickly. That’s where human-centered design comes in.</p><p>In this post, we’ll explore what it means to design embedded BI portals with people in mind, and how you can use these principles to boost adoption, clarity, and long-term value.</p><p>‍</p><h2 id="what-is-human-centered-design-in-bi">What Is Human-Centered Design in BI?</h2><p>Human-centered design is all about creating tools that are truly useful by focusing on the people who use them. It means understanding their goals, the decisions they need to make, and the actions they want to take.</p><p>In BI, that goes beyond just showing charts. It’s about designing a comprehensive experience that supports the entire decision cycle, from identifying trends to testing hypotheses and taking action. That might mean telling a clear story with the data, or building features right into the dashboard that let users respond in real-time.</p><p><strong>In the context of business intelligence, HCD means:</strong></p><div class="bloghumanux-icons-cm9488">
+
+  <div class="bloghumanux-icons-cm9488__grid">
+
+    <div class="bloghumanux-icons-cm9488__item">
+      <div class="bloghumanux-icons-cm9488__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b01a8ef120f26ad1dbd3f_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-4.webp" alt="">
+      </div>
+      <div class="bloghumanux-icons-cm9488__text">
+        Dashboards that guide users, not overwhelm them
+      </div>
+    </div>
+
+    <div class="bloghumanux-icons-cm9488__item">
+      <div class="bloghumanux-icons-cm9488__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b01a8ef120f26ad1dbd3f_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-4.webp" alt="">
+      </div>
+      <div class="bloghumanux-icons-cm9488__text">
+        Navigation that feels intuitive, not frustrating
+      </div>
+    </div>
+
+    <div class="bloghumanux-icons-cm9488__item">
+      <div class="bloghumanux-icons-cm9488__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b01a8ef120f26ad1dbd3f_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-4.webp" alt="">
+      </div>
+      <div class="bloghumanux-icons-cm9488__text">
+        Design choices that reflect real usage patterns, not just data logic
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<style>
+/* ===== Section Wrapper ===== */
+.bloghumanux-icons-cm9488 {
+  width: 100%;
+  padding: 32px 0;
+}
+
+/* ===== Grid ===== */
+.bloghumanux-icons-cm9488__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+/* ===== Item ===== */
+.bloghumanux-icons-cm9488__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== Icon ===== */
+.bloghumanux-icons-cm9488__icon img {
+  width: 160px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 14px;
+}
+
+/* ===== Text ===== */
+.bloghumanux-icons-cm9488__text {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #000;
+  max-width: 260px;
+}
+.human-centered-image {
+    height: auto;
+}
+
+
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .bloghumanux-icons-cm9488__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .bloghumanux-icons-cm9488__icon img {
+    width: 140px;
+  }
+}
+</style></div><p>For example, if the request is to display distributor sales and current inventory, it might seem like a standard dashboard will suffice. But once you understand how users will interact with the data, you may find they need more than visibility; they need to make decisions directly from the insights.</p><p>With <a href="https://thereportinghub.com/">Reporting Hub</a>, you can design an embedded BI experience that brings those insights closer to action. Users can explore trends, plan purchases, and monitor performance, all within a single, intuitive interface. It’s about turning dashboards into tools people use to move work forward.</p><p><strong>HCD doesn’t ignore the technical power of your BI portal. It simply ensures that power is accessible to those who need it, without requiring a PhD in data science.</strong></p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1024px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1024px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b001342a0dfe2df810c7e_What-Is-Human-Centered-Design-in-BI-1024x572.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><h3>What Is Human-Centered Design in BI?</h3><p>Designing for usability often takes a backseat to getting the data and visuals right. But poor user experience can break even the most technically advanced dashboards.</p><p>‍</p><h4><strong>Common issues include:</strong></h4><div class="bloguxissues-grid-cm9563">
+
+  <div class="bloguxissues-grid-cm9563__grid">
+
+    <div class="bloguxissues-grid-cm9563__card">
+      <div class="bloguxissues-grid-cm9563__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b03d3c48b73489e9a8d4d_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-5-1-.webp" alt>
+      </div>
+      <div class="bloguxissues-grid-cm9563__content">
+        <div class="bloguxissues-grid-cm9563__title">Cluttered Layouts</div>
+        <div class="bloguxissues-grid-cm9563__text">
+          Overwhelming users with too many visuals, filters, or KPIs on a single page.
+        </div>
+      </div>
+    </div>
+
+    <div class="bloguxissues-grid-cm9563__card">
+      <div class="bloguxissues-grid-cm9563__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b03d3c48b73489e9a8d4d_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-5-1-.webp" alt>
+      </div>
+      <div class="bloguxissues-grid-cm9563__content">
+        <div class="bloguxissues-grid-cm9563__title">Confusing Navigation</div>
+        <div class="bloguxissues-grid-cm9563__text">
+          Users don’t know where to start, what a filter controls, or how to drill down.
+        </div>
+      </div>
+    </div>
+
+    <div class="bloguxissues-grid-cm9563__card">
+      <div class="bloguxissues-grid-cm9563__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b03c8116778a72c16be20_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-7.webp" alt>
+      </div>
+      <div class="bloguxissues-grid-cm9563__content">
+        <div class="bloguxissues-grid-cm9563__title">Lack of Mobile Responsiveness</div>
+        <div class="bloguxissues-grid-cm9563__text">
+          Embedded BI portals that aren’t designed for mobile lose relevance in fast-paced, on-the-go use cases.
+        </div>
+      </div>
+    </div>
+
+    <div class="bloguxissues-grid-cm9563__card">
+      <div class="bloguxissues-grid-cm9563__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b03e4a6d077abbc8c3432_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-8.webp" alt>
+      </div>
+      <div class="bloguxissues-grid-cm9563__content">
+        <div class="bloguxissues-grid-cm9563__title">No Support for Self-Service</div>
+        <div class="bloguxissues-grid-cm9563__text">
+          While self-service BI boosts adoption, it requires guardrails, like curated datasets and tooltips, to prevent misanalysis and ensure ROI.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<style>
+/* ===== Section Wrapper ===== */
+.bloguxissues-grid-cm9563 {
+  width: 100%;
+  padding: 28px 0;
+}
+
+/* ===== Grid ===== */
+.bloguxissues-grid-cm9563__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ===== Card ===== */
+.bloguxissues-grid-cm9563__card {
+  display: flex;
+  gap: 16px;
+  padding: 20px 22px;
+  background: #eaf3f9;
+  border-radius: 14px;
+}
+
+/* ===== Icon ===== */
+.bloguxissues-grid-cm9563__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bloguxissues-grid-cm9563__icon img {
+  width: 56px;
+  height: 56px;
+	max-width: 56px;
+}
+
+/* ===== Content ===== */
+.bloguxissues-grid-cm9563__content {
+  flex: 1;
+}
+
+/* Title */
+.bloguxissues-grid-cm9563__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #178ee8;
+  margin-bottom: 6px;
+}
+
+/* Text */
+.bloguxissues-grid-cm9563__text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #000;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .bloguxissues-grid-cm9563__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bloguxissues-grid-cm9563__title {
+    font-size: 17px;
+  }
+}
+</style></div><p><a href="https://thereportinghub.com/power-bi/power-bi-dashboards" target="_blank"><strong>The Reporting Hub’s Power BI dashboards</strong></a><strong> </strong>address these challenges directly. It offers clean, intuitive layouts with only the most relevant visuals. Simple navigation ensures users know exactly where to start and how to explore data. It’s mobile-responsive, so users can engage with dashboards from anywhere. With self-service tools, users can explore, customize, and gain insights on their own, boosting adoption and ROI.</p><p>‍</p><h2 id="principles-of-human-centered-design-for-bi-portals">Principles of Human-Centered Design for BI Portals</h2><p>Even the best dashboards fail when usability is ignored. Design is often an afterthought. But if users struggle to navigate, the dashboard fails, no matter how good the data looks.</p><div class="blogclarity-textline-cm9724">
+
+  <div class="blogclarity-textline-cm9724__block">
+    <div class="blogclarity-textline-cm9724__title">
+      Clarity Over Complexity
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      Dashboards often fall into the trap of over-communication. Every stakeholder wants their metric on the homepage, and every team wants their chart front and center.
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      But showing everything at once only leads to noise. Human-centered design means focusing on what matters most in the moment. Prioritize essential KPIs. Use techniques like progressive disclosure to reveal additional data only when it’s needed.
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      This also respects how users naturally process information, one decision at a time.
+    </div>
+  </div>
+
+  <div class="blogclarity-textline-cm9724__block">
+    <div class="blogclarity-textline-cm9724__title">
+      Intuitive Navigation
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      If users don’t know where to click or what controls what, they’ll leave—or worse, make the wrong decision.
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      Group related visuals together to create a natural flow. Filters should behave consistently and predictably across pages. Clear headers, descriptive subtext, and hover states help users stay oriented. It should always be obvious what they’re looking at, what it means, and how to explore deeper.
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      Think of navigation as a conversation, not a puzzle.
+    </div>
+  </div>
+
+  <div class="blogclarity-textline-cm9724__block">
+    <div class="blogclarity-textline-cm9724__title">
+      Mobile-First and Accessible
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      Your users aren’t all sitting at desks. They’re on factory floors, in meetings, or commuting.
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      For users on the go (e.g., sales teams, execs), mobile-friendly design is essential. Audit your users’ primary devices before prioritizing this. The same goes for accessibility. Use proper color contrast, readable fonts, and keyboard-friendly layouts.
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      Designing for smaller screens and assistive technologies shows you care about making data usable for everyone, everywhere.
+    </div>
+  </div>
+
+  <div class="blogclarity-textline-cm9724__block">
+    <div class="blogclarity-textline-cm9724__title">
+      Embedded Help and Feedback Loops
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      No one likes being dropped into a dashboard without context. Help users get oriented with in-line explanations, onboarding tooltips, and embedded help buttons.
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      Just as important: show them the result of their actions. If a user applies a filter, updates the labels, or adds a toast notification, they know something changed.
+    </div>
+    <div class="blogclarity-textline-cm9724__text">
+      Feedback loops build confidence, and confidence drives adoption.
+    </div>
+  </div>
+
+</div>
+<style>
+/* ===== Section Wrapper ===== */
+.blogclarity-textline-cm9724 {
+  width: 100%;
+  padding: 10px 0;
+}
+
+/* ===== Content Block ===== */
+.blogclarity-textline-cm9724__block {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 34px;
+}
+
+/* Vertical Blue Line */
+.blogclarity-textline-cm9724__block::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 3px;
+  height: calc(100% - 4px);
+  background: #1a73ff;
+  border-radius: 2px;
+}
+
+/* Heading */
+.blogclarity-textline-cm9724__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+/* Paragraphs */
+.blogclarity-textline-cm9724__text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+/* Remove margin from last paragraph */
+.blogclarity-textline-cm9724__text:last-child {
+  margin-bottom: 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blogclarity-textline-cm9724__title {
+    font-size: 17px;
+  }
+
+  .blogclarity-textline-cm9724__text {
+    font-size: 14.5px;
+  }
+}
+</style></div><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:1024px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="1024px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b0876d17b79f16c04415c_Principles-of-Human-Centered-Design-for-BI-Portals-1024x572.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><h2 id="what-human-centered-bi-looks-like">What Human-Centered BI Looks Like</h2><p>Here’s what BI looks like when it’s built around the user.</p><div class="blogpink-insight-cm8821">
+
+  <div class="blogpink-insight-cm8821__item">
+    <div class="blogpink-insight-cm8821__icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b0980645f5740fcfe31c4_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-10.webp" alt>
+    </div>
+    <div class="blogpink-insight-cm8821__content">
+      <div class="blogpink-insight-cm8821__title">
+        Cluttered Layouts
+      </div>
+      <div class="blogpink-insight-cm8821__text">
+        Right away, they see what features users are adopting, which ones are lagging, and how that ties to churn. There’s no need to scroll through endless tabs or guess which chart matters. The insights are front and center. Simple. Actionable.
+      </div>
+    </div>
+  </div>
+
+  <div class="blogpink-insight-cm8821__item">
+    <div class="blogpink-insight-cm8821__icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b0988d51e4aa79163f5b9_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-9.webp" alt>
+    </div>
+    <div class="blogpink-insight-cm8821__content">
+      <div class="blogpink-insight-cm8821__title">
+        A store manager at a national retail chain compares performance across five locations.
+      </div>
+      <div class="blogpink-insight-cm8821__text">
+        With a few clicks, they spot which store is underperforming and why staffing levels, inventory issues, and foot traffic. No training. No help needed. The dashboard guides them like a conversation.
+      </div>
+    </div>
+  </div>
+
+  <div class="blogpink-insight-cm8821__item">
+    <div class="blogpink-insight-cm8821__icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b09982dc2ac1135989993_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-11.webp" alt>
+    </div>
+    <div class="blogpink-insight-cm8821__content">
+      <div class="blogpink-insight-cm8821__title">
+        In HR, an internal portal filters the noise.
+      </div>
+      <div class="blogpink-insight-cm8821__text">
+        A recruiter sees open roles and applicant funnels. A benefits manager sees plan usage and engagement. A team lead sees PTO trends and burnout signals. Each view is tailored by role. Alerts and prompts nudge action without users needing to ask, “What next?”
+      </div>
+    </div>
+  </div>
+
+</div>
+<style>
+/* ===== Section Wrapper ===== */
+.blogpink-insight-cm8821 {
+  width: 100%;
+  padding: 10px 0;
+}
+
+/* ===== Item ===== */
+.blogpink-insight-cm8821__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fde9ef;
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+
+/* Icon Circle */
+.blogpink-insight-cm8821__icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blogpink-insight-cm8821__icon img {
+  width: 56px;
+  height: 56px;
+	max-width: 56px;
+  object-fit: contain;
+}
+
+/* Content */
+.blogpink-insight-cm8821__content {
+  flex: 1;
+}
+
+/* Heading */
+.blogpink-insight-cm8821__title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #ff2f7d;
+  margin-bottom: 6px;
+}
+
+/* Text */
+.blogpink-insight-cm8821__text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blogpink-insight-cm8821__item {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .blogpink-insight-cm8821__title {
+    font-size: 16px;
+  }
+
+  .blogpink-insight-cm8821__text {
+    font-size: 14.5px;
+  }
+}
+</style></div><p>When BI is built with humans in mind, people don’t struggle. They engage. They explore. They make faster, better decisions. That’s the power of human-centered design. It turns dashboards into tools people want to use daily.</p><p>‍</p><h3>Common UX Challenges in Embedded BI Portals</h3><p>Designing for usability often takes a backseat to getting the data and visuals right. But poor user experience can break even the most technically advanced dashboards.</p><p>‍</p><div class="blogfeature-grid-cm9943">
+
+  <div class="blogfeature-grid-cm9943__grid">
+
+    <div class="blogfeature-grid-cm9943__card">
+      <div class="blogfeature-grid-cm9943__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b0dafcb84861f22bc5248_How-to-Optimize-DAX-Formulas-for-Better-Performance-17.webp" alt>
+      </div>
+      <div class="blogfeature-grid-cm9943__text">
+        Pre-built layouts and role-based views reduce noise for different users.
+      </div>
+    </div>
+
+    <div class="blogfeature-grid-cm9943__card">
+      <div class="blogfeature-grid-cm9943__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b0db6f8e1a03b89167307_Icons-Common-Data-Governance-Mistakes-and-How-to-Avoid-Them-4.webp" alt>
+      </div>
+      <div class="blogfeature-grid-cm9943__text">
+        White label customization means your portal looks and feels like part of your product.
+      </div>
+    </div>
+
+    <div class="blogfeature-grid-cm9943__card">
+      <div class="blogfeature-grid-cm9943__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b0dce5128f2d8c5f828f2_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-8.webp" alt>
+      </div>
+      <div class="blogfeature-grid-cm9943__text">
+        Embedded Power BI technology ensures performance, interactivity, and security.
+      </div>
+    </div>
+
+    <div class="blogfeature-grid-cm9943__card">
+      <div class="blogfeature-grid-cm9943__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b0dd6bd44454ed37c8ae0_Icon-for-Human-Centered-Design-for-Embedded-BI-Portals-16.webp" alt>
+      </div>
+      <div class="blogfeature-grid-cm9943__text">
+        Deployed on Azure, giving you full control over where and how your BI experience is hosted.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<style>
+/* ===== Section Wrapper ===== */
+.blogfeature-grid-cm9943 {
+  width: 100%;
+  padding: 10px 0;
+}
+
+/* ===== Grid ===== */
+.blogfeature-grid-cm9943__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+/* ===== Card ===== */
+.blogfeature-grid-cm9943__card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #eaf2f9;
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+/* Icon */
+.blogfeature-grid-cm9943__icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blogfeature-grid-cm9943__icon img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+	max-width: 56px;
+}
+
+/* Text */
+.blogfeature-grid-cm9943__text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .blogfeature-grid-cm9943__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blogfeature-grid-cm9943__card {
+    padding: 14px 16px;
+  }
+
+  .blogfeature-grid-cm9943__text {
+    font-size: 14.5px;
+  }
+}
+</style></div><p>Whether you’re building for customers, partners, or internal teams, Reporting Hub gives you the foundation to design better and faster.</p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-floatleft" style="max-width:50%" data-rt-type="image" data-rt-align="floatleft" data-rt-max-width="50%"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694b0e776225845da23b9d8e_Build-a-Better-Embedded-BI-Portal-1024x1024.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><h3><strong>Build a Better Embedded BI Portal</strong></h3><p><strong>A great BI experience isn’t about how much data you can show; it’s about how easily your users can act on it.</strong></p><p>With Reporting Hub, you can build embedded BI portals that are both powerful and personal.</p><p>Ready to see it in action?</p><p>‍</p><a href="/install-today" target="_blank" class="get-started-button small w-button">Get started today</a></div>
+    <div class="author-bio-block">
+      <img class="bio-avatar" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a3f30361927cb1cee617_Brian-DL.webp" alt="Brian DeLuca">
+      <div>
+        <div class="bio-name">Brian DeLuca</div>
+        <p class="bio-text">Brian DeLuca is a co-founder and CEO of The Reporting Hub. As a seasoned expert in data, analytics, and business intelligence, Brian brings over 20 years of experience driving innovation and organizat...</p>
+      </div>
+    </div>
+  </article>
+  <aside class="post-sidebar">
+    <div class="sidebar-card"><h4>In this post</h4><ul class="toc-list"><li><a href="#what-is-human-centered-design-in-bi">What Is Human-Centered Design in BI?</a></li><li><a href="#principles-of-human-centered-design-for-bi-portals">Principles of Human-Centered Design for BI Portals</a></li><li><a href="#what-human-centered-bi-looks-like">What Human-Centered BI Looks Like</a></li><li><a href="#build-a-better-embedded-bi-portal">Build a Better Embedded BI Portal</a></li></ul></div>
+    <div class="sidebar-cta">
+      <p>See how Reporting Hub handles white-label analytics end-to-end.</p>
+      <a href="/demo/">Book a Demo →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- INCLUDE footer -->
+</body>
+</html>

@@ -1,0 +1,125 @@
+/* ==========================================================
+   blog-fixes.css — Injected before </head> by build.js
+   Fixes Webflow-transitioned layout issues (margins, padding,
+   float figures, inline-style overrides).
+   ========================================================== */
+
+/* --- 1. Webflow richtext figure classes ------------------- */
+.post-content figure.w-richtext-figure-type-image,
+.post-content figure[data-rt-type="image"] {
+  display: table;
+  margin: 24px 0;
+}
+.post-content figure.w-richtext-figure-type-image > div,
+.post-content figure[data-rt-type="image"] > div {
+  display: inline-block;
+  font-size: 0;
+}
+.post-content figure.w-richtext-figure-type-image > figcaption,
+.post-content figure[data-rt-type="image"] > figcaption {
+  display: table-caption;
+  caption-side: bottom;
+}
+.post-content figure.w-richtext-align-center {
+  margin-right: auto;
+  margin-left: auto;
+  clear: both;
+}
+.post-content figure.w-richtext-align-center > div {
+  max-width: 100%;
+}
+.post-content figure.w-richtext-align-normal {
+  clear: both;
+}
+.post-content figure.w-richtext-align-fullwidth {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  clear: both;
+  display: block;
+  margin: 24px auto;
+}
+.post-content figure.w-richtext-align-fullwidth > div {
+  display: inline-block;
+}
+.post-content figure.w-richtext-align-floatleft {
+  float: left;
+  margin: 12px 24px 12px 0;
+  clear: none;
+  max-width: 40%;
+}
+.post-content figure.w-richtext-align-floatright {
+  float: right;
+  margin: 12px 0 12px 24px;
+  clear: none;
+  max-width: 40%;
+}
+.post-content figure.w-richtext-figure-type-video {
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+.post-content figure.w-richtext-figure-type-video iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.post-content figure.w-richtext-figure-type-video > div {
+  width: 100%;
+}
+
+/* --- 2. Content image defaults (replaces inline styles) --- */
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 24px 0;
+}
+
+/* --- 3. Override conflicting paragraph margins ------------- */
+.post-content p {
+  margin-bottom: 22px !important;
+}
+.post-content blockquote p {
+  margin-bottom: 0 !important;
+}
+
+/* --- 4. List-item icon images — no extra margin ----------- */
+.post-content li img {
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* --- 5. Float figure image overrides ---------------------- */
+.post-content figure.w-richtext-align-floatleft img,
+.post-content figure.w-richtext-align-floatright img {
+  margin: 0 !important;
+  width: 100%;
+}
+
+/* --- 6. Broaden Webflow div max-width overrides ----------- */
+.post-content div[class*="_container"],
+.post-content div[class*="_content"],
+.post-content div[class*="_image"],
+.post-content div[class*="_grid"],
+.post-content div[class*="_wrapper"],
+.post-content div[class^="blog_"] {
+  max-width: 100% !important;
+}
+
+/* --- 7. Clear floats before headings ---------------------- */
+.post-content h2,
+.post-content h3 {
+  clear: both;
+}
+
+/* --- 8. Responsive fix for float figures ------------------ */
+@media (max-width: 600px) {
+  .post-content figure.w-richtext-align-floatleft,
+  .post-content figure.w-richtext-align-floatright {
+    float: none;
+    max-width: 100%;
+    margin: 24px 0;
+  }
+}

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Why Data Security Shouldn’t Come at the Cost of Speed — The Reporting Hub</title>
+<meta name="description" content="Data security is essential. But too often, protecting data slows everything else down. Reports take longer to load. Dashboards lag. Users wait.And in analy">
+<meta property="og:title" content="Why Data Security Shouldn’t Come at the Cost of Speed">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6944690ddfe0bdedd5b151b3_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-1-p-1080.webp">
+<link rel="canonical" href="https://thereportinghub.com/blog/why-data-security-shouldnt-come-at-the-cost-of-speed/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#22A4F7; --indigo:#6C6EF3; --purple:#5E2C8F; --magenta:#C729ED;
+    --navy:#0D0F1A;
+    --grad:linear-gradient(135deg,#22A4F7 0%,#6C6EF3 50%,#C729ED 100%);
+    --text:#0D0F1A; --muted:#6B7280; --border:#E5E7EB;
+    --bg:#F8F9FB; --card-bg:#FFFFFF; --radius:14px;
+  }
+  body { font-family:'DM Sans',sans-serif; background:#fff; color:var(--text); -webkit-font-smoothing:antialiased; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 32px; height:68px;
+    display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo img { height:34px; display:block; }
+  .nav-links { display:flex; gap:32px; list-style:none; }
+  .nav-links a { font-size:15px; font-weight:500; color:var(--text); text-decoration:none; opacity:.75; transition:opacity .2s; }
+  .nav-links a:hover { opacity:1; }
+  .nav-links a.active { background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:600; opacity:1; }
+  .nav-cta { background:var(--grad); color:#fff; font-size:14px; font-weight:600;
+    padding:10px 22px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .nav-cta:hover { opacity:.88; }
+  footer { background:var(--navy); border-top:1px solid rgba(255,255,255,.08); padding:32px; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+  .footer-inner img { height:24px; opacity:.7; }
+  .footer-inner p { font-size:13px; color:rgba(255,255,255,.4); }
+  @media(max-width:600px) { .nav-links { display:none; } }
+
+  .post-hero { max-width:760px; margin:0 auto; padding:64px 32px 40px; }
+  .breadcrumb { font-size:13px; margin-bottom:20px; }
+  .breadcrumb a { color:var(--muted); text-decoration:none; }
+  .breadcrumb a:hover { color:var(--blue); }
+  .breadcrumb span { color:var(--border); margin:0 8px; }
+  .post-cat { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:16px; display:block; }
+  .post-hero h1 { font-family:'Sora',sans-serif; font-size:clamp(28px,4vw,44px);
+    font-weight:800; line-height:1.15; color:var(--navy); margin-bottom:20px; }
+  .post-byline { display:flex; align-items:center; gap:14px; padding:20px 0;
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .avatar { width:44px; height:44px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:16px; flex-shrink:0; }
+  .byline-name { font-size:15px; font-weight:600; color:var(--text); }
+  .byline-meta { font-size:13px; color:var(--muted); margin-top:2px; }
+  .byline-share { margin-left:auto; display:flex; gap:10px; }
+  .share-btn { width:36px; height:36px; border-radius:50%; border:1px solid var(--border);
+    background:#fff; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; transition:border-color .2s;
+    text-decoration:none; color:var(--muted); }
+  .share-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .post-img-wrap { max-width:900px; margin:0 auto 48px; padding:0 32px; }
+  .post-img { border-radius:var(--radius); height:400px; }
+  .post-layout { max-width:1100px; margin:0 auto; padding:0 32px 80px;
+    display:grid; grid-template-columns:1fr 280px; gap:60px; align-items:start; }
+  .post-content h2 { font-family:'Sora',sans-serif; font-size:26px; font-weight:700;
+    color:var(--navy); margin:44px 0 18px; line-height:1.25; }
+  .post-content h3 { font-family:'Sora',sans-serif; font-size:20px; font-weight:700;
+    color:var(--navy); margin:32px 0 14px; }
+  .post-content p { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:22px; }
+  .post-content ul,.post-content ol { padding-left:24px; margin-bottom:22px; }
+  .post-content li { font-size:17px; line-height:1.8; color:#1F2937; margin-bottom:8px; }
+  .post-content blockquote { border-left:3px solid transparent;
+    border-image:var(--grad) 1; padding:16px 24px;
+    background:var(--bg); border-radius:0 var(--radius) var(--radius) 0; margin:32px 0; }
+  .post-content blockquote p { font-size:18px; font-style:italic; color:var(--navy); font-weight:500; margin:0; }
+  .post-content a { color:var(--blue); text-decoration:none; }
+  .post-content a:hover { text-decoration:underline; }
+  /* Grid + overflow fix: article column must not bleed past its track */
+  .post-content { min-width:0; overflow:hidden; }
+  /* Every element inside article is capped to column width */
+  .post-content * { max-width:100%; box-sizing:border-box; }
+  .post-content img, .post-content video,
+  .post-content iframe { height:auto; display:block; }
+  /* Neutralise Webflow-authored max-width overrides on callout/grid divs */
+  .post-content div[class^="blog_"] { max-width:100% !important; }
+  /* Collapse Webflow embedded two-column flex sections to single column */
+  .post-content section { margin:40px 0; overflow:hidden; }
+  .post-content section > div { display:block !important; }
+  .post-content section > div > div { width:100% !important; flex:none !important; }
+  /* Centre embedded section images */
+  .post-content section img {
+    max-width:520px; width:100%; display:block;
+    margin:24px auto; border-radius:8px;
+  }
+  /* Preserve icon+text list item flex layouts */
+  .post-content section li { display:flex !important; }
+  .callout { background:linear-gradient(135deg,rgba(34,164,247,.08),rgba(108,110,243,.08));
+    border:1px solid rgba(34,164,247,.2); border-radius:var(--radius);
+    padding:24px 28px; margin:32px 0; }
+  .callout p { font-size:16px; font-weight:500; margin:0 0 10px; }
+  .callout p:last-child { margin:0; }
+  .post-sidebar { position:sticky; top:88px; }
+  .sidebar-card { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+  .sidebar-card h4 { font-family:'Sora',sans-serif; font-size:13px; font-weight:700;
+    color:var(--navy); margin-bottom:16px; text-transform:uppercase; letter-spacing:.05em; }
+  .toc-list { list-style:none; }
+  .toc-list li { margin-bottom:10px; }
+  .toc-list a { font-size:13px; color:var(--muted); text-decoration:none;
+    line-height:1.4; display:block; transition:color .2s; }
+  .toc-list a:hover { color:var(--blue); }
+  .sidebar-cta { background:var(--navy); border-radius:var(--radius); padding:24px; text-align:center; }
+  .sidebar-cta p { font-size:14px; line-height:1.55; color:rgba(255,255,255,.65); margin-bottom:16px; }
+  .sidebar-cta a { display:block; background:var(--grad); color:#fff; font-size:14px;
+    font-weight:600; padding:12px 20px; border-radius:100px; text-decoration:none; transition:opacity .2s; }
+  .sidebar-cta a:hover { opacity:.88; }
+  .author-bio-block { background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; margin-top:48px;
+    display:flex; gap:20px; align-items:flex-start; }
+  .author-bio-block .bio-avatar { width:56px; height:56px; border-radius:50%;
+    object-fit:cover; flex-shrink:0; }
+  .author-bio-block .bio-avatar-placeholder { width:56px; height:56px; border-radius:50%;
+    background:var(--grad); display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:20px; flex-shrink:0; }
+  .bio-name { font-family:'Sora',sans-serif; font-size:16px; font-weight:700;
+    color:var(--navy); margin-bottom:6px; }
+  .bio-text { font-size:14px; line-height:1.65; color:var(--muted); }
+  @media(max-width:900px) {
+    .post-layout { grid-template-columns:1fr; }
+    .post-sidebar { position:static; }
+  }
+  @media(max-width:600px) {
+    .post-hero { padding:40px 20px 32px; }
+    .post-img-wrap { padding:0 20px; }
+    .post-img { height:220px; }
+    .post-layout { padding:0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- INCLUDE header -->
+<header class="post-hero">
+  <div class="breadcrumb">
+    <a href="/blog/">Blog</a>
+    <span>›</span>
+    <a href="/blog/?cat=data-analysis">Data Analysis</a>
+  </div>
+  <span class="post-cat">Data Analysis</span>
+  <h1>Why Data Security Shouldn’t Come at the Cost of Speed</h1>
+  <div class="post-byline">
+    <img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a2794d98474036c4f432_691d62c15c0b1cfdbdb287e4_DSC00127-768x768.webp" alt="Manvir G" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+    <div>
+      <div class="byline-name">Manvir G</div>
+      <div class="byline-meta">Jan 30, 2026 · 4 Minutes</div>
+    </div>
+    <div class="byline-share">
+      <a href="https://www.linkedin.com/shareArticle?url=https://thereportinghub.com/blog/why-data-security-shouldnt-come-at-the-cost-of-speed/" class="share-btn" target="_blank" rel="noopener">in</a>
+      <a href="https://twitter.com/intent/tweet?url=https://thereportinghub.com/blog/why-data-security-shouldnt-come-at-the-cost-of-speed/&text=Why Data Security Shouldn’t Come at the Cost of Speed" class="share-btn" target="_blank" rel="noopener">𝕏</a>
+    </div>
+  </div>
+</header>
+<div class="post-img-wrap">
+  <div class="post-img" style="background-image:url('https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/thumbnails/6944690ddfe0bdedd5b151b3_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-1-p-1080.webp');background-size:cover;background-position:center;"></div>
+</div>
+<div class="post-layout">
+  <article class="post-content">
+    <p>Data security is essential. But too often, protecting data slows everything else down. Reports take longer to load. Dashboards lag. Users wait.</p><p>And in analytics, speed matters. You shouldn’t have to choose between protecting your data and delivering a fast, seamless experience. With the right tools and setup, you can have both, without compromise.</p><p>‍</p><h2 id="the-challenge-security-vs-speed-in-embedded-analytics">The Challenge: Security vs. Speed in Embedded Analytics</h2><p>It’s not uncommon for users to click into a report and wait… and wait. Those delays usually come from layers of security checks. While they’re there to protect your data, they can ruin the experience.</p><p>In embedded analytics, experience is everything. Users expect dashboards to be fast, responsive, and always available – especially when they’re built into your product.</p><p>At <a href="https://thereportinghub.com/">Reporting Hub</a>, we’ve solved that problem. Unlike most SaaS providers, our platform is fully deployed in your Azure environment. That means we never store, process, or transmit customer data. You stay in control of your data, security, and compliance.</p><p><strong>This approach eliminates external data access delays, giving you secure, embedded Power BI reporting with the performance your users expect.</strong></p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:734px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="734px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694463e2af274995aabc1a29_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-2.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><p>‍</p><h2 id="why-performance-matters-in-power-bi-embedded">Why Performance Matters in Power BI Embedded</h2><p>Users don’t just want insights – they want them now. Power BI Embedded lets you deliver dashboards right inside your application, so users get seamless access to the data they need.</p><p>But when reports are slow to load, frustration builds fast. It doesn’t just hurt the experience – it can delay decisions and lower product value.</p><p>‍</p><div class="blogDF45775nfo-grid"> 
+  
+  <!-- Card 1 -->
+  <div class="blogDF45775nfo-card">
+    <div class="blogDF45775nfo-icon"> 
+      <!-- Simple chart icon --> 
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69446aa74f94523831bcb0e0_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-5.webp"/> 
+				
+				</div>
+    <div class="blogDF45775nfo-content">
+      
+		<h3 class="blogDF45775nfo-title" style="color: #178ee8">Speed isn’t optional. For embedded analytics to deliver on its promise, performance has to match security – and Power BI Embedded is built to deliver both.
+</h3>
+     
+
+     
+    </div>
+  </div>
+  
+  <!-- Card 2 --> 
+  
+</div>
+	
+<style>
+/* Grid */
+.blogDF45775nfo-grid {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+/* Card */
+.blogDF45775nfo-card {
+	background:#e4eef7;
+	border-radius: 16px;
+	padding: 24px;
+	flex: 1;
+	min-width: 280px;
+	display: flex;
+	gap: 20px;
+	 
+	
+}
+/* Icon */
+.blogDF45775nfo-icon {
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+	
+	.blogDF45775nfo-icon img{ width: 75px; max-width: 75px;}	
+	
+.blogDF45775nfo-title {
+	color: #000;
+	font-size: 20px;
+	font-weight: 600;
+
+	line-height: 25px;
+}
+/* Text */
+.blogDF45775nfo-text {
+	font-size: 15px;
+	line-height: 1.6;
+	color: #000;
+	margin: 0;
+	margin-bottom: 19px;
+}
+.human-centered-image {
+    height: auto;
+}
+
+
+
+
+
+/* Mobile */
+@media (max-width: 768px) {
+.blogDF45775nfo-grid {
+	flex-direction: column;
+}
+}
+</style></div><p>‍</p><h2 id="best-practices-for-faster-performance-in-power-bi-embedded">Best Practices for Faster Performance in Power BI Embedded</h2><p><strong>Fast doesn’t mean fragile. Here’s how to optimize for speed without giving up security:</strong></p><p>‍</p><div class="bloggrdentbg_786JH">
+  <div class="bloggrdentbg_786JH__grid">
+
+    <!-- Top row -->
+    <div class="bloggrdentbg_786JH__row bloggrdentbg_786JH__row--top">
+
+      <div class="bloggrdentbg_786JH__item">
+        <div class="bloggrdentbg_786JH__icon">
+          <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69446da3add830f9fa7956ea_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-6.webp" alt>
+        </div>
+        <div class="bloggrdentbg_786JH__title">Keep tools up to date</div>
+        <div class="bloggrdentbg_786JH__text">
+          Use the latest Power BI Desktop, SDK, and Tabular Editor to stay on top of performance improvements.
+        </div>
+      </div>
+
+      <div class="bloggrdentbg_786JH__item">
+        <div class="bloggrdentbg_786JH__icon">
+          <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69446eba87b13157dd443ebc_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-7.webp" alt>
+        </div>
+        <div class="bloggrdentbg_786JH__title">Preload files</div>
+        <div class="bloggrdentbg_786JH__text">
+          Use powerbi.preload() to load the Power BI JavaScript library in advance, but report data still requires authentication and RLS checks when the user requests it.
+        </div>
+      </div>
+
+      <div class="bloggrdentbg_786JH__item">
+        <div class="bloggrdentbg_786JH__icon">
+          <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69446ee78bf3953e438efbd8_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-8.webp" alt>
+        </div>
+        <div class="bloggrdentbg_786JH__title">Use optimized embed URLs</div>
+        <div class="bloggrdentbg_786JH__text">
+          Use the latest Power BI Desktop, SDK, and Tabular Editor to stay on top of performance improvements.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom row -->
+    <div class="bloggrdentbg_786JH__row bloggrdentbg_786JH__row--bottom">
+
+      <div class="bloggrdentbg_786JH__item">
+        <div class="bloggrdentbg_786JH__icon">
+          <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69446f0ab9ad0e8f435b97a6_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-9.webp" alt>
+        </div>
+        <div class="bloggrdentbg_786JH__title">Minimize iFrames</div>
+        <div class="bloggrdentbg_786JH__text">
+          Use the Power BI JavaScript SDK’s embedreport() method with single-page app frameworks to avoid iFrames entirely. For multiple reports, reuse the same iFrame.
+        </div>
+      </div>
+
+      <div class="bloggrdentbg_786JH__item">
+        <div class="bloggrdentbg_786JH__icon">
+          <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69446f8b71ceae202b753af4_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-10.webp" alt>
+        </div>
+        <div class="bloggrdentbg_786JH__title">Leverage cached data</div>
+        <div class="bloggrdentbg_786JH__text">
+          Enable query caching in Power BI Premium/Embedded to cache dataset results. Use Aggregation Tables for large DirectQuery models to accelerate common queries.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<style>
+.bloggrdentbg_786JH {
+      background-image: linear-gradient(90deg, #f1fafe, #f7f0fd);
+  padding: 60px 20px;
+  border-radius: 12px;
+}
+
+
+
+/* rows */
+.bloggrdentbg_786JH__row {
+  display: grid;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.bloggrdentbg_786JH__row--top {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.bloggrdentbg_786JH__row--bottom {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* item */
+.bloggrdentbg_786JH__item {
+  text-align: center;
+  padding: 10px 20px;
+}
+
+/* icon */
+.bloggrdentbg_786JH__icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bloggrdentbg_786JH__icon img {
+   width: 70px;
+  height: 70px;
+	max-width: 70px;
+}
+
+/* title */
+.bloggrdentbg_786JH__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #6b3cff;
+  margin-bottom: 10px;
+}
+
+/* text */
+.bloggrdentbg_786JH__text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #000000;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .bloggrdentbg_786JH__row--top,
+  .bloggrdentbg_786JH__row--bottom {
+    grid-template-columns: 1fr;
+  }
+}
+</style></div><p>‍</p><h2 id="smarter-architecture-for-safer-faster-reporting">Smarter Architecture for Safer, Faster Reporting</h2><p><strong>Power BI Embedded includes advanced features to protect data and improve performance at scale:<br></strong></p><p>‍</p><div class="blog_security-8769id_list">
+
+  <div class="blog_security-8769id_list__item">
+    <div class="blog_security-8769id_list__icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694471a0db6889bc5bde49f7_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-11.webp" alt>
+    </div>
+    <div class="blog_security-8769id_list__content">
+      <h4>Multi-tenant support</h4>
+      <p>
+        Isolate tenants using separate workspaces or RLS with DAX dynamic filters. For Premium, use dedicated capacities per tenant to avoid resource contention.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_security-8769id_list__item">
+    <div class="blog_security-8769id_list__icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694471a0db6889bc5bde49f7_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-11.webp" alt>
+    </div>
+    <div class="blog_security-8769id_list__content">
+      <h4>Audit logs</h4>
+      <p>
+        Get full visibility into usage for compliance and monitoring.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog_security-8769id_list__item">
+    <div class="blog_security-8769id_list__icon">
+      <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694472e7b8aa7ee02dfa56c9_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-13.webp" alt>
+    </div>
+    <div class="blog_security-8769id_list__content">
+      <h4>Row-level security</h4>
+      <p>
+        Ensure users only see what they’re allowed to – nothing more.
+      </p>
+    </div>
+  </div>
+
+</div>
+	
+	<style>
+
+
+.blog_security-8769id_list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.blog_security-8769id_list__icon {
+  flex-shrink: 0;
+  border-radius: 10px;
+   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog_security-8769id_list__icon img {
+  width:90px;
+  height: 90px;
+	max-width: 90px;
+	margin-top: -20px;
+}
+
+.blog_security-8769id_list__content h4 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.blog_security-8769id_list__content p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4a4a4a;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .blog_security-8769id_list__item {
+    align-items: flex-start;
+  }
+}
+</style></div><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:734px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="734px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6944735f6e2c821dc1648609_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-3.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><p>‍</p><h4><strong>Reporting Hub builds on this foundation with even more safeguards:</strong></h4><p>‍</p><div class="blog_securegrid_904">
+  <div class="blog_securegrid_904__grid">
+
+    <div class="blog_securegrid_904__item">
+      <div class="blog_securegrid_904__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69447419d9f7d0112d9baa35_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-14.png" alt>
+      </div>
+      <div class="blog_securegrid_904__content">
+        <h4>Secure code development</h4>
+        <p>We follow strict security testing and code review practices.</p>
+      </div>
+    </div>
+
+    <div class="blog_securegrid_904__item">
+      <div class="blog_securegrid_904__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69447527b03e531a54804dc3_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-15.png" alt>
+      </div>
+      <div class="blog_securegrid_904__content">
+        <h4>Minimal attack surface</h4>
+        <p>Our deployment lives entirely in your Azure environment.</p>
+      </div>
+    </div>
+
+    <div class="blog_securegrid_904__item">
+      <div class="blog_securegrid_904__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69447545e866c173df3dfa6e_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-16.png" alt>
+      </div>
+      <div class="blog_securegrid_904__content">
+        <h4>Customer-controlled access</h4>
+        <p>You define identity, authentication, and permissions.</p>
+      </div>
+    </div>
+
+    <div class="blog_securegrid_904__item">
+      <div class="blog_securegrid_904__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6944755e5c8f370678b13d0b_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-17.png" alt>
+      </div>
+      <div class="blog_securegrid_904__content">
+        <h4>No data retention</h4>
+        <p>We never store your customer data – removing risk at the root.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<style>
+
+.blog_securegrid_904__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 60px;
+}
+
+.blog_securegrid_904__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+	    align-items: center;
+}
+
+.blog_securegrid_904__icon {
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog_securegrid_904__icon img {
+  width: 60px;
+  height: 60px;
+	max-width: 60px;
+}
+
+.blog_securegrid_904__content h4 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #007bff;
+}
+
+.blog_securegrid_904__content p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #4a4a4a;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog_securegrid_904__grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style></div><p>‍</p><p>‍</p><h2 id="security-without-sacrificing-speed-how-power-bi-embedded-gets-it-right">Security Without Sacrificing Speed: How Power BI Embedded Gets It Right</h2><p>Power BI Embedded is designed for both performance and protection. It uses encrypted pipelines, Azure Active Directory for authentication, and granular access controls – all without slowing down the user experience.</p><h4><strong>In short:<br></strong></h4><div class="blog_pinkinsight_662">
+  <div class="blog_pinkinsight_662__grid">
+
+    <div class="blog_pinkinsight_662__item">
+      <div class="blog_pinkinsight_662__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694476708ae277769fcf0fa2_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-18.webp" alt>
+      </div>
+      <div class="blog_pinkinsight_662__text">
+        <strong>Granular access control with zero performance trade-offs</strong>
+      </div>
+    </div>
+
+    <div class="blog_pinkinsight_662__item">
+      <div class="blog_pinkinsight_662__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/6944776502965639946f036b_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-19.webp" alt>
+      </div>
+      <div class="blog_pinkinsight_662__text">
+        <strong>Fast, secure data delivery through encrypted pipelines</strong>
+      </div>
+    </div>
+
+    <div class="blog_pinkinsight_662__item">
+      <div class="blog_pinkinsight_662__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694477831e1e2290c5fb6b5a_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-20.webp" alt>
+      </div>
+      <div class="blog_pinkinsight_662__text">
+       <strong> Built-in compliance that doesn’t disrupt the user experience</strong>
+      </div>
+    </div>
+
+  </div>
+</div>
+<style>
+.blog_pinkinsight_662 {
+  background: #fff3f7;
+  padding: 20px 20px;
+  border-radius: 14px;
+}
+
+.blog_pinkinsight_662__grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.blog_pinkinsight_662__item {
+  padding: 10px 20px;
+}
+
+.blog_pinkinsight_662__icon {
+
+  margin: 0 auto 18px;
+  border-radius: 50%;
+   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog_pinkinsight_662__icon img {
+  width: 72px;
+  height: 72px;
+	max-width: 72px;
+}
+
+.blog_pinkinsight_662__text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ff3f8e;
+  font-weight: 500;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog_pinkinsight_662__grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style></div><p>‍</p><p><strong>It’s security by design – optimized for speed.<br></strong></p><p>‍</p><h2 id="achieving-the-perfect-balance-with-reporting-hub">Achieving the Perfect Balance with Reporting Hub</h2><p>At Reporting Hub, we believe speed and security should go hand in hand. That’s why we built a white-label business intelligence platform that delivers both – without trade-offs.</p><p>‍</p><h2 id="the-bottom-line">The Bottom Line</h2><p><strong>Our plug-and-play, no-code reporting portal is purpose-built for Power BI Embedded. With it, you can:</strong></p><div class="blog_bluefeatures_882">
+  <div class="blog_bluefeatures_882__grid">
+
+    <div class="blog_bluefeatures_882__item">
+      <div class="blog_bluefeatures_882__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694478c3aff2640188b0980e_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-21.webp" alt>
+      </div>
+      <div class="blog_bluefeatures_882__text">
+        Share insights with unlimited users
+      </div>
+    </div>
+
+    <div class="blog_bluefeatures_882__item">
+      <div class="blog_bluefeatures_882__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694479d4cc8f67e5fc712636_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-22.webp" alt>
+      </div>
+      <div class="blog_bluefeatures_882__text">
+        Fully own and brand your analytics experience
+      </div>
+    </div>
+
+    <div class="blog_bluefeatures_882__item">
+      <div class="blog_bluefeatures_882__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/694479ed936a8a7548b86966_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-23.webp" alt>
+      </div>
+      <div class="blog_bluefeatures_882__text">
+       Launch fast with a turnkey web app
+      </div>
+    </div>
+
+    <div class="blog_bluefeatures_882__item">
+      <div class="blog_bluefeatures_882__icon">
+        <img loading="lazy" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69447a073fcdd9bada73e44c_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-24.webp" alt>
+      </div>
+      <div class="blog_bluefeatures_882__text">
+        Embed directly into your Azure environment for maximum security
+      </div>
+    </div>
+
+  </div>
+</div>
+	
+	<style>
+
+
+.blog_bluefeatures_882__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px 60px;
+}
+
+.blog_bluefeatures_882__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.blog_bluefeatures_882__icon {
+  flex-shrink: 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog_bluefeatures_882__icon img {
+  width: 80px;
+  height: 80px;
+	max-width:  80px;    margin-right: -20px;
+}
+
+.blog_bluefeatures_882__text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #1a1a1a;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .blog_bluefeatures_882__grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style></div><p><strong>‍</strong></p><p>Whether you’re scaling internal dashboards or launching data products, Reporting Hub gives you the power to do it all – securely, quickly, and on your terms.</p><p>‍</p><figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" style="max-width:734px" data-rt-type="image" data-rt-align="fullwidth" data-rt-max-width="734px"><div><img src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/content/69447a798801f12593f3ad2c_Why-Data-Security-Shouldnt-Come-at-the-Cost-of-Speed-4.webp" loading="lazy" alt="__wf_reserved_inherit" width="auto" height="auto"></div></figure><p><strong>‍<br></strong></p><p>‍</p>
+    <div class="author-bio-block">
+      <img class="bio-avatar" src="https://pub-8d138aff324c4093bf8fd5b4e0551a1c.r2.dev/authors/author-6941a2794d98474036c4f432_691d62c15c0b1cfdbdb287e4_DSC00127-768x768.webp" alt="Manvir G">
+      <div>
+        <div class="bio-name">Manvir G</div>
+        <p class="bio-text">Manvir Grewal, co-founder and architect behind The Reporting Hub, is a seasoned Agile Coach with over 16 years of experience in creating and leading cross-functional teams in complex domains. His expe...</p>
+      </div>
+    </div>
+  </article>
+  <aside class="post-sidebar">
+    <div class="sidebar-card"><h4>In this post</h4><ul class="toc-list"><li><a href="#the-challenge-security-vs-speed-in-embedded-analytics">The Challenge: Security vs. Speed in Embedded Analytics</a></li><li><a href="#why-performance-matters-in-power-bi-embedded">Why Performance Matters in Power BI Embedded</a></li><li><a href="#choose-the-right-functions">Choose the Right Functions</a></li><li><a href="#best-practices-for-faster-performance-in-power-bi-embedded">Best Practices for Faster Performance in Power BI Embedded</a></li><li><a href="#smarter-architecture-for-safer-faster-reporting">Smarter Architecture for Safer, Faster Reporting</a></li><li><a href="#security-without-sacrificing-speed-how-power-bi-embedded-gets-it-right">Security Without Sacrificing Speed: How Power BI Embedded Gets It Right</a></li><li><a href="#achieving-the-perfect-balance-with-reporting-hub">Achieving the Perfect Balance with Reporting Hub</a></li><li><a href="#the-bottom-line">The Bottom Line</a></li></ul></div>
+    <div class="sidebar-cta">
+      <p>See how Reporting Hub handles white-label analytics end-to-end.</p>
+      <a href="/demo/">Book a Demo →</a>
+    </div>
+  </aside>
+</div>
+
+<!-- INCLUDE footer -->
+</body>
+</html>
